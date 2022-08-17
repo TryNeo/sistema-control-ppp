@@ -1,0 +1,45 @@
+RewriteEngine On 
+Options All -Indexes
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-zA-Z0-9/ñÑ-]+)$ index.php?url=$1 [QSA,L]
+ErrorDocument 404 http://localhost/sistema-control-ppp/Errors
+ErrorDocument 403 http://localhost/sistema-control-ppp/Errors
+SetEnvIfNoCase user-Agent ^FrontPage [NC,OR]
+SetEnvIfNoCase user-Agent ^Java.* [NC,OR]
+SetEnvIfNoCase user-Agent ^Microsoft.URL [NC,OR]
+SetEnvIfNoCase user-Agent ^MSFrontPage [NC,OR]
+SetEnvIfNoCase user-Agent ^Offline.Explorer [NC,OR]
+SetEnvIfNoCase user-Agent ^[Ww]eb[Bb]andit [NC,OR]
+SetEnvIfNoCase user-Agent ^Zeus [NC]
+Order Allow,Deny
+Allow from all
+Deny from env=bad_bot 
+
+
+<Files ~ “^w+.(gif|jpe?g|png)$”>
+
+    order deny,allow
+
+    allow from all
+
+</Files>
+
+<FilesMatch "((\.(lock|cache|database|config|backups|helpers|models|views|font|fpdf))|CHANGELOG.md |README.md|.gitignore |.htaccess |^(.*\.config|.*\.example|.*\.sql)(.*?))$">
+	<IfModule !mod_authz_core.c>
+		Order allow,deny
+		Deny from all
+		Satisfy All
+	</IfModule>
+
+	<IfModule mod_authz_core.c>
+		Require all denied
+	</IfModule>
+
+</FilesMatch>
+
+
+<Files .htaccess>
+order allow,deny
+deny from all
+</Files>

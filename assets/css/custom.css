@@ -1,0 +1,26 @@
+.btn-custom-sm{
+    padding: .10rem 2.4rem;
+    font-size: 12px;
+}
+
+.hidden-data{
+    display: none;
+}
+
+.card-body-lg{
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+}
+
+.text-samll-custom{
+    font-size: 12px;
+    line-height: 12px;
+}
+
+.no-valid{
+    color: black !important;
+}
+
+.no-valid::before{
+    color:black !important;
+}
