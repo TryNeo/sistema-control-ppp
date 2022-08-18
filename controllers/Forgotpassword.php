@@ -96,12 +96,18 @@
                 $data['csrf'] = $token;
                 $request_email_code = $this->model->verifyCodeEmail(strclean($_GET['token']));
                 if($request_email_code > 0){
-                    if (time() >=  $_SESSION['token-expire']){
-                        $this->model->resetCodeEmail($_SESSION['emailtemp']);
-                        $data_res = array("status" => false, "msg" => "El token a expirado, porfavor reenvie el enlace para restablecer su contraseña nuevamente");
-                    }else{
-                        $data_res = array("status" => true);
-                    }
+                        if (isset($_SESSION['token-expire']) and  $_SESSION['emailtemp']){
+                            if ($_SESSION['token-expire'] != NULL and $_SESSION['emailtemp'] != NULL) {
+                                if (time() >=  $_SESSION['token-expire']){
+                                    $this->model->resetCodeEmail($_SESSION['emailtemp']);
+                                    $data_res = array("status" => false, "msg" => "El token a expirado, porfavor reenvie el enlace para restablecer su contraseña nuevamente");
+                                }else{
+                                    $data_res = array("status" => true);
+                                }
+                            }
+                        }else{
+                            $data_res = array("status" => false, "msg" => "Oops hubo un error, intentelo de nuevo");
+                        }
                 }else{
                     $data_res = array("status" => false, "msg" => "El token a expirado, porfavor reenvie el enlace para restablecer su contraseña nuevamente");
                 }
@@ -115,42 +121,45 @@
 
         public function resetPassword(){
             if($_POST){
-                if (time() >=  $_SESSION['token-expire']){
-                    $data = array("status" => false, "msg" => "El token a expirado, porfavor reenvie el enlace para restablecer su contraseña nuevamente");
-                }else{
-                    if (empty($_POST['csrf'])) {
-                        $data = array('status' => false,'msg' => 'Oops hubo un error, intentelo de nuevo','formErrors'=> array());
-                    }else{
-                        if (hash_equals($_SESSION['token'], $_POST['csrf'])) {
-                            $password = strclean($_POST['password']);
-                            $password_confirm = strclean($_POST['password_confirm']);
-                            if(validateEmptyFields(array($password,$password_confirm))){
-                                if($password != $password_confirm){
-                                    $data= array("status" => false, "msg" => "Las contraseñas no coinciden, verifique que estén escritas bien");
-                                }
-                                $str_password = password_hash(strclean($_POST['password']),PASSWORD_DEFAULT,['cost' => 10]);
-                                $response = $this->model->updatePassword($str_password,$_SESSION['emailtemp']);
-                                if($response > 0){
-                                    $this->model->resetCodeEmail($_SESSION['emailtemp']);
-                                    $data = array("status" => true,"msg" => "La contraseña ha sido cambiado con exito",'url' => server_url.'login');
-                                    unset($_SESSION['token']);
-                                    unset($_SESSION['emailtemp']);
-                                    unset($_SESSION['token-expire']);
-                                }else{
-                                    $data = array("status" => false,"msg" => "La contraseña no ha sido cambia con exito, intentelo nuevamente");
-                                }
-                            }else{
-                                $data = array('status' => false,'formErrors'=> array(
-                                        'password' => 'el campo se encuentra vacio',
-                                        'password_confirm' => 'el campo se encuentra vacio',
-                                    ));
-                            }
+                if (isset($_SESSION['token-expire'])){
+                    if ($_SESSION['token-expire'] != NULL) {
+                        if (time() >=  $_SESSION['token-expire']){
+                            $data = array("status" => false, "msg" => "El token a expirado, porfavor reenvie el enlace para restablecer su contraseña nuevamente");
                         }else{
-                            $data = array('status' => false,'msg' => 'Oops hubo un errors, intentelo de nuevo');
+                            if (empty($_POST['csrf'])) {
+                                $data = array('status' => false,'msg' => 'Oops hubo un error, intentelo de nuevo','formErrors'=> array());
+                            }else{
+                                if (hash_equals($_SESSION['token'], $_POST['csrf'])) {
+                                    $password = strclean($_POST['password']);
+                                    $password_confirm = strclean($_POST['password_confirm']);
+                                    if(validateEmptyFields(array($password,$password_confirm))){
+                                        if($password != $password_confirm){
+                                            $data= array("status" => false, "msg" => "Las contraseñas no coinciden, verifique que estén escritas bien");
+                                        }
+                                        $str_password = password_hash(strclean($_POST['password']),PASSWORD_DEFAULT,['cost' => 10]);
+                                        $response = $this->model->updatePassword($str_password,$_SESSION['emailtemp']);
+                                        if($response > 0){
+                                            $this->model->resetCodeEmail($_SESSION['emailtemp']);
+                                            $data = array("status" => true,"msg" => "La contraseña ha sido cambiado con exito",'url' => server_url.'login');
+                                            unset($_SESSION['token']);
+                                            unset($_SESSION['emailtemp']);
+                                            unset($_SESSION['token-expire']);
+                                        }else{
+                                            $data = array("status" => false,"msg" => "La contraseña no ha sido cambia con exito, intentelo nuevamente");
+                                        }
+                                    }else{
+                                        $data = array('status' => false,'formErrors'=> array(
+                                                'password' => 'el campo se encuentra vacio',
+                                                'password_confirm' => 'el campo se encuentra vacio',
+                                            ));
+                                    }
+                                }else{
+                                    $data = array('status' => false,'msg' => 'Oops hubo un errors, intentelo de nuevo');
+                                }
+                            }
                         }
                     }
                 }
-
                 echo json_encode($data,JSON_UNESCAPED_UNICODE);
             }else{
                 header('location:'.server_url.'login');

@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <title><?php echo $data['page_title']; ?></title>
-    <link rel="icon" type="image/png" href="https://i.imgur.com/x0pRK7B.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="https://i.ibb.co/DQstGsn/favicon1.png" sizes="16x16" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" integrity="sha512-q3eWabyZPc1XTCmF+8/LuE1ozpg5xxn7iO89yfSOd5/oKvyqLngoNGsx8jq92Y8eXJ/IRxQbEC+FGSYxtk2oiw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -43,7 +43,7 @@
                         </div>
                         <div class="form-group">
                         <button class="g-recaptcha btn btn-primary btn-lg btn-block" 
-                                data-sitekey="6LdBGc0fAAAAAIm_M6A2kzJcpbB6dS-AqBf9HCnL" 
+                                data-sitekey="6LesooYhAAAAALYkmxdjcz-9ec3gIz5sMPnRILQu" 
                                 data-callback='onSubmit' 
                                 data-action='submit' id="enviarEnlance">Enviar enlance</button>
                         </div>
@@ -73,11 +73,11 @@
     <script src="https://cdn.jsdelivr.net/npm/@emretulek/jbvalidator"></script>
     <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
 
-    <script src="https://www.google.com/recaptcha/api.js?render=6LdBGc0fAAAAAIm_M6A2kzJcpbB6dS-AqBf9HCnL"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LesooYhAAAAALYkmxdjcz-9ec3gIz5sMPnRILQu"></script>
     <script>
             $('#enviarEnlance').click(function(){
                 grecaptcha.ready(function() {
-                    grecaptcha.execute('6LdBGc0fAAAAAIm_M6A2kzJcpbB6dS-AqBf9HCnL', {action: 'submit'}).then(function(token) {
+                    grecaptcha.execute('6LesooYhAAAAALYkmxdjcz-9ec3gIz5sMPnRILQu', {action: 'submit'}).then(function(token) {
                         $('#fntForgotpassword').submit();
                     });
                 });

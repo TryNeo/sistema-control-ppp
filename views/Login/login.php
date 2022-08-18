@@ -72,12 +72,12 @@
     
                         <div class="form-group">
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" name="remember"  class="custom-control-input" id="remember-me">
+                                <input type="checkbox" name="remember"  class="custom-control-input" id="remember-me" >
                                 <label class="custom-control-label no-valid" for="remember-me" >Recordarme</label>
                             </div>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4" >
                             Login <i class="fas fa-sign-in"></i>
                             </button>
                         </div>

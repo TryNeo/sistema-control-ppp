@@ -74,6 +74,7 @@ function sendingDataServerSideResetpasword(idForm,validatorServerSide,fieldsToVa
                                     }
                                 });
                             }else{
+                                $("*", "#fntForgotpassword").prop('disabled',true);
                                 mensaje("error","Error",data.msg);
                             }
                         }
@@ -100,6 +101,7 @@ function sendingDataServerSideResetpasword(idForm,validatorServerSide,fieldsToVa
             allowEscapeKey: false
         }).then((result) => {
             if (result.isConfirmed) {
+                $("*", "#fntForgotpassword").prop('disabled',true);
                 window.close();
             }
         });

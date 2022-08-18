@@ -22,6 +22,7 @@ CREATE TABLE usuarios(
     usuario  varchar(50),
     email  varchar(100),
     ultimo_online boolean DEFAULT 0,
+    code text default NULL,
     id_rol int(11),
     password text,
     estado boolean,
