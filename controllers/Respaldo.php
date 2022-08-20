@@ -131,7 +131,7 @@
                 $id = 0;
                 $btnRestore = '';
                 $btnRestoreEliminar = '';
-                $data = array(array('id' => 0, 'nombre' =>'default_database','opciones' => '<div class="text-center"><button type="button" class="btn btn-info btn-circle btnRestore" title="restaurar" rbd=""><i class="fa fa-upload"></i></button>
+                $data = array(array('id' => 0, 'nombre' =>'database-ignore','opciones' => '<div class="text-center"><button type="button" class="btn btn-info btn-circle btnRestore" title="restaurar" rbd=""><i class="fa fa-upload"></i></button>
                 <button type="button" class="btn btn-danger btn-circle btnRestoreEliminar" title="eliminar" rbd=""><i class="fa fa-trash"></i></button></div>'));
                 if (is_dir($ruta)){
                     if($aux = opendir($ruta)){
