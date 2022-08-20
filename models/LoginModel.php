@@ -10,7 +10,7 @@
 
         public function login_user(string $str_email){
             $this->str_email = $str_email;
-            $sql = "SELECT id_usuario,password,estado FROM usuarios WHERE email = '$this->str_email'";
+            $sql = "SELECT id_usuario,password,estado FROM usuarios WHERE email_institucional = '$this->str_email'";
             $request = $this->select_sql($sql);
             return $request;
         }        
@@ -23,7 +23,7 @@
             $data = array(1);
             $request_update = $this->update_sql($sql_update,$data);
             if($request_update > 0){
-                $sql = "SELECT us.id_usuario,us.nombre,us.apellido,us.ultimo_online,us.foto,us.usuario,us.email,r.id_rol,r.nombre_rol,us.estado 
+                $sql = "SELECT us.id_usuario,us.ultimo_online,us.usuario,us.email_institucional,r.id_rol,r.nombre_rol,us.estado 
                 FROM usuarios us INNER JOIN roles r ON us.id_rol = r.id_rol WHERE us.id_usuario = $this->int_id_usuario";
                 $request = $this->select_sql($sql);
                 return $request;

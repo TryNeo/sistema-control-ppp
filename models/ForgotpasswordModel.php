@@ -11,7 +11,7 @@
 
         public function searchEmail(string $str_email){
             $this->str_email = $str_email;
-            $sql = "SELECT nombre,apellido FROM usuarios WHERE email = '$this->str_email' and estado = 1";
+            $sql = "SELECT email_institucional FROM usuarios WHERE email_institucional = '$this->str_email' and estado = 1";
             $request = $this->select_sql($sql);
             return $request;
         } 
@@ -19,7 +19,7 @@
         public function generateCodeEmail(string $code,string $str_email){
             $this->str_email = $str_email;
             $this->str_code = $code;
-            $sql_udpate = "UPDATE usuarios SET code = ?,fecha_modifica = now()  WHERE email = '$this->str_email'";
+            $sql_udpate = "UPDATE usuarios SET code = ?,fecha_modifica = now()  WHERE email_institucional = '$this->str_email'";
             $data = array($this->str_code);
             $request_update = $this->update_sql($sql_udpate,$data);
             return $request_update;
@@ -34,7 +34,7 @@
 
         public function resetCodeEmail(string $str_email){
             $this->str_email = $str_email;
-            $sql_udpate  = "UPDATE usuarios SET code = ? ,fecha_modifica = now() WHERE email =  '$this->str_email' ";
+            $sql_udpate  = "UPDATE usuarios SET code = ? ,fecha_modifica = now() WHERE email_institucional =  '$this->str_email' ";
             $data = array('0');
             $request_update = $this->update_sql($sql_udpate,$data);
             return $request_update;
@@ -44,7 +44,7 @@
         public function updatePassword(string $str_password,string $str_email){
             $this->str_password = $str_password;
             $this->str_email = $str_email;
-            $sql_udpate  = "UPDATE usuarios SET password = ? ,fecha_modifica = now() WHERE email =  '$this->str_email' ";
+            $sql_udpate  = "UPDATE usuarios SET password = ? ,fecha_modifica = now() WHERE email_institucional =  '$this->str_email' ";
             $data = array($this->str_password);
             $request_update = $this->update_sql($sql_udpate,$data);
             return $request_update;
