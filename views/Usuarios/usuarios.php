@@ -19,10 +19,8 @@
                                         <thead class="text-uppercase">
                                         <tr>
                                             <th scope="col">ID</th>
-                                            <th scope="col">FOTO</th>
-                                            <th scope="col">NOMBRE Y APELLIDO</th>
                                             <th scope="col">USUARIO</th>
-                                            <th scope="col">CORREO</th>
+                                            <th scope="col">EMAIL INSTITUCIONAL</th>
                                             <th scope="col">ACTIVIDAD</th>
                                             <th scope="col">ROL</th>
                                             <th scope="col">ESTADO</th>

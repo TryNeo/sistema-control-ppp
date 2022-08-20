@@ -47,16 +47,16 @@
             <a href="index.html">PCE</a>
           </div>
           <ul class="sidebar-menu">
-              <li class="menu-header">Dashboard</li>
+              <li class="menu-header">MENU PRINCIPAL</li>
               <li class="nav-item">
                 <?php if (!empty($_SESSION['permisos'][1]['r'])) {?>
                   <?php if($data['page_id'] == 1 ){ ?>
                     <li class="active">
-                      <a href="<?php echo server_url; ?>dashboard/" class="nav-link"><i class="fas fa-home"></i><span>Dashboard</span></a>
+                      <a href="<?php echo server_url; ?>dashboard/" class="nav-link"><i class="fas fa-home"></i><span>Principal</span></a>
                     </li>
                   <?php }else{ ?>
                     <li>
-                      <a href="<?php echo server_url; ?>dashboard/" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>
+                      <a href="<?php echo server_url; ?>dashboard/" class="nav-link"><i class="fas fa-fire"></i><span>Principal</span></a>
                     </li>               
                   <?php } ?>
                 <?php } ?>

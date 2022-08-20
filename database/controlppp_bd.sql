@@ -8,38 +8,37 @@ CREATE TABLE roles(
     nombre_rol varchar(50),
     descripcion text,
     estado boolean,
-fecha_crea DATETIME,
-fecha_modifica DATETIME default now(),
+    fecha_crea DATETIME,
+    fecha_modifica DATETIME default now(),
     PRIMARY KEY(id_rol)
 );
 
 DROP TABLE IF EXISTS usuarios;
 CREATE TABLE usuarios(
     id_usuario INT(11) auto_increment,
-    nombre  varchar(50),
-    apellido  varchar(50),
-    foto varchar(250) DEFAULT NULL,
     usuario  varchar(50),
-    email  varchar(100),
+    password text,
+    email_institucional varchar(100),
+    id_rol int(11),
     ultimo_online boolean DEFAULT 0,
     code text default NULL,
-    id_rol int(11),
-    password text,
     estado boolean,
-fecha_crea DATETIME,
-fecha_modifica DATETIME default now(),
+    fecha_crea DATETIME,
+    fecha_modifica DATETIME default now(),
     PRIMARY KEY(id_usuario)
 );
+
 DROP TABLE IF EXISTS modulos;
 CREATE TABLE modulos(
     id_modulo INT(11) auto_increment,
     nombre varchar(50),
     descripcion text,
     estado boolean,
-fecha_crea DATETIME,
-fecha_modifica DATETIME default now(),
+    fecha_crea DATETIME,
+    fecha_modifica DATETIME default now(),
     PRIMARY KEY(id_modulo)
 );
+
 DROP TABLE IF EXISTS permisos;
 CREATE TABLE permisos(
     id_permiso int(11)  auto_increment,
@@ -52,8 +51,22 @@ CREATE TABLE permisos(
     PRIMARY KEY(id_permiso)
 );
 
+DROP TABLE IF EXISTS alumnos;
+CREATE TABLE alumnos(
+    id_alumno int(11) auto_increment,
+    cedula  varchar(10),
+    nombre  varchar(50),
+    apellido  varchar(50),
+    email_personal  varchar(100),
+    telefono  varchar(10),
+    sexo varchar(1),
+    estado boolean,
+    fecha_crea DATETIME,
+    fecha_modifica DATETIME default now(),
+    PRIMARY KEY(id_alumno)
+);
 
-ALTER TABLE usuarios ADD CONSTRAINT fk_roles FOREIGN KEY (id_rol)  REFERENCES roles(id_rol);
+
 ALTER TABLE permisos ADD CONSTRAINT fk_modulo FOREIGN KEY (id_modulo) REFERENCES modulos(id_modulo);
 ALTER TABLE permisos ADD CONSTRAINT fk_rol FOREIGN KEY (id_rol) REFERENCES roles(id_rol);
 
@@ -72,5 +85,4 @@ INSERT INTO permisos (id_modulo,id_rol,r,w,u,d) VALUES (4,1,1,1,1,1);
 INSERT INTO permisos (id_modulo,id_rol,r,w,u,d) VALUES (5,1,1,1,1,1);
 
 
-INSERT INTO usuarios (nombre,apellido,usuario,email,id_rol,password,estado,fecha_crea) VALUES ("joel josue","huacon lopez","josu3","jjhuacon@est.itsgg.edu.ec",1,"$2y$10$nLtnKbUrAQnMMfWi9bqsEuQ53U5k1pKCRsKYWEw0x/R5hgKNcHiYK",1,now());
-
+INSERT INTO usuarios (usuario,password,email_institucional,id_rol,estado,fecha_crea) VALUES ("josu3","$2y$10$nLtnKbUrAQnMMfWi9bqsEuQ53U5k1pKCRsKYWEw0x/R5hgKNcHiYK","jjhuacon@est.itsgg.edu.ec",1,1,now());

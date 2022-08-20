@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <title>Restablecer contraseña</title>
-    <link rel="icon" type="image/png" href="https://i.imgur.com/x0pRK7B.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="https://i.ibb.co/DQstGsn/favicon1.png" sizes="16x16" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" integrity="sha512-q3eWabyZPc1XTCmF+8/LuE1ozpg5xxn7iO89yfSOd5/oKvyqLngoNGsx8jq92Y8eXJ/IRxQbEC+FGSYxtk2oiw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="<?php echo server_url; ?>assets/libs/stisla/assets/css/style.css">
@@ -18,7 +18,7 @@
             <div class="row">
             <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
                 <div class="login-brand">
-                    <img src="https://i.imgur.com/bJl5fX4.png" alt="logo" width="300" class="shadow-light">
+                    <img src="https://i.ibb.co/bgQYpYd/279874955-1027702184620744-1030435789778340311-n.jpg" alt="logo" width="200" class="shadow-light">
                 </div>
                 
                 <div class="card card-primary">
@@ -58,7 +58,7 @@
                 </div>
                 </div>
                 <div class="simple-footer">
-                Copyright &copy;  2022
+                Copyright &copy; Instituto Tecnológico Superior Tres De Marzo - <?php echo date("Y");?>
                 </div>
             </div>
             </div>
