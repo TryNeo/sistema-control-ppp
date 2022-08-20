@@ -1,26 +1,22 @@
 $(function(){
     const columnData = [
         {"data":"id_usuario"},
-        {"data":"foto"},
-        {"data":"nombre_apellido"},
         {"data":"usuario"},
-        {"data":"email"},
+        {"data":"email_institucional"},
         {"data":"ultimo_online"},
         {"data":"nombre_rol"},
         {"data":"estado"},
         ]
 
-
-
     const tableUsuarios =  configDataTables('.tableUsuarios',base_url+"usuarios/getUsuarios",columnData)
 
-    const listCamps =  ["#id_usuario","#nombre","#apellido","#usuario","#password","#email","#id_rol","#foto"];
+    const listCamps =  ["#id_usuario","#usuario","#password","#email_institucional","#id_rol"];
 
-    const fieldsToValidate = ['nombre','apellido',"usuario","email","id_rol","foto"]
+    const fieldsToValidate = ["email","id_rol"]
 
     const configValid = configToValidate()
 
-    clickModal("#modalUsuario","Crear | Usuario",listCamps);
+    clickModal("#modalUsuario","Crear | Usuario","#fntUsuario");
     fetchSelect(base_url+"roles/getSelectRoles","#id_rol","Selecciona un rol")
     sendingDataServerSide('#fntUsuario',configValid,fieldsToValidate,listCamps,tableUsuarios,"usuarios/setUsuario","#modalUsuario");
 
@@ -41,34 +37,6 @@ function configToValidate(){
         language: base_url_assets+"js/jbvalidatorLangEs.json",
     });
     validatorServerSide.validator.custom = function(el, event){
-
-        if($(el).is('[name=nombre]')){
-            let value= $(el).val()
-
-            if (!validateEmptyField(value)){
-                return 'Este campo es obligatorio';
-            }
-
-
-            if (!validString(value)){
-                return 'El nombre '+value+' contiene numeros o caracteres especiales';
-            }
-            
-        }
-        
-        if($(el).is('[name=apellido]')){
-            let value= $(el).val()
-
-            if (!validateEmptyField(value)){
-                return 'Este campo es obligatorio';
-            }
-
-
-            if (!validString(value)){
-                return 'El apellido '+value+' contiene numeros o caracteres especiales';
-            }
-            
-        }
 
         if($(el).is('[name=usuario]')){
             let value= $(el).val()
@@ -98,7 +66,7 @@ function configToValidate(){
         }
 
 
-        if($(el).is('[name=email]')){
+        if($(el).is('[name=email_institucional]')){
             let value= $(el).val()
 
             if (!validateEmptyField(value)){
@@ -120,21 +88,7 @@ function configToValidate(){
             }
             
         }
-        
-        if($(el).is('[name=foto]')){
-            let value= $(el).val()
 
-            if (!validateEmptyField(value)){
-                return 'Este campo es obligatorio';
-            }
-
-
-            if (!validateImage(value)){
-                return 'La url '+value+' ingresada no es una imagen';
-            }
-            
-        }
-        
     }
 
     return validatorServerSide

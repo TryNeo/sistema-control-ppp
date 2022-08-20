@@ -20,6 +20,7 @@ $(function(){
     clickModalPermiso("#modalPermiso","Crear | Permisos",listCamps,true);
     fetchSelect(base_url+"roles/getSelectRoles","#id_rol","Selecciona un rol")
     sendingDataServerSide('#fntPermiso',configValid,fieldsToValidate,listCamps,tablePermisos,"permisos/setPermiso","#modalPermiso");
+
     fntSearchEmpleado()
 
 })

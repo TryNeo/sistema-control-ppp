@@ -3,7 +3,7 @@ const base_url_assets = "http://localhost/sistema-control-ppp/assets/";
 const base_url_image = "http://localhost/sistema-control-ppp/assets/images/";
 
 
-function clickModal(nameSelector,modalName,listCamps){
+function clickModal(nameSelector,modalName,formSelector=''){
     $('#openModal').on('click',function (e) {
         var options = {
             "backdrop" : "static",
@@ -13,11 +13,17 @@ function clickModal(nameSelector,modalName,listCamps){
         
         document.querySelector('#modalTitle').innerHTML = modalName;
         document.querySelector('.changeText').innerHTML = "Crear ";
-        listCamps.forEach(element => {
-            document.querySelector(element).value = '';          
-            $(element).removeClass('is-valid');
-            $(element).addClass('is-invalid');
-        });
+        if (formSelector != ''){
+            $(formSelector).trigger("reset");
+            $('form').removeClass('was-validated');
+            $("input").removeClass("is-valid");
+            $("input").removeClass("is-invalid");
+            $("textarea").removeClass("is-valid");
+            $("textarea").removeClass("is-invalid");
+            $("select").removeClass("is-valid");
+            $("select").removeClass("is-invalid");
+        }
+
         $(nameSelector).modal(options);
     });
 }
@@ -143,7 +149,7 @@ function sendingDataServerSide(idForm,validatorServerSide,fieldsToValidate,listC
     
                 }
             }).fail(function (error) {
-                mensaje("error","Error",'Hubo problemas con el servidor, intentelo nuevamente')
+                mensaje("error","Error",'Hubo problemas con el servidor,intentelo nuevamente ,si el problema persiste comuniquese con el administrador del sistema');
             })
         }
     })
