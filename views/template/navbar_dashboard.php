@@ -6,6 +6,19 @@
     </ul>
   </form>
   <ul class="navbar-nav navbar-right">
+    <!---
+    <li class="dropdown dropdown-list-toggle" style="margin-right:20px;margin-top:6px;color:white;font-size:17px;">
+      </a>
+      <div>
+        <input type="checkbox" class="checkbox-mode" id="chk" />
+        <label class="label-mode" for="chk">
+          <i class="fas fa-moon"></i>
+          <i class="fas fa-sun"></i>
+          <div class="ball-mode"></div>
+        </label>
+      </div>
+    </li>
+    --->
     <li class="dropdown dropdown-list-toggle reloj" style="margin-right:20px;margin-top:6px;color:white;font-size:17px;">
       <a class="nav-link reloj" href="#">
       </a>
@@ -41,11 +54,17 @@
 </nav>
 <div class="main-sidebar">
   <aside id="sidebar-wrapper">
+    <hr style="border-top:1px solid white;">
     <div class="sidebar-brand">
-      <a href="index.html">PANEL CONTROL PPP</a>
+      <a href="<?php echo server_url; ?>dashboard">
+        <img src="https://i.ibb.co/DQstGsn/favicon1.png" alt="logo" width="70" class="shadow-light">
+      </a>
     </div>
+    <hr style="border-top:1px solid white;">
     <div class="sidebar-brand sidebar-brand-sm">
-      <a href="index.html">PCE</a>
+      <a href="<?php echo server_url; ?>dashboard">
+        <img src="https://i.ibb.co/DQstGsn/favicon1.png" alt="logo" width="50" class="shadow-light">
+      </a>
     </div>
     <ul class="sidebar-menu">
       <li class="menu-header">MENU PRINCIPAL</li>

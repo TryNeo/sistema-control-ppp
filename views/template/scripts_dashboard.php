@@ -1,4 +1,17 @@
 </div>
+<footer class="main-footer">
+        <div class="footer-left">
+          Copyright © <?php echo date("Y");?> <div class="bullet"></div>Desarrollado por estudiantes del <a href="https://istg.edu.ec/" target="_blank">istg</a>
+        </div>
+        <div class="footer-right">
+          Version 1.0
+        </div>
+        <!--
+            AUTHOR:JOEL JOSUE HUACON LOPEZ
+            GITHUB:https://github.com/TryNeo
+            MAIL:ts.josu3@gmail.com
+        --->
+      </footer>
 </div>
 </div>
 
