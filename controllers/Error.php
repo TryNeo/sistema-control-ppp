@@ -10,6 +10,7 @@
             $data["page_title"] = "Error | 404";
             $error = "error404";
 
+
             if (empty($_SESSION['permisos_modulo']['r'])) {
                 $data["page_title"] = "Error | 403";
                 $error = "error403";

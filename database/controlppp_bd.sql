@@ -66,6 +66,22 @@ CREATE TABLE alumnos(
     PRIMARY KEY(id_alumno)
 );
 
+DROP TABLE IF EXISTS profesores;
+CREATE TABLE profesores(
+    id_profesor int(11) auto_increment,
+    cedula  varchar(10),
+    nombre  varchar(50),
+    apellido  varchar(50),
+    email_personal  varchar(100),
+    telefono  varchar(10),
+    sexo varchar(1),
+    estado boolean,
+    fecha_crea DATETIME,
+    fecha_modifica DATETIME default now(),
+    PRIMARY KEY(id_profesor)
+);
+
+
 
 ALTER TABLE permisos ADD CONSTRAINT fk_modulo FOREIGN KEY (id_modulo) REFERENCES modulos(id_modulo);
 ALTER TABLE permisos ADD CONSTRAINT fk_rol FOREIGN KEY (id_rol) REFERENCES roles(id_rol);
@@ -76,6 +92,9 @@ INSERT INTO modulos (nombre,descripcion,estado,fecha_crea) values('Roles','modul
 INSERT INTO modulos (nombre,descripcion,estado,fecha_crea) values('Respaldo','modulo de respaldo',1,now());
 INSERT INTO modulos (nombre,descripcion,estado,fecha_crea) values('Permisos','modulo de permisos',1,now());
 
+INSERT INTO modulos (nombre,descripcion,estado,fecha_crea) values('Alumnos','modulo de alumnos',1,now());
+INSERT INTO modulos (nombre,descripcion,estado,fecha_crea) values('Profesores','modulo de profesores',1,now());
+
 INSERT INTO roles (nombre_rol,descripcion,estado,fecha_crea) values ("Administrador","permisos de acceso a todo el sistema",1,now());
 
 INSERT INTO permisos (id_modulo,id_rol,r,w,u,d) VALUES (1,1,1,1,1,1);
@@ -83,6 +102,7 @@ INSERT INTO permisos (id_modulo,id_rol,r,w,u,d) VALUES (2,1,1,1,1,1);
 INSERT INTO permisos (id_modulo,id_rol,r,w,u,d) VALUES (3,1,1,1,1,1);
 INSERT INTO permisos (id_modulo,id_rol,r,w,u,d) VALUES (4,1,1,1,1,1);
 INSERT INTO permisos (id_modulo,id_rol,r,w,u,d) VALUES (5,1,1,1,1,1);
-
+INSERT INTO permisos (id_modulo,id_rol,r,w,u,d) VALUES (6,1,1,1,1,1);
+INSERT INTO permisos (id_modulo,id_rol,r,w,u,d) VALUES (7,1,1,1,1,1);
 
 INSERT INTO usuarios (usuario,password,email_institucional,id_rol,estado,fecha_crea) VALUES ("josu3","$2y$10$nLtnKbUrAQnMMfWi9bqsEuQ53U5k1pKCRsKYWEw0x/R5hgKNcHiYK","jjhuacon@est.itsgg.edu.ec",1,1,now());
