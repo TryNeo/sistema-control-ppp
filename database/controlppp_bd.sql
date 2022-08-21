@@ -60,6 +60,7 @@ CREATE TABLE alumnos(
     email_personal  varchar(100),
     telefono  varchar(10),
     sexo varchar(1),
+    id_usuario int(11),
     estado boolean,
     fecha_crea DATETIME,
     fecha_modifica DATETIME default now(),
@@ -85,6 +86,7 @@ CREATE TABLE profesores(
 
 ALTER TABLE permisos ADD CONSTRAINT fk_modulo FOREIGN KEY (id_modulo) REFERENCES modulos(id_modulo);
 ALTER TABLE permisos ADD CONSTRAINT fk_rol FOREIGN KEY (id_rol) REFERENCES roles(id_rol);
+ALTER TABLE alumnos ADD CONSTRAINT fk_usuario_al FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario);
 
 INSERT INTO modulos (nombre,descripcion,estado,fecha_crea) values('Dashboard','modulo de dashboard',1,now());
 INSERT INTO modulos (nombre,descripcion,estado,fecha_crea) values('Usuarios','modulo de usuarios',1,now());
