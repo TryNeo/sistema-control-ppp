@@ -59,7 +59,7 @@
                 </div>
                 <div class="card-wrap">
                     <div class="card-header">
-                        <h4>Total empresas</h4>
+                        <h4>Total Convenios</h4>
                     </div>
                     <div class="card-body">
                         0

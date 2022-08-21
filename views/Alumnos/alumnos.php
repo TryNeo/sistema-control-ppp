@@ -1,4 +1,5 @@
-<?php getHeaderDashboard($data); 
+<?php getHeaderDashboard($data);
+    getModal('modals_alumnos',$data);
 ?>    
 
 <section class="section">

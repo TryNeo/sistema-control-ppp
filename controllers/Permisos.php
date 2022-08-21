@@ -120,6 +120,9 @@
                     }
                 }            
             }
+            if (!isset($data)) {
+                $data = array();
+            }
             echo json_encode($data,JSON_UNESCAPED_UNICODE);
             die();
         }

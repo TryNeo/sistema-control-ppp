@@ -45,6 +45,12 @@
                     }else{
                         $data[$i]['ultimo_online']='<span  class="btn btn-danger btn-icon-split btn-custom-sm"><i class="icon fas fa-ban"></i><span class="label text-padding text-white-1">0ffline</span></span>';
                     }
+
+                    if ($data[$i]['email_activo'] == 1){
+                        $data[$i]['email_activo'] = '<span  class="text-center"><i class="icon fas fa-check-circle "></i></span>';
+                    }else{
+                        $data[$i]['email_activo'] = '<span class="text-center"><i class="text-center"><i class="icon fas fa-ban "></i></span>';
+                    }
                 }
             }
             echo json_encode($data,JSON_UNESCAPED_UNICODE);

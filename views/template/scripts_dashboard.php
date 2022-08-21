@@ -60,6 +60,12 @@
             <script type="text/javascript" src="<?php echo server_url; ?>assets/js/functions_usuarios.js"></script>
         <?php } ?>
 
+        
+        <?php if ($data['page'] == 'alumnos') { ?>
+            <script type="text/javascript" src="<?php echo server_url; ?>assets/js/functions_alumnos.js"></script>
+        <?php } ?>
+
+
     <?php }else {?>
     <?php } ?>
 

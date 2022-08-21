@@ -1,21 +1,43 @@
 <?php getHeaderError($data); ?>
 <body>
-    <div class="scene">
-    <div class="overlay"></div>
-    <div class="overlay"></div>
-    <div class="overlay"></div>
-    <div class="overlay"></div>
-    <span class="bg-403">404</span>
-    <div class="text">
-        <span class="hero-text"></span>
-        <span class="msg">Pagina no encontrada </span>
-        <span class="support">
-        <span>La pagina a la que intenta acceder <strong><?php echo $_GET["url"] ?></strong> no existe , compruebe que la url haya sido escrita correctamente</p></span>
-        <a href="<?php  echo server_url; ?>">Regresar a la pagina principal</a>
-        </span>
+    <div id="app">
+        <section class="section">
+            <div class="container mt-5">
+                <div class="page-error">
+                    <div class="page-inner">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <img class="mx-auto d-block" src="https://i.ibb.co/DQstGsn/favicon1.png" width="150">
+                                </div>
+                            </div>
+                            <hr width="350">
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <h1 class="error-title" style="font-size: 75px;">404</h1>
+                                    <h2 class="error-subtitle">Pagina no encontrada</h2>
+                                    <p class="error-message" style="font-size: 20px;">
+                                        La pagina a la que intenta acceder  <strong><?php echo $_GET["url"] ?></strong>  no existe , compruebe que la url haya sido escrita correctamente
+                                    </p>
+                                    <p class="error-message">
+                                        <button class="btn  btn-sm  btn-outline-primary" onclick="javascript:history.go(-1)">
+                                            Regresar a la pagina anterior
+                                        </button>
+                                        <span style="font-size: 25px;">&nbsp;&nbsp;&nbsp;O&nbsp;&nbsp;&nbsp;</span> 
+                                        <a href="<?php echo server_url; ?>" class="btn btn-sm  btn-outline-primary">Ir a la pagina principal</a>.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="simple-footer mt-5">
+                    Copyright &copy; Instituto Tecnológico Superior Tres De Marzo - <?php echo date("Y"); ?> </div>
+            </div>
+        </section>
     </div>
-    <div class="lock"></div>
-    </div>
+
+    <script src="<?php echo server_url; ?>assets/libs/stisla/assets/js/custom.js"></script>
+
 </body>
 </html>
-

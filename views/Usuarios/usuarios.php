@@ -21,6 +21,7 @@
                                             <th scope="col">ID</th>
                                             <th scope="col">USUARIO</th>
                                             <th scope="col">EMAIL INSTITUCIONAL</th>
+                                            <th scope="col">EMAIL ACTIVO</th>
                                             <th scope="col">ACTIVIDAD</th>
                                             <th scope="col">ROL</th>
                                             <th scope="col">ESTADO</th>

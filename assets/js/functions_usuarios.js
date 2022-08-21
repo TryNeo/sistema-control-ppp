@@ -3,6 +3,7 @@ $(function(){
         {"data":"id_usuario"},
         {"data":"usuario"},
         {"data":"email_institucional"},
+        {"data":"email_activo"},
         {"data":"ultimo_online"},
         {"data":"nombre_rol"},
         {"data":"estado"},
@@ -10,9 +11,9 @@ $(function(){
 
     const tableUsuarios =  configDataTables('.tableUsuarios',base_url+"usuarios/getUsuarios",columnData)
 
-    const listCamps =  ["#id_usuario","#usuario","#password","#email_institucional","#id_rol"];
+    const listCamps =  ["#id_usuario","#usuario","#email_institucional","#password","#id_rol"];
 
-    const fieldsToValidate = ["email","id_rol"]
+    const fieldsToValidate = ["usuario","email","id_rol"]
 
     const configValid = configToValidate()
 

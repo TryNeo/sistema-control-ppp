@@ -11,7 +11,7 @@
 
         public function searchEmail(string $str_email){
             $this->str_email = $str_email;
-            $sql = "SELECT email_institucional FROM usuarios WHERE email_institucional = '$this->str_email' and estado = 1";
+            $sql = "SELECT email_institucional FROM usuarios WHERE email_institucional = '$this->str_email' and estado = 1 and estado_email = 1";
             $request = $this->select_sql($sql);
             return $request;
         } 
@@ -27,7 +27,7 @@
 
         public function verifyCodeEmail(string $code){
             $this->str_code = $code;
-            $sql = "SELECT * FROM usuarios WHERE code = '$this->str_code' and estado = 1";
+            $sql = "SELECT * FROM usuarios WHERE code = '$this->str_code' and estado = 1 and estado_email = 1";
             $request = $this->select_sql($sql);
             return $request;
         }
