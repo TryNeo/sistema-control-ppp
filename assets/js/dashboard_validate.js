@@ -81,7 +81,7 @@ function validaEmail(value){
  * @param  {string} cedula -recibe  un string con una cantidad de numeros de 10 digitos
  * @return {boolean} - retornara true o false , si algo esta correcto o incorrecto . 
  */
- function validateCedula(cedula){
+function validateCedula(cedula){
     const validRegEx = /[0-9]{0,10}/;
     if (cedula.match(validRegEx) === null){
         return false;
@@ -109,9 +109,8 @@ function validaEmail(value){
         if((total - (total_a)) == ultimo_numero  ){
             return true
         }else{
-            mensaje("error","Error","La cedula Ingresada no fue valida")
             return false
         }
     
-        }
+    }
 }

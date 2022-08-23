@@ -7,7 +7,7 @@ $(function(){
 
     ]
     
- 
+
     const tablePermisos =  configDataTables('.tablePermisos',base_url+"permisos/getPermisos",columnData)
 
 

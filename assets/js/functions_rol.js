@@ -27,6 +27,8 @@ function configToValidate(){
     const validatorServerSide = $('form.needs-validation').jbvalidator({
         errorMessage: true,
         successClass: true,
+        language: base_url_assets+"js/jbvalidatorLangEs.json",
+
     });
     validatorServerSide.validator.custom = function(el, event){
 
