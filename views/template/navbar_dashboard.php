@@ -26,22 +26,36 @@
     <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
         <?php if ($_SESSION['user_data']['id_usuario'] == 1) { ?>
           <figure class="avatar mr-2 avatar-sm">
-          <img alt="image" src="<?php echo server_url_image; ?>default.png" class="rounded-circle mr-1">
-          <?php if ($_SESSION['user_data']['ultimo_online'] == 1) { ?>
-            <i class="avatar-presence online"></i>
-          <?php } ?>
+            <img alt="image" src="<?php echo server_url_image; ?>default.png" class="rounded-circle mr-1">
+            <?php if ($_SESSION['user_data']['ultimo_online'] == 1) { ?>
+              <i class="avatar-presence online"></i>
+            <?php } ?>
 
-          <?php if ($_SESSION['user_data']['ultimo_online'] == 0) { ?>
-            <i class="avatar-presence offline"></i>
-          <?php } ?>
-        </figure>
+            <?php if ($_SESSION['user_data']['ultimo_online'] == 0) { ?>
+              <i class="avatar-presence offline"></i>
+            <?php } ?>
+          </figure>
+        <?php }else{ ?>
+          <figure class="avatar mr-2 avatar-sm">
+            <img alt="image" src="<?php echo server_url_image; ?>default.png" class="rounded-circle mr-1">
+            <?php if ($_SESSION['user_data']['ultimo_online'] == 1) { ?>
+              <i class="avatar-presence online"></i>
+            <?php } ?>
+
+            <?php if ($_SESSION['user_data']['ultimo_online'] == 0) { ?>
+              <i class="avatar-presence offline"></i>
+            <?php } ?>
+          </figure>
         <?php } ?>
 
         <div class="d-sm-none d-lg-inline-block">HOLA , 
           <?php if ($_SESSION['user_data']['id_usuario'] == 1) { ?>
             ADMINISTRADOR
+          <?php }else { ?>
+            <?php echo $_SESSION['user_data']['nombre']; ?> <?php echo $_SESSION['user_data']['apellido']; ?>
           <?php } ?>
         </div>
+
       </a>
       <div class="dropdown-menu dropdown-menu-right">
         <div class="dropdown-divider"></div>
@@ -94,16 +108,27 @@
         <?php if (!empty($_SESSION['permisos'][7]['r'])) { ?>
           <?php if ($data['page_id'] == 7) { ?>
             <li class="active">
-              <a href="<?php echo server_url; ?>profesores/" class="nav-link"><i class="fas fa-user-tie"></i><span>Profesores</span></a>
+              <a href="<?php echo server_url; ?>profesores/" class="nav-link"><i class="fas fa-user-tie"></i><span>Docentes</span></a>
             </li>
           <?php } else { ?>
             <li>
-              <a href="<?php echo server_url; ?>profesores/" class="nav-link"><i class="fas fa-user-tie"></i><span>Profesores</span></a>
+              <a href="<?php echo server_url; ?>profesores/" class="nav-link"><i class="fas fa-user-tie"></i><span>Docentes</span></a>
+            </li>
+          <?php } ?>
+        <?php } ?>
+        <?php if (!empty($_SESSION['permisos'][8]['r'])) { ?>
+          <?php if ($data['page_id'] == 7) { ?>
+            <li class="active">
+              <a href="<?php echo server_url; ?>empresas/" class="nav-link"><i class="far fa-building"></i><span>Convenios</span></a>
+            </li>
+          <?php } else { ?>
+            <li>
+              <a href="<?php echo server_url; ?>empresas/" class="nav-link"><i class="far fa-building"></i><span>Convenios</span></a>
             </li>
           <?php } ?>
         <?php } ?>
   </li>
-
+  <?php if ($_SESSION['user_data']['id_rol'] != 2) {?>
   <li class="menu-header">Seguridad</li>
   <li class="dropdown">
     <a href="#" class="has-dropdown"><i class="fas fa-lock"></i><span>Configuracion</span></a>
@@ -143,6 +168,7 @@
       <?php } ?>
     </ul>
   </li>
+  <?php } ?>
     </ul>
   </aside>
 </div>

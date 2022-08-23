@@ -64,8 +64,9 @@
                                     if ($data['estado'] == 1) {
                                         if(password_verify($str_password,$data['password'])){
                                             $_SESSION['id_usuario'] = $data['id_usuario'];
+                                            $_SESSION['id_rol'] = $data['id_rol'];
                                             $_SESSION['login'] = true;
-                                            $arrResponse = $this->model->sessionLogin($_SESSION['id_usuario']);
+                                            $arrResponse = $this->model->sessionLogin($_SESSION['id_usuario'],$_SESSION['id_rol']);
                                             $_SESSION['user_data'] = $arrResponse;
                                             unset($_SESSION['token']);
                                             unset($_SESSION['token-expire']);

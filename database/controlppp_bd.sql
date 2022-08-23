@@ -110,8 +110,11 @@ INSERT INTO modulos (nombre,descripcion,estado,fecha_crea) values('Respaldo','mo
 INSERT INTO modulos (nombre,descripcion,estado,fecha_crea) values('Permisos','modulo de permisos',1,now());
 INSERT INTO modulos (nombre,descripcion,estado,fecha_crea) values('Alumnos','modulo de alumnos',1,now());
 INSERT INTO modulos (nombre,descripcion,estado,fecha_crea) values('Profesores','modulo de profesores',1,now());
+INSERT INTO modulos (nombre,descripcion,estado,fecha_crea) values('Empresas','modulo de convenios',1,now());
 
 INSERT INTO roles (nombre_rol,descripcion,estado,fecha_crea) values ("Administrador","permisos de acceso a todo el sistema",1,now());
+INSERT INTO roles (nombre_rol,descripcion,estado,fecha_crea) values ("Estudiante","permisos de acceso para el estudiante",1,now());
+INSERT INTO roles (nombre_rol,descripcion,estado,fecha_crea) values ("Profesor","permisos de acceso para el profesor",1,now());
 
 INSERT INTO permisos (id_modulo,id_rol,r,w,u,d) VALUES (1,1,1,1,1,1);
 INSERT INTO permisos (id_modulo,id_rol,r,w,u,d) VALUES (2,1,1,1,1,1);
@@ -120,6 +123,7 @@ INSERT INTO permisos (id_modulo,id_rol,r,w,u,d) VALUES (4,1,1,1,1,1);
 INSERT INTO permisos (id_modulo,id_rol,r,w,u,d) VALUES (5,1,1,1,1,1);
 INSERT INTO permisos (id_modulo,id_rol,r,w,u,d) VALUES (6,1,1,1,1,1);
 INSERT INTO permisos (id_modulo,id_rol,r,w,u,d) VALUES (7,1,1,1,1,1);
+INSERT INTO permisos (id_modulo,id_rol,r,w,u,d) VALUES (8,1,1,1,1,1);
 
 
 INSERT INTO carreras (nombre_carrera,descripcion,estado,fecha_crea) values ("Tecnología Superior en Administración","no hay descripcion",0,now());

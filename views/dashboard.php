@@ -2,9 +2,13 @@
 ?>
 <section class="section">
     <div class="section-header">
-        <h1>INSTITUTO SUPERIOR TECNOLÓGICO TRES DE MARZO -  <?php if ($_SESSION['user_data']['id_usuario'] == 1) { ?>
+        <h1>INSTITUTO SUPERIOR TECNOLÓGICO TRES DE MARZO -  
+        <?php if ($_SESSION['user_data']['id_usuario'] == 1) { ?>
             ADMINISTRADOR
-          <?php } ?></h1>
+        <?php } else {?>
+            <?php echo $_SESSION['user_data']['nombre']; ?> <?php echo $_SESSION['user_data']['apellido']; ?>
+        <?php } ?>
+        </h1>
     </div>
     <div class="row">
         <div class="col-lg-3 col-md-6 col-sm-6 col-12">

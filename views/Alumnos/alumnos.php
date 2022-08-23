@@ -18,7 +18,12 @@
                                 <table  class="table tableAlumno table-striped table-bordered dt-responsive nowrap" cellspacing="0"  style="width:100%">
                                     <thead class="text-uppercase">
                                         <tr>
-                                            <th scope="col">ID</th>
+                                            <th scope="col">CEDULA</th>
+                                            <th scope="col">NOMBRES</th>
+                                            <th scope="col">APELLIDOS</th>
+                                            <th scope="col">USUARIO</th>
+                                            <th scope="col">EMAIL INSTITUCIONAL</th>
+                                            <th scope="col">ESTADO</th>
                                             <th scope="col">OPCIONES</th>
                                         </tr>
                                     </thead>
