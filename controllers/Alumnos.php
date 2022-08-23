@@ -51,15 +51,15 @@
                 if(empty($_POST)){
                     $request_data =  $this->model->selectUsuariosNoInactivos('');
                     foreach ($request_data as $row) {    
-                        $data[] = array("id_usuario"=>$row['id_usuario'], "usuario"=>$row['usuario'],
-                        "email_institucional" => $row['email_institucional'],"nombre_rol" => $row['nombre_rol']);
+                        $data[] = array("id"=>$row['id_usuario'], "text"=>$row['usuario'],
+                        "descripcion" => $row['email_institucional'], "rol" => $row['nombre_rol']);
                     }
                 }else{
                     $search_usuario = strclean($_POST['search']);
                     $request_data = $this->model->selectUsuariosNoInactivos($search_usuario);
                     foreach ($request_data as $row) {    
-                        $data[] = array("id_usuario"=>$row['id_usuario'], "usuario"=>$row['usuario'],
-                        "email_institucional" => $row['email_institucional'],"nombre_rol" => $row['nombre_rol']);
+                        $data[] = array("id"=>$row['id_usuario'], "text"=>$row['usuario'],
+                        "descripcion" => $row['email_institucional'], "rol" => $row['nombre_rol']);
                     }
                 }      
             }
@@ -67,6 +67,25 @@
                 $data = array();
             }
             echo json_encode($data,JSON_UNESCAPED_UNICODE);
+            die();
+        }
+
+        public function getSelectSearchUsuario(int $int_id_usuario){
+            if (empty($_SESSION['permisos_modulo']['r']) ) {
+                header('location:'.server_url.'Errors');
+                $data_response = array("status" => false, "msg" => "Error no tiene permisos");
+            }else{
+                $intUsuario = Intval(strclean($int_id_usuario));
+                if ($intUsuario > 0){
+                    $data = $this->model->selectSearchUsuario($int_id_usuario);
+                    if (empty($data)){
+                        $data_response = array('status' => false,'msg'=> 'Datos no encontrados');
+                    }else{
+                        $data_response = array('status' => true,'msg'=> $data);
+                    }
+                }
+            }
+            echo json_encode($data_response,JSON_UNESCAPED_UNICODE);
             die();
         }
     }

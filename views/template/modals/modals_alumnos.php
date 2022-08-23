@@ -1,4 +1,4 @@
-<div class="modal fade" id="modalAlumno" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="modalAlumno" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -43,7 +43,7 @@
                                             <i class="fas fa-address-book"></i>
                                         </span>
                                     </div>
-                                    <input type="text" name="nommbre" class="form-control" id="nombre" placeholder="ingrese los nombres" required>
+                                    <input type="text" name="nombre" class="form-control" id="nombre" placeholder="ingrese los nombres" required>
                                 </div>
                             </div>
                         </div>
@@ -103,14 +103,12 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-md-12">
                             <div class="form-group">
-                                <select id="id_usuario" class="form-control select2" required>
+                                <select id="id_usuario" class="form-control select2" name="id_usuario" required>
                                 </select>
                             </div>
                         </div>
-
                     </div>
                     <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4 is-valid"><span class="changeText">Crear </span><i class="fa fa-plus"></i></button>
                 </form>
