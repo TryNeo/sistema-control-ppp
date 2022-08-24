@@ -31,31 +31,19 @@
                     FROM usuarios us INNER JOIN roles r ON us.id_rol = r.id_rol WHERE us.id_usuario = $this->int_id_usuario";
                     $request = $this->select_sql($sql);
                 }else{
-                    $sql_gen="SELECT us.id_usuario,r.id_rol FROM usuarios us 
-                        INNER JOIN roles r ON r.id_rol = r.id_rol WHERE us.id_usuario =  $this->int_id_usuario and r.id_rol = $this->int_id_rol";
-                    $request = $this->select_sql($sql_gen);
-                    if ($request['id_rol'] == 2){
-                        $sql = "SELECT
-                        us.id_usuario,
-                        al.nombre,
-                        al.apellido,
+                    $sql = "SELECT us.id_usuario,
+                        IFNULL(al.nombre, pro.nombre) nombre,
+                        IFNULL(al.apellido, pro.apellido) apellido,
                         us.ultimo_online,
-                        us.usuario,
-                        us.email_institucional,
-                        r.id_rol,
-                        r.nombre_rol,
-                        us.estado
+                        us.usuario,us.email_institucional,r.id_rol,r.nombre_rol,us.estado
                         FROM
-                            usuarios us
-                        INNER JOIN roles r ON
+                            usuarios as us
+                        INNER JOIN roles as r ON
                             us.id_rol = r.id_rol
-                        INNER JOIN alumnos al ON
-                            us.id_usuario = al.id_usuario
-                        WHERE
-                            us.id_usuario = $this->int_id_usuario";
-                            $request = $this->select_sql($sql);
-                    }
-
+                        LEFT JOIN alumnos as al on us.id_usuario = al.id_usuario
+                        LEFT JOIN profesores as pro on us.id_usuario = pro.id_usuario
+                        WHERE us.id_usuario = $this->int_id_usuario and r.id_rol = $this->int_id_rol";
+                        $request = $this->select_sql($sql);
                 }
                 return $request;
             }

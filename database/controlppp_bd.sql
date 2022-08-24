@@ -11,7 +11,7 @@ CREATE TABLE roles(
     fecha_crea DATETIME,
     fecha_modifica DATETIME default now(),
     PRIMARY KEY(id_rol)
-);
+)ENGINE=InnoDB CHARACTER SET utf8;
 
 DROP TABLE IF EXISTS usuarios;
 CREATE TABLE usuarios(
@@ -27,7 +27,7 @@ CREATE TABLE usuarios(
     fecha_crea DATETIME,
     fecha_modifica DATETIME default now(),
     PRIMARY KEY(id_usuario)
-);
+)ENGINE=InnoDB CHARACTER SET utf8;
 
 DROP TABLE IF EXISTS modulos;
 CREATE TABLE modulos(
@@ -38,7 +38,7 @@ CREATE TABLE modulos(
     fecha_crea DATETIME,
     fecha_modifica DATETIME default now(),
     PRIMARY KEY(id_modulo)
-);
+)ENGINE=InnoDB CHARACTER SET utf8;
 
 DROP TABLE IF EXISTS permisos;
 CREATE TABLE permisos(
@@ -50,7 +50,7 @@ CREATE TABLE permisos(
     u int(11),
     d int(11),
     PRIMARY KEY(id_permiso)
-);
+)ENGINE=InnoDB CHARACTER SET utf8;
 
 
 DROP TABLE IF EXISTS carreras;
@@ -62,7 +62,7 @@ CREATE TABLE carreras(
     fecha_crea DATETIME,
     fecha_modifica DATETIME default now(),
     PRIMARY KEY(id_carrera)
-);
+)ENGINE=InnoDB CHARACTER SET utf8;
 
 
 DROP TABLE IF EXISTS alumnos;
@@ -80,7 +80,7 @@ CREATE TABLE alumnos(
     fecha_crea DATETIME,
     fecha_modifica DATETIME default now(),
     PRIMARY KEY(id_alumno)
-);
+)ENGINE=InnoDB CHARACTER SET utf8;
 
 DROP TABLE IF EXISTS profesores;
 CREATE TABLE profesores(
@@ -91,17 +91,19 @@ CREATE TABLE profesores(
     email_personal  varchar(100),
     telefono  varchar(10),
     sexo varchar(1),
+    id_usuario  int(11),
     estado boolean,
     fecha_crea DATETIME,
     fecha_modifica DATETIME default now(),
     PRIMARY KEY(id_profesor)
-);
+)ENGINE=InnoDB CHARACTER SET utf8;
 
 
 ALTER TABLE permisos ADD CONSTRAINT fk_modulo FOREIGN KEY (id_modulo) REFERENCES modulos(id_modulo);
 ALTER TABLE permisos ADD CONSTRAINT fk_rol FOREIGN KEY (id_rol) REFERENCES roles(id_rol);
 ALTER TABLE alumnos ADD CONSTRAINT fk_usuario_al FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario);
 ALTER TABLE alumnos ADD CONSTRAINT fk_carrera FOREIGN KEY (id_carrera) REFERENCES carreras(id_carrera);
+ALTER TABLE profesores ADD CONSTRAINT fk_usuario_prof FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario);
 
 INSERT INTO modulos (nombre,descripcion,estado,fecha_crea) values('Dashboard','modulo de dashboard',1,now());
 INSERT INTO modulos (nombre,descripcion,estado,fecha_crea) values('Usuarios','modulo de usuarios',1,now());
