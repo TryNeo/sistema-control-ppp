@@ -24,6 +24,25 @@
 
         }
 
+        public function getAlumnos(){
+            if (empty($_SESSION['permisos_modulo']['r']) ) {
+                header('location:'.server_url.'Errors');
+                $data = array("status" => false, "msg" => "Error no tiene permisos");
+            }else{
+                $data = $this->model->selectAlumnos();
+                for ($i=0; $i < count($data); $i++) { 
+                    if ($data[$i]['estado'] == 1){
+                        $data[$i]['estado']= '<span  class="btn btn-success btn-icon-split btn-custom-sm"><i class="icon fas fa-check-circle "></i><span class="label text-padding text-white-50">&nbsp;&nbsp;Activo</span></span>';
+                    }else{
+                        $data[$i]['estado']='<span  class="btn btn-danger btn-icon-split btn-custom-sm"><i class="icon fas fa-ban "></i><span class="label text-padding text-white-50">Inactivo</span></span>';
+                    }
+
+                }
+            }
+            echo json_encode($data,JSON_UNESCAPED_UNICODE);
+            die();
+        }
+
         public function getSelectCarreras()
         {   
             if (empty($_SESSION['permisos_modulo']['r']) ) {
@@ -42,6 +61,36 @@
             }
             echo json_encode($data,JSON_UNESCAPED_UNICODE);
         }
+
+        public function setAlumno(){
+            if ($_POST) {
+                $id_alumno = Intval(strclean($_POST['id_alumno']));
+                $cedula = strclean($_POST['cedula']);
+                $nombre = ucwords(strtolower(strclean($_POST['nombre'])));
+                $apellido = ucwords(strtolower(strclean($_POST['apellido'])));
+                $email_personal = strtolower(strclean($_POST['email_personal']));
+                $telefono = strclean($_POST['telefono']);
+                $sexo   =  strclean($_POST['sexo']);
+                $id_carrera = Intval(strclean($_POST['id_carrera']));
+                $id_usuario = Intval(strclean($_POST['id_usuario']));
+                $data = array(
+                    "id_alumno" => $id_alumno,
+                    "cedula" => $cedula,
+                    "nombre" => $nombre,
+                    "apellido" => $apellido,
+                    "email_personal" => $email_personal,
+                    "telefono" => $telefono,
+                    "sexo" => $sexo,
+                    "id_carrera" => $id_carrera,
+                    "id_usuario" => $id_usuario
+                );
+            }else{
+                header('location:'.server_url.'Errors');
+            }
+            echo json_encode($data,JSON_UNESCAPED_UNICODE);
+            die();
+        }
+
 
         public function getSelectUsuarios(){
             if (empty($_SESSION['permisos_modulo']['r']) ) {
@@ -70,22 +119,4 @@
             die();
         }
 
-        public function getSelectSearchUsuario(int $int_id_usuario){
-            if (empty($_SESSION['permisos_modulo']['r']) ) {
-                header('location:'.server_url.'Errors');
-                $data_response = array("status" => false, "msg" => "Error no tiene permisos");
-            }else{
-                $intUsuario = Intval(strclean($int_id_usuario));
-                if ($intUsuario > 0){
-                    $data = $this->model->selectSearchUsuario($int_id_usuario);
-                    if (empty($data)){
-                        $data_response = array('status' => false,'msg'=> 'Datos no encontrados');
-                    }else{
-                        $data_response = array('status' => true,'msg'=> $data);
-                    }
-                }
-            }
-            echo json_encode($data_response,JSON_UNESCAPED_UNICODE);
-            die();
-        }
     }

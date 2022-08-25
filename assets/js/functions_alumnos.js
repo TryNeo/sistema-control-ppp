@@ -1,8 +1,19 @@
 $(function(){
+    const columnData = [
+        {"data":"cedula"},
+        {"data":"nombre"},
+        {"data":"apellido"},
+        {"data":"usuario"},
+        {"data":"email_institucional"},
+        {"data":"estado"}]
 
-    const configValid = configToValidate()
+    const tableAlumno = configDataTables('.tableAlumno',base_url+"alumnos/getAlumnos",columnData);
+    const listCamps =  ["#id_alumno","#cedula","#email_personal","#nombre","#apellido","#telefono","#sexo","#id_carrera","#id_usuario"];
+    const fieldsToValidate = ["cedula","email_personal","nombre","apellido","telefono","sexo","id_carrera","id_usuario"];
+    const configValid = configToValidate();
     clickModal("#modalAlumno","Crear | Alumno","#fntAlumno");
     fetchSelect(base_url+"alumnos/getSelectCarreras","#id_carrera","Selecciona una carrera")
+    sendingDataServerSide('#fntAlumno',configValid,fieldsToValidate,listCamps,tableAlumno,"alumnos/setAlumno","#modalAlumno");
     searchUsuarioA();
 })
 
@@ -70,6 +81,41 @@ function configToValidate(){
             }
             
         }
+
+        if($(el).is('[name=id_carrera]')){
+            let value= $(el).val()
+            if (!validateEmptyField(value)){
+                return 'Este campo es obligatorio';
+            }
+            
+        }
+
+        if($(el).is('[name=sexo]')){
+            let value= $(el).val()
+            if (!validateEmptyField(value)){
+                return 'Este campo es obligatorio';
+            }
+        }
+
+        if($(el).is('[name=id_usuario]')){
+            let value= $(el).val()
+            if (!validateEmptyField(value)){
+                return 'Este campo es obligatorio';
+            }
+        }
+
+        if($(el).is('[name=telefono]')){
+            let value= $(el).val()
+
+            if (!validaTelefono(value)){
+                return 'El telefono '+value+' es invalido';
+            }
+
+            if (!validateEmptyField(value)){
+                return 'Este campo es obligatorio';
+            }
+        }
+
     }
 
     return validatorServerSide

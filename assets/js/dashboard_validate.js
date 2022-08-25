@@ -4,6 +4,7 @@ const regex_fechas = new RegExp("([0-9]{4}[-](0[1-9]|1[0-2])[-]([0-2]{1}[0-9]{1}
 const regex_username_password = '^[a-zA-Z0-9_-]{4,18}$';
 const regex_email = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 const regex_image = '[^\\s]+(.*?)\\.(jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF)$';
+const regex_telefono='^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$';
 const regex_hora = /^(0?[1-9]|1[0-2]):([0-5]\d)\s?((?:A|P)\.?M\.?)$/i;
 
 
@@ -68,6 +69,13 @@ function validaNumber(value){
 
 function validaEmail(value){
     if (value.match(regex_email) === null){
+        return false;
+    }
+    return true;
+}
+
+function validaTelefono(value){
+    if (value.match(regex_telefono) === null){
         return false;
     }
     return true;

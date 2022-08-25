@@ -24,7 +24,6 @@
                                             <th scope="col">USUARIO</th>
                                             <th scope="col">EMAIL INSTITUCIONAL</th>
                                             <th scope="col">ESTADO</th>
-                                            <th scope="col">OPCIONES</th>
                                         </tr>
                                     </thead>
                                     <tbody>
