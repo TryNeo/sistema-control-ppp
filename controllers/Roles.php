@@ -110,7 +110,7 @@
                                 $option = 1;
                             }
                         }else{
-                            if (empty($_SESSION['permisos_modulo']['w'])){
+                            if (empty($_SESSION['permisos_modulo']['u'])){
                                 header('location:'.server_url.'Errors');
                                 $data= array("status" => false, "msg" => "Error no tiene permisos");
                                 $response_rol = 0;

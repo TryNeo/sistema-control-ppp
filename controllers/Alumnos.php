@@ -73,17 +73,49 @@
                 $sexo   =  strclean($_POST['sexo']);
                 $id_carrera = Intval(strclean($_POST['id_carrera']));
                 $id_usuario = Intval(strclean($_POST['id_usuario']));
-                $data = array(
-                    "id_alumno" => $id_alumno,
-                    "cedula" => $cedula,
-                    "nombre" => $nombre,
-                    "apellido" => $apellido,
-                    "email_personal" => $email_personal,
-                    "telefono" => $telefono,
-                    "sexo" => $sexo,
-                    "id_carrera" => $id_carrera,
-                    "id_usuario" => $id_usuario
-                );
+                $validate_data = array($id_alumno,$cedula,$nombre,$apellido,$email_personal,$telefono,$sexo,$id_carrera,$id_usuario);
+
+                if(!validateEmptyFields($validate_data)){
+                    $data = array('status' => false,'msg' => "Verifique que algunos de los campos no se encuentre vacio");
+                }
+                
+                if(!empty(preg_matchall(array($nombre,$apellido),regex_string))){
+                    $data = array('status' => false,'formErrors'=> array(
+                        'nombre' => "El nombre contiene numero o caracteres especiales",
+                        'apellido' => "La apellido contiene numero o caracteres especiales",
+                    ));
+                }
+
+                if(!empty(preg_matchall(array($id_carrera,$id_alumno,$id_usuario),regex_numbers))){
+                    $data = array('status' => false,'formErrors'=> array(
+                        'id_carrera' => "La carrera contiene letras o caracteres especiales",
+                        'id_usuario' => "El usuario contiene letras o caracteres especiales",
+                    ));
+                }
+
+                if ($id_alumno == 0){
+                    if (empty($_SESSION['permisos_modulo']['w'])){
+                        header('location:'.server_url.'Errors');
+                        $data= array("status" => false, "msg" => "Error no tiene permisos");
+                        $response_alumno = 0;
+                    }else{
+                        $response_alumno = $this->model->insertAlumno($cedula,$nombre,$apellido,$email_personal,
+                                        $telefono,$sexo,$id_carrera,$id_usuario);
+                        $option = 1;
+                    }
+                }
+
+                if ($response_alumno > 0){ 
+                    if ($option == 1){
+                        $data = array('status' => true, 'msg' => 'Datos guardados correctamente');
+                    }
+                }else if ($response_alumno == 'exist'){
+                    $data = array('status' => false,'formErrors'=> array(
+                        'cedula' => "La cedula ".$cedula." ya existe, ingrese uno nuevo",
+                    ));
+                }else{
+                    $data = array('status' => false,'msg' => 'Hubo un error no se pudieron guardar los datos');
+                }
             }else{
                 header('location:'.server_url.'Errors');
             }
