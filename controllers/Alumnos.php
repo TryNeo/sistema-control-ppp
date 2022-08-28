@@ -42,7 +42,9 @@
 
                     if ($_SESSION['permisos_modulo']['u']) {
                         $btnEditarAlumno = '<button class="btn btn-primary btnEditarRol btn-circle " title="editar" 
-                        onClick="return clickModalEditing('."'getAlumno/".$data[$i]['id_alumno']."'".','."'Actualizacion | Alumno'".','."'id_alumno'".','."['cedula','email_personal','nombre','apellido','telefono']".','."'#modalAlumno'".');">
+                        onClick="return clickModalEditing('."'getAlumno/".$data[$i]['id_alumno']."'".
+                        ','."'Actualizacion | Alumno'".','."'id_alumno'".','."['cedula','email_personal','nombre','apellido','telefono']".
+                        ','."'#modalAlumno'".','.'true'.','."['sexo','id_carrera']".','.'true'.','."'#id_usuario'".');">
                         <i class="fa fa-edit"></i></button>';
                     }
 
@@ -88,7 +90,12 @@
                 $telefono = strclean($_POST['telefono']);
                 $sexo   =  strclean($_POST['sexo']);
                 $id_carrera = Intval(strclean($_POST['id_carrera']));
-                $id_usuario = Intval(strclean($_POST['id_usuario']));
+                if ($id_alumno == 0) {
+                    $id_usuario = Intval(strclean($_POST['id_usuario']));
+                }
+                
+                $id_usuario = 0;
+
                 $validate_data = array($id_alumno,$cedula,$nombre,$apellido,$email_personal,$telefono,$sexo,$id_carrera,$id_usuario);
 
                 if(!validateEmptyFields($validate_data)){
@@ -119,11 +126,24 @@
                                         $telefono,$sexo,$id_carrera,$id_usuario);
                         $option = 1;
                     }
+                }else{
+                    if (empty($_SESSION['permisos_modulo']['u'])){
+                        header('location:'.server_url.'Errors');
+                        $data= array("status" => false, "msg" => "Error no tiene permisos");
+                        $response_alumno = 0;
+                    }else{
+                        $response_alumno = $this->model->updateAlumno($id_alumno,$cedula,$nombre,$apellido,$email_personal,
+                                        $telefono,$sexo,$id_carrera);
+                        $option = 2;
+                    }
                 }
 
                 if ($response_alumno > 0){ 
                     if ($option == 1){
                         $data = array('status' => true, 'msg' => 'Datos guardados correctamente');
+                    }
+                    if ($option == 2){
+                        $data = array('status' => true, 'msg' => 'Datos actualizados correctamente');
                     }
                 }else if ($response_alumno == 'exist'){
                     $data = array('status' => false,'formErrors'=> array(
@@ -142,6 +162,33 @@
             echo json_encode($data,JSON_UNESCAPED_UNICODE);
             die();
         }
+
+        public function getAlumno(int $id_alumno){
+            if (empty($_SESSION['permisos_modulo']['r']) ) {
+                header('location:'.server_url.'Errors');
+                $data_response = array("status" => false, "msg" => "Error no tiene permisos");
+            }else{
+                $id_alumno  = Intval(strclean($id_alumno));
+                if(!validateEmptyFields([$id_alumno])){
+                    $data = array('status' => false,'msg' => 'El campo se encuentra vacio , verifique y vuelva a ingresarlo');
+                }
+
+                if(!empty(preg_matchall([$id_alumno],regex_numbers))){
+                    $data = array('status' => false,'msg' => 'El campo estan mal escrito , verifique y vuelva a ingresarlo');
+                }
+
+                if ($id_alumno > 0){
+                    $data = $this->model->selectAlumno($id_alumno);
+                    if (!empty($data)){
+                        $data_response = array('status' => false,'msg'=> 'Datos no encontrados');
+                    }
+                    $data_response = array('status' => true,'msg'=> $data);
+                }
+            }
+            echo json_encode($data_response,JSON_UNESCAPED_UNICODE);
+            die();
+        }
+
 
 
         public function getSelectUsuarios(){

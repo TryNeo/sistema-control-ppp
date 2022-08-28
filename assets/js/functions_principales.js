@@ -3,7 +3,7 @@ const base_url_assets = "http://localhost/sistema-control-ppp/assets/";
 const base_url_image = "http://localhost/sistema-control-ppp/assets/images/";
 
 
-function clickModal(nameSelector,modalName,formSelector='',formSelect2=''){
+function clickModal(nameSelector,modalName,formSelector='',formSelect2='',select2=[]){
     $('#openModal').on('click',function (e) {
         var options = {
             "backdrop" : "static",
@@ -22,17 +22,23 @@ function clickModal(nameSelector,modalName,formSelector='',formSelect2=''){
             $("textarea").removeClass("is-invalid");
             $("select").removeClass("is-valid");
             $("select").removeClass("is-invalid");
+            select2.forEach(function(element,index){
+                $(element).prop('selectedIndex',0);
+            })
+
         }
 
         if(formSelect2 != ''){
             $(formSelect2).val('').trigger('change')
+            $(formSelect2).removeAttr('disabled');   
+
         }
 
         $(nameSelector).modal(options);
     });
 }
 
-function clickModalEditing(urlData,modalName,nameSelectorId,listCamps,nameSelectorModal,isSelect =false,listSelect = []) {
+function clickModalEditing(urlData,modalName,nameSelectorId,listCamps,nameSelectorModal,isSelect =false,listSelect = [],isSelect2=false,nameSelect2='') {
     $(nameSelectorModal).modal("show");
     document.querySelector('#modalTitle').innerHTML = modalName;
     document.querySelector('.changeText').innerHTML = " Actualizar registro ";
@@ -63,6 +69,13 @@ function clickModalEditing(urlData,modalName,nameSelectorId,listCamps,nameSelect
                         $('#'+element).addClass('is-valid');
                     })
                 }
+
+                if(isSelect2){
+                    $(nameSelect2).attr('disabled','disabled');
+                    $(nameSelect2).addClass('hidden-data');
+                    $(nameSelect2).removeClass('is-invalid');
+                }
+
             }else {
                 mensaje("error","Error | Peticion Ajax","Oops hubo un error al realizar la peticion")
             }

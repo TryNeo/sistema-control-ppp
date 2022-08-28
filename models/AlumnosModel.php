@@ -34,6 +34,14 @@
             return $request;
         }
 
+        public function selectAlumno(int $id_alumno){
+            $this->int_id_alumno = $id_alumno;
+            $sql = "SELECT id_alumno,cedula,email_personal,nombre,apellido,telefono,sexo,id_carrera,id_usuario FROM alumnos where id_alumno =$this->int_id_alumno";
+            $request = $this->select_sql($sql);
+            return $request;
+
+        }
+
         public function selectUsuariosNoInactivos(string $str_search_usuario){
             $this->str_search_usuario = $str_search_usuario;
             $sql = "SELECT us.id_usuario,us.usuario,us.email_institucional,rl.nombre_rol FROM usuarios as us INNER JOIN roles as rl ON us.id_rol = rl.id_rol 
@@ -80,6 +88,24 @@
             return $return;
         }
 
+        public function updateAlumno(int $id_alumno,string $cedula,string $nombre,string $apellido,string $email_personal,
+                    string $telefono,string $sexo,int $id_carrera){
+
+            $this->int_id_alumno = $id_alumno;
+            $this->str_cedula = $cedula;
+            $this->str_nombre = $nombre;
+            $this->str_apellido = $apellido;
+            $this->str_email_personal = $email_personal;
+            $this->str_telefono = $telefono;
+            $this->str_sexo = $sexo;
+            $this->int_id_carrera = $id_carrera;    
+            $sql = "UPDATE alumnos SET cedula = ?,nombre = ?,apellido = ?,email_personal = ?,telefono = ?,sexo = ?,id_carrera = ?,fecha_modifica = now() WHERE id_alumno = $this->int_id_alumno";
+            $data = array($this->str_cedula,$this->str_nombre,$this->str_apellido,$this->str_email_personal,
+                                $this->str_telefono,$this->str_sexo,$this->int_id_carrera);
+            $request = $this->update_sql($sql,$data);
+            return $request;
+
+        }
 
         public function deleteAlumno(int $int_id_alumno){
             $this->int_id_alumno = $int_id_alumno;
