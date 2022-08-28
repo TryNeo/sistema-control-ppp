@@ -18,7 +18,7 @@
                 $where_admin = " and us.id_usuario !=1";
             }
             $sql = "SELECT us.id_usuario,us.usuario,us.email_institucional,us.email_activo,us.ultimo_online,rl.id_rol,rl.nombre_rol,us.estado
-                FROM usuarios  as us INNER JOIN roles as rl ON us.id_rol = rl.id_rol WHERE rl.estado !=0 ".$where_admin;
+                FROM usuarios  as us INNER JOIN roles as rl ON us.id_rol = rl.id_rol WHERE rl.estado !=0 and us.estado!=0".$where_admin;
             $request = $this->select_sql_all($sql);
             return $request;
         }
@@ -115,9 +115,16 @@
 
         public function deleteUsuario(int $int_id_usuario){
             $this->int_id_usuario = $int_id_usuario;
-            $sql = "UPDATE usuarios SET estado = ?, fecha_modifica = now() WHERE id_usuario = $this->int_id_usuario";
-            $data = array(0);
-            $request_delete = $this->update_sql($sql,$data);
+            $sql_ultimo_online = "SELECT ultimo_online FROM usuarios WHERE id_usuario = $this->int_id_usuario";
+            $response_ultimo_online = $this->select_sql($sql_ultimo_online);
+            if($response_ultimo_online['ultimo_online'] == 1){
+                $request_delete = 'error_online';
+            }else{
+                $sql = "UPDATE usuarios SET email_activo= ?,estado = ?, fecha_modifica = now() WHERE id_usuario = $this->int_id_usuario";
+                $data = array(0,0);
+                $request_delete = $this->update_sql($sql,$data);
+            }
+            
             return $request_delete;
         }
 

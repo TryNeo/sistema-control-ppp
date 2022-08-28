@@ -140,3 +140,4 @@ INSERT INTO carreras (nombre_carrera,descripcion,estado,fecha_crea) values ("Tec
 INSERT INTO carreras (nombre_carrera,descripcion,estado,fecha_crea) values ("Tecnología Superior en Seguridad Ciudadana y Orden Púbilco","Formar profesionales a nivel tecnológico superior con calidad humana capaces de diseñar, ejecutar y evaluar procesos de atención integral a la primera infancia y a mujeres estantes, que integren conocimientos teórico-prácticos en la generación de estrategias, técnicas y herramientas de cuidado materno infantil",1,now());
 
 INSERT INTO usuarios (usuario,password,email_institucional,email_activo,id_rol,estado,fecha_crea) VALUES ("josu3","$2y$10$nLtnKbUrAQnMMfWi9bqsEuQ53U5k1pKCRsKYWEw0x/R5hgKNcHiYK","jjhuacon@est.itsgg.edu.ec",1,1,1,now());
+

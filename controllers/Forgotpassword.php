@@ -101,7 +101,7 @@ class Forgotpassword extends Controllers
             $data['csrf'] = $token;
             $request_email_code = $this->model->verifyCodeEmail(strclean($_GET['token']));
             if ($request_email_code > 0) {
-                if (isset($_SESSION['token-expire']) and  $_SESSION['emailtemp']) {
+                if (isset($_SESSION['token-expire']) and  isset($_SESSION['emailtemp'])) {
                     if ($_SESSION['token-expire'] != NULL and $_SESSION['emailtemp'] != NULL) {
                         if (time() >=  $_SESSION['token-expire']) {
                             $this->model->resetCodeEmail($_SESSION['emailtemp']);
@@ -111,7 +111,7 @@ class Forgotpassword extends Controllers
                         }
                     }
                 } else {
-                    $data_res = array("status" => false, "msg" => "Oops hubo un error, intentelo de nuevo");
+                    $data_res = array("status" => false, "msg" => "Error !, Esta tratando de reestablacer su contraseña en distintos navagedores");
                 }
             } else {
                 $data_res = array("status" => false, "msg" => "El token a expirado, porfavor reenvie el enlace para restablecer su contraseña nuevamente");

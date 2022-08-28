@@ -48,7 +48,7 @@ function sendingDataServerSideForgotpassword(idForm,validatorServerSide,fieldsTo
                         $('#fntForgotpassword').trigger("reset");
                         $('form').removeClass('was-validated');
                         $("input").removeClass("is-valid");
-                    }, 900);
+                    },900);
                 }else{
                     if (!jQuery.isEmptyObject(data.formErrors)){
                         console.log(data.formErrors)

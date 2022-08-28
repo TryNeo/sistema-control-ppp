@@ -11,7 +11,7 @@
 
         public function login_user(string $str_email){
             $this->str_email = $str_email;
-            $sql = "SELECT id_usuario,password,estado,id_rol
+            $sql = "SELECT id_usuario,password,ultimo_online,estado,id_rol
                 FROM usuarios WHERE email_institucional = '$this->str_email' and estado = 1 and email_activo = 1";
             $request = $this->select_sql($sql);
             return $request;

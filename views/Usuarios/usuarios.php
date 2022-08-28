@@ -25,6 +25,7 @@
                                             <th scope="col">ACTIVIDAD</th>
                                             <th scope="col">ROL</th>
                                             <th scope="col">ESTADO</th>
+                                            <th scope="col">OPCIONES</th>
                                         </tr>
                                         </thead>
                                         <tbody>

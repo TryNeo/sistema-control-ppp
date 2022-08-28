@@ -3,7 +3,7 @@ const base_url_assets = "http://localhost/sistema-control-ppp/assets/";
 const base_url_image = "http://localhost/sistema-control-ppp/assets/images/";
 
 
-function clickModal(nameSelector,modalName,formSelector=''){
+function clickModal(nameSelector,modalName,formSelector='',formSelect2=''){
     $('#openModal').on('click',function (e) {
         var options = {
             "backdrop" : "static",
@@ -22,6 +22,10 @@ function clickModal(nameSelector,modalName,formSelector=''){
             $("textarea").removeClass("is-invalid");
             $("select").removeClass("is-valid");
             $("select").removeClass("is-invalid");
+        }
+
+        if(formSelect2 != ''){
+            $(formSelect2).trigger("reset");
         }
 
         $(nameSelector).modal(options);
@@ -177,17 +181,15 @@ function deleteServerSide(url,id,text,nameSelectortable){
                         let data = await response.json();
                         if(data.status){
                             mensaje("success","Exitoso",data.msg);
-                            setTimeout(function(){
-                                $(nameSelectortable).DataTable().ajax.reload();
-                            },500)
+                            $(nameSelectortable).DataTable().ajax.reload();
                         }else{
                             mensaje("error","Error",data.msg);
                         }
                     }else {
-                        mensaje("error","Error | Peticion Ajax","Oops hubo un error al realizar la peticion")
+                        mensaje("error","Error",'Hubo problemas con el servidor,intentelo nuevamente ,si el problema persiste comuniquese con el administrador del sistema');
                     }
                 } catch (err) {
-                    mensaje("error","Error | Peticion Ajax","Oops hubo un error al realizar la peticion")
+                    mensaje("error","Error",'Hubo problemas con el servidor,intentelo nuevamente ,si el problema persiste comuniquese con el administrador del sistema');
                 }
             })();
         }

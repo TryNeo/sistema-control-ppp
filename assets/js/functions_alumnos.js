@@ -13,27 +13,12 @@ $(function(){
     const fieldsToValidate = ["cedula","email_personal","nombre","apellido","telefono","sexo","id_carrera","id_usuario"];
     const configValid = configToValidate();
 
-    clickModal("#modalAlumno","Crear | Alumno","#fntAlumno");
+    clickModal("#modalAlumno","Crear | Alumno","#fntAlumno","#id_usuario");
     fetchSelect(base_url+"alumnos/getSelectCarreras","#id_carrera","Selecciona una carrera")
-    $('#alumnoCr').on('click',function(e){
-        Swal.fire({
-            title: 'Estas seguro?',
-            text: "¿Estas seguro de crear el alumno "+$("#nombre").val()+" "+$("#apellido").val()+" con este usuario "
-                +$('#id_usuario :selected').text()+"?",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, crear!',
-            cancelButtonText: 'No, cancelar'
-            }).then((result) => {
-            if (result.isConfirmed) {
-                sendingDataServerSide('#fntAlumno',configValid,fieldsToValidate,listCamps,tableAlumno,"alumnos/setAlumno","#modalAlumno");
-            }
-        })
-    })
+    sendingDataServerSide('#fntAlumno',configValid,fieldsToValidate,listCamps,tableAlumno,"alumnos/setAlumno","#modalAlumno");
     searchUsuarioA();
 })
+
 
 function configToValidate(){
 
@@ -140,7 +125,6 @@ function configToValidate(){
 }
 
 
-
 function formatRepo (repo) {
     if (repo.loading) {
         return repo.text;
@@ -195,3 +179,4 @@ function searchUsuarioA(){
         usuarioAl = data.text;
     });
 }
+

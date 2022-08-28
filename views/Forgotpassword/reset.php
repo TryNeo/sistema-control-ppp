@@ -18,7 +18,8 @@
             <div class="row">
             <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
                 <div class="login-brand">
-                    <img src="https://i.ibb.co/bgQYpYd/279874955-1027702184620744-1030435789778340311-n.jpg" alt="logo" width="200" class="shadow-light">
+
+                    <img src="https://i.ibb.co/DQstGsn/favicon1.png" alt="logo" width="160" class="shadow-light">
                 </div>
                 
                 <div class="card card-primary">

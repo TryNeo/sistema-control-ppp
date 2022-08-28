@@ -7,6 +7,7 @@ $(function(){
         {"data":"ultimo_online"},
         {"data":"nombre_rol"},
         {"data":"estado"},
+        {"data":"opciones"}
         ]
 
     const tableUsuarios =  configDataTables('.tableUsuarios',base_url+"usuarios/getUsuarios",columnData)
@@ -23,11 +24,7 @@ $(function(){
 
 })
 
-
-
-setInterval(function(){
-    $(".tableUsuarios").DataTable().ajax.reload();
-},5000);
+setInterval(function(){ $(".tableUsuarios").DataTable().ajax.reload(); },10000);
 
 
 function configToValidate(){

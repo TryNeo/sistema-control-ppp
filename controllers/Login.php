@@ -57,26 +57,33 @@
                                 $str_password = strclean($_POST['password']);
                                 $request_user = $this->model->login_user($str_email);
                                 if (empty($request_user)) {
-                                    $data = array('status' => false,'msg' => 'Las Credenciales no son validas',
+                                    $data = array('status' => false,'msg' => 'Las credenciales ingresadas no son validas',
                                         'formErrors'=> array());
                                 }else{
                                     $data = $request_user;
-                                    if ($data['estado'] == 1) {
-                                        if(password_verify($str_password,$data['password'])){
-                                            $_SESSION['id_usuario'] = $data['id_usuario'];
-                                            $_SESSION['id_rol'] = $data['id_rol'];
-                                            $_SESSION['login'] = true;
-                                            $arrResponse = $this->model->sessionLogin($_SESSION['id_usuario'],$_SESSION['id_rol']);
-                                            $_SESSION['user_data'] = $arrResponse;
-                                            unset($_SESSION['token']);
-                                            unset($_SESSION['token-expire']);
-                                            $data = array('status' => true,'msg' => 'Ha iniciado sesión correctamente','url' => server_url."dashboard");
-                                        }else{
-                                            $data = array('status' => false,'formErrors'=> array(
-                                                    'password' => 'la contraseña es incorrecta'
-                                            ));
+                                    if ($data['ultimo_online'] == 1){
+                                        $data = array('status' => false,'msg' => 'Error!,Ya hay una session activa , cierre la session para iniciar una nueva, 
+                                                    si el problema persiste reestablesca su contraseña',
+                                            'formErrors'=> array());
+                                    }else{
+                                        if ($data['estado'] == 1) {
+                                            if(password_verify($str_password,$data['password'])){
+                                                $_SESSION['id_usuario'] = $data['id_usuario'];
+                                                $_SESSION['id_rol'] = $data['id_rol'];
+                                                $_SESSION['login'] = true;
+                                                $arrResponse = $this->model->sessionLogin($_SESSION['id_usuario'],$_SESSION['id_rol']);
+                                                $_SESSION['user_data'] = $arrResponse;
+                                                unset($_SESSION['token']);
+                                                unset($_SESSION['token-expire']);
+                                                $data = array('status' => true,'msg' => 'Ha iniciado sesión correctamente','url' => server_url."dashboard");
+                                            }else{
+                                                $data = array('status' => false,'formErrors'=> array(
+                                                        'password' => 'la contraseña es incorrecta'
+                                                ));
+                                            }
                                         }
-                                    }
+                                    }          
+
                                 }
                             } else {
                                 $data = array('status' => false,'msg' => 'Oops hubo un error, intentelo de nuevo');

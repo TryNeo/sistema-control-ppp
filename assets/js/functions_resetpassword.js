@@ -64,6 +64,9 @@ function sendingDataServerSideResetpasword(idForm,validatorServerSide,fieldsToVa
                         if(data.status){
                             mensaje('success','Exitoso',data.msg);
                             setTimeout(function(){
+                                $.LoadingOverlay("show");
+                            },3000);
+                            setTimeout(function(){
                                 window.location = data.url;
                                 document.getElementById("fntResetpassword").reset();
                             },5000);
