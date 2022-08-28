@@ -21,7 +21,7 @@
                         <h4>Total Alumnos</h4>
                     </div>
                     <div class="card-body">
-                        0
+                        <?php echo $data["total_alumnos"]; ?>
                     </div>
                 </div>
             </div>

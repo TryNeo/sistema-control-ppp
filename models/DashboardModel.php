@@ -18,6 +18,13 @@
             return  $request_query;
         }
 
+        public function getAlumnos(){
+            $query = "SELECT * FROM alumnos as al 
+            INNER JOIN usuarios as us ON us.id_usuario = al.id_usuario WHERE us.estado !=0 and al.estado !=0 and us.email_activo !=0";
+            $request_query = $this->select_count($query);
+            return $request_query;
+        }
+
     }
 
 ?>
