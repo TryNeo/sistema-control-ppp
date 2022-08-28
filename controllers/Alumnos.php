@@ -21,7 +21,6 @@
             $data["page_name"] = "Listado de Alumnos";
             $data['page'] = "alumnos";
             $this->views->getView($this,"alumnos",$data);
-
         }
 
         public function getAlumnos(){
@@ -31,12 +30,29 @@
             }else{
                 $data = $this->model->selectAlumnos();
                 for ($i=0; $i < count($data); $i++) { 
+                    $btnEliminarAlumno = '';
+                    $btnEditarAlumno = '';
+
                     if ($data[$i]['estado'] == 1){
                         $data[$i]['estado']= '<span  class="btn btn-success btn-icon-split btn-custom-sm"><i class="icon fas fa-check-circle "></i><span class="label text-padding text-white-50">&nbsp;&nbsp;Activo</span></span>';
                     }else{
                         $data[$i]['estado']='<span  class="btn btn-danger btn-icon-split btn-custom-sm"><i class="icon fas fa-ban "></i><span class="label text-padding text-white-50">Inactivo</span></span>';
                     }
 
+
+                    if ($_SESSION['permisos_modulo']['u']) {
+                        $btnEditarAlumno = '<button class="btn btn-primary btnEditarRol btn-circle " title="editar" 
+                        onClick="return clickModalEditing('."'getAlumno/".$data[$i]['id_alumno']."'".','."'Actualizacion | Alumno'".','."'id_alumno'".','."['cedula','email_personal','nombre','apellido','telefono']".','."'#modalAlumno'".');">
+                        <i class="fa fa-edit"></i></button>';
+                    }
+
+
+                    if ($_SESSION['permisos_modulo']['d']) {
+                        $btnEliminarAlumno = '<button  class="btn btn-danger btn-circle btnEliminarAlumno" 
+                            title="eliminar" onClick="return deleteServerSide('."'delAlumno/'".','.$data[$i]['id_alumno'].','."'¿Desea eliminar el alumno ".$data[$i]['nombre']." ".$data[$i]['apellido']."?'".','."'.tableAlumno'".');"><i class="far fa-thumbs-down"></i></button>';
+                    }
+
+                    $data[$i]['opciones'] = $btnEditarAlumno .' '.$btnEliminarAlumno;
                 }
             }
             echo json_encode($data,JSON_UNESCAPED_UNICODE);
@@ -113,6 +129,10 @@
                     $data = array('status' => false,'formErrors'=> array(
                         'cedula' => "La cedula ".$cedula." ya existe, ingrese uno nuevo",
                     ));
+                }else if ($response_alumno == 'error_email') { 
+                    $data = array('status' => false,'formErrors'=> array(
+                        'email_personal' => "El email ".$email_personal." no puede ser igual al del usuario",
+                    ));
                 }else{
                     $data = array('status' => false,'msg' => 'Hubo un error no se pudieron guardar los datos');
                 }
@@ -146,6 +166,37 @@
             }
             if (!isset($data)) {
                 $data = array();
+            }
+            echo json_encode($data,JSON_UNESCAPED_UNICODE);
+            die();
+        }
+
+        public function delAlumno(){
+            if (empty($_SESSION['permisos_modulo']['d']) ) {
+                header('location:'.server_url.'Errors');
+                $data = array("status" => false, "msg" => "Error no tiene permisos");
+            }else{
+
+                if (!$_POST){
+                    $data = array("status" => false, "msg" => "Error Hubo problemas");
+                }
+
+                $id_alumno = intval(strclean($_POST["id"]));
+
+                if(!validateEmptyFields([$id_alumno])){
+                    $data = array('status' => false,'msg' => 'El campo se encuentra vacio , verifique y vuelva a ingresarlo');
+                }
+
+                if(!empty(preg_matchall([$id_alumno],regex_numbers))){
+                    $data = array('status' => false,'msg' => 'El campo estan mal escrito , verifique y vuelva a ingresarlo');
+                }
+
+                $response_del = $this->model->deleteAlumno($id_alumno);
+                if($response_del == "ok"){
+                    $data = array("status" => true, "msg" => "Se ha eliminado el alumno");
+                }else{
+                    $data = array("status" => false, "msg" => "Error al eliminar alumno");
+                }
             }
             echo json_encode($data,JSON_UNESCAPED_UNICODE);
             die();

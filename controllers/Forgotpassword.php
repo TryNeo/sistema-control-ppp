@@ -52,27 +52,28 @@ class Forgotpassword extends Controllers
 
                     if ($datos['success'] == 1 && $datos['score'] >= 0.5) {
                         $request_email = $this->model->searchEmail($emaiL_user);
-                        if (empty($request_email) != 0) {
+                        if (empty($request_email)) {
                             $data = array(
                                 'status' => false, 'msg' => 'El email ingresado no existe, verifique que este escrito bien y vuelva a ingresarlo',
                                 'formErrors' => array()
                             );
-                        }
-                        $code = bin2hex(random_bytes(32));
-                        $request_email_code = $this->model->generateCodeEmail($code, $emaiL_user);
-                        if ($request_email_code > 0) {
-                            $mail = new MailSender('smtp.gmail.com', CORREO, CONTRASEÑA, true);
-                            $mail->setTemplateURL('./views/template/mail/mail_forgotpassword.html');
-                            $mail->compose(array(
-                                'link' => "'" . server_url . 'forgotpassword/reset?token=' . $code . "'",
-                            ));
-                            $_SESSION['emailtemp'] = $emaiL_user;
-                            $_SESSION['token-expire'] = time() + 5 * 60;
-                            $data = $mail->sendEmail(array(
-                                CORREO, 'Gestoria PPP'
-                            ), array(
-                                $emaiL_user
-                            ), 'Restablece tu contraseña de Gestoria PPP');
+                        }else{
+                            $code = bin2hex(random_bytes(32));
+                            $request_email_code = $this->model->generateCodeEmail($code, $emaiL_user);
+                            if ($request_email_code > 0) {
+                                $mail = new MailSender('smtp.gmail.com', CORREO, CONTRASEÑA, true);
+                                $mail->setTemplateURL('./views/template/mail/mail_forgotpassword.html');
+                                $mail->compose(array(
+                                    'link' => "'" . server_url . 'forgotpassword/reset?token=' . $code . "'",
+                                ));
+                                $_SESSION['emailtemp'] = $emaiL_user;
+                                $_SESSION['token-expire'] = time() + 5 * 60;
+                                $data = $mail->sendEmail(array(
+                                    CORREO, 'Gestoria PPP'
+                                ), array(
+                                    $emaiL_user
+                                ), 'Restablece tu contraseña de Gestoria PPP');
+                            }
                         }
                     } else {
                         $data = array('status' => false, 'msg' => 'El  reCAPTCHA ha sido invalido, recargue la pagiina e  intentelo nuevamente');

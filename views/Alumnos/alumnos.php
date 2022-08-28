@@ -22,8 +22,10 @@
                                             <th scope="col">NOMBRES</th>
                                             <th scope="col">APELLIDOS</th>
                                             <th scope="col">USUARIO</th>
+                                            <th scope="col">EMAIL PERSONAL</th>
                                             <th scope="col">EMAIL INSTITUCIONAL</th>
                                             <th scope="col">ESTADO</th>
+                                            <th scope="col">OPCIONES</th>
                                         </tr>
                                     </thead>
                                     <tbody>

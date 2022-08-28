@@ -25,7 +25,7 @@ function clickModal(nameSelector,modalName,formSelector='',formSelect2=''){
         }
 
         if(formSelect2 != ''){
-            $(formSelect2).trigger("reset");
+            $(formSelect2).val('').trigger('change')
         }
 
         $(nameSelector).modal(options);

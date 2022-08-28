@@ -5,8 +5,11 @@ $(function(){
         {"data":"nombre"},
         {"data":"apellido"},
         {"data":"usuario"},
+        {"data":"email_personal"},
         {"data":"email_institucional"},
-        {"data":"estado"}]
+        {"data":"estado"},
+        {"data":"opciones"},
+    ]
 
     const tableAlumno = configDataTables('.tableAlumno',base_url+"alumnos/getAlumnos",columnData);
     const listCamps =  ["#id_alumno","#cedula","#email_personal","#nombre","#apellido","#telefono","#sexo","#id_carrera","#id_usuario"];
@@ -18,6 +21,9 @@ $(function(){
     sendingDataServerSide('#fntAlumno',configValid,fieldsToValidate,listCamps,tableAlumno,"alumnos/setAlumno","#modalAlumno");
     searchUsuarioA();
 })
+
+
+setInterval(function(){ $(".tableAlumno").DataTable().ajax.reload(); },10000);
 
 
 function configToValidate(){
