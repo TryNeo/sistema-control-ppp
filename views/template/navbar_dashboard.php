@@ -117,7 +117,7 @@
           <?php } ?>
         <?php } ?>
         <?php if (!empty($_SESSION['permisos'][8]['r'])) { ?>
-          <?php if ($data['page_id'] == 7) { ?>
+          <?php if ($data['page_id'] == 8) { ?>
             <li class="active">
               <a href="<?php echo server_url; ?>empresas/" class="nav-link"><i class="far fa-building"></i><span>Convenios</span></a>
             </li>

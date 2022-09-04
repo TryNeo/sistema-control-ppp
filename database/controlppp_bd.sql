@@ -99,6 +99,25 @@ CREATE TABLE profesores(
 )ENGINE=InnoDB CHARACTER SET utf8;
 
 
+DROP TABLE IF EXISTS empresas;
+CREATE TABLE empresas(
+    id_empresa int(11) auto_increment,
+    ruc_empresa varchar(13),
+    nombre_empresa varchar(200),
+    direccion_empresa varchar(200),
+    telefono_empresa varchar(12),
+    correo_empresa varchar(40),
+    cedula_representante varchar(10),
+    nombre_representante varchar(150),
+    telefono_representante varchar(12),
+    descripcion_empresa text,
+    estado boolean,
+    fecha_crea DATETIME,
+    fecha_modifica DATETIME default now(),
+    PRIMARY KEY(id_empresa)
+)ENGINE=InnoDB CHARACTER SET utf8;
+
+
 ALTER TABLE permisos ADD CONSTRAINT fk_modulo FOREIGN KEY (id_modulo) REFERENCES modulos(id_modulo);
 ALTER TABLE permisos ADD CONSTRAINT fk_rol FOREIGN KEY (id_rol) REFERENCES roles(id_rol);
 ALTER TABLE alumnos ADD CONSTRAINT fk_usuario_al FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario);
