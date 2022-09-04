@@ -186,3 +186,53 @@ function searchUsuarioA(){
     });
 }
 
+function clickModalEditingAl(urlData,modalName,nameSelectorId,listCamps,nameSelectorModal,isSelect =false,
+    listSelect = [],isSelect2=false,nameSelect2='') {
+$(nameSelectorModal).modal("show");
+$('form').removeClass('was-validated');
+$("input").removeClass("is-valid");
+$("input").removeClass("is-invalid");
+$("textarea").removeClass("is-valid");
+$("textarea").removeClass("is-invalid");
+$("select").removeClass("is-valid");
+$("select").removeClass("is-invalid");
+
+document.querySelector('#modalTitle').innerHTML = modalName;
+document.querySelector('.changeText').innerHTML = " Actualizar registro ";
+(async () => {
+    try {
+        let options = { method: "GET"}
+        let response = await fetch(urlData,options);
+        if (response.ok) {
+            let data = await response.json();
+            
+            document.querySelector('#'+nameSelectorId).value = data.msg[nameSelectorId];
+            listCamps.forEach(function(element,index){
+                document.querySelector('#'+element).value = data.msg[element];
+                $('#'+element).removeClass('is-invalid');
+                $('#'+element).addClass('is-valid');
+            })
+
+            if(isSelect){
+                listSelect.forEach(function(element,index){
+                    document.querySelector('#'+element).value = data.msg[element];
+                    $('#'+element).removeClass('is-invalid');
+                    $('#'+element).addClass('is-valid');
+                })
+            }
+
+            if(isSelect2){
+                $(nameSelect2).attr('disabled','disabled');
+                $(nameSelect2).addClass('hidden-data');
+                $(nameSelect2).removeClass('is-invalid');
+                $('select').toggleSelect2(false);
+            }
+
+        }else {
+            mensaje("error","Error",'Hubo problemas con el servidor,intentelo nuevamente ,si el problema persiste comuniquese con el administrador del sistema');
+        }
+    } catch (err) {
+        console.log(err)
+    }
+})();
+}

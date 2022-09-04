@@ -38,7 +38,8 @@ function clickModal(nameSelector,modalName,formSelector='',formSelect2='',select
     });
 }
 
-function clickModalEditing(urlData,modalName,nameSelectorId,listCamps,nameSelectorModal,isSelect =false,listSelect = [],isSelect2=false,nameSelect2='') {
+function clickModalEditing(urlData,modalName,nameSelectorId,listCamps,nameSelectorModal,isSelect =false,
+        listSelect = [],isSelect2=false,nameSelect2='') {
     $(nameSelectorModal).modal("show");
     document.querySelector('#modalTitle').innerHTML = modalName;
     document.querySelector('.changeText').innerHTML = " Actualizar registro ";
@@ -48,6 +49,7 @@ function clickModalEditing(urlData,modalName,nameSelectorId,listCamps,nameSelect
             let response = await fetch(urlData,options);
             if (response.ok) {
                 let data = await response.json();
+                
                 document.querySelector('#'+nameSelectorId).value = data.msg[nameSelectorId];
                 listCamps.forEach(function(element,index){
                     document.querySelector('#'+element).value = data.msg[element];
@@ -59,6 +61,7 @@ function clickModalEditing(urlData,modalName,nameSelectorId,listCamps,nameSelect
                     listSelect.forEach(function(element,index){
                         let a = document.querySelector("#"+element).getElementsByTagName('option');
                         for (let item of a){
+                            console.log(data.msg[element])
                             if (item.value === data.msg[element]) {
                                 item.setAttribute("selected","");
                             }else{
@@ -77,7 +80,7 @@ function clickModalEditing(urlData,modalName,nameSelectorId,listCamps,nameSelect
                 }
 
             }else {
-                mensaje("error","Error | Peticion Ajax","Oops hubo un error al realizar la peticion")
+                mensaje("error","Error",'Hubo problemas con el servidor,intentelo nuevamente ,si el problema persiste comuniquese con el administrador del sistema');
             }
         } catch (err) {
             console.log(err)

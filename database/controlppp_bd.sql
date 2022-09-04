@@ -127,6 +127,9 @@ INSERT INTO permisos (id_modulo,id_rol,r,w,u,d) VALUES (6,1,1,1,1,1);
 INSERT INTO permisos (id_modulo,id_rol,r,w,u,d) VALUES (7,1,1,1,1,1);
 INSERT INTO permisos (id_modulo,id_rol,r,w,u,d) VALUES (8,1,1,1,1,1);
 
+INSERT INTO permisos (id_modulo,id_rol,r,w,u,d) VALUES (1,2,1,1,1,1);
+INSERT INTO permisos (id_modulo,id_rol,r,w,u,d) VALUES (1,3,1,1,1,1);
+
 
 INSERT INTO carreras (nombre_carrera,descripcion,estado,fecha_crea) values ("Tecnología Superior en Administración","no hay descripcion",0,now());
 INSERT INTO carreras (nombre_carrera,descripcion,estado,fecha_crea) values ("Tecnología Superior en Contabilidad","El objeto de estudio de la carrera de Tecnología Superior en Contabilidad es el estudio del proceso contable y las variaciones del patrimonio a través del tiempo",1,now());

@@ -42,7 +42,7 @@
 
                     if ($_SESSION['permisos_modulo']['u']) {
                         $btnEditarAlumno = '<button class="btn btn-primary btnEditarRol btn-circle " title="editar" 
-                        onClick="return clickModalEditing('."'getAlumno/".$data[$i]['id_alumno']."'".
+                        onClick="return clickModalEditingAl('."'getAlumno/".$data[$i]['id_alumno']."'".
                         ','."'Actualizacion | Alumno'".','."'id_alumno'".','."['cedula','email_personal','nombre','apellido','telefono']".
                         ','."'#modalAlumno'".','.'true'.','."['sexo','id_carrera']".','.'true'.','."'#id_usuario'".');">
                         <i class="fa fa-edit"></i></button>';
