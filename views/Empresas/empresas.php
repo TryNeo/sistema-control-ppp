@@ -21,8 +21,12 @@
                                 <table  class="table tableEmpresa table-striped table-bordered dt-responsive nowrap" cellspacing="0"  style="width:100%">
                                     <thead class="text-uppercase">
                                         <tr>
+                                            <th scope="col">RUC</th>
+                                            <th scope="col">NOMBRE EMPRESA</th>
+                                            <th scope="col">CORREO EMPRESA</th>
+                                            <th scope="col">NOMBRE REPRESENTANTE</th>
+                                            <th scope="col">TELEFONO REPRESENTANTE</th>
                                             <th scope="col">ESTADO</th>
-                                            <th scope="col">OPCIONES</th>
                                         </tr>
                                     </thead>
                                     <tbody>
