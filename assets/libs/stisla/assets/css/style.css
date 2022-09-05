@@ -2848,10 +2848,10 @@ body.layout-3 .main-footer {
         padding-left: 65px;
         font-weight: 400; }
         .main-sidebar .sidebar-menu li ul.dropdown-menu li a:hover {
-          color: #6777ef;
+          color: #045e8c;
           background-color: inherit; }
       .main-sidebar .sidebar-menu li ul.dropdown-menu li.active > a {
-        color: #6777ef;
+        color: #045e8c;
         font-weight: 600; }
       .main-sidebar .sidebar-menu li ul.dropdown-menu li a i {
         margin-top: 1px;
