@@ -9,6 +9,7 @@ $(function(){
     ]
 
     const tableEmpresa = configDataTables('.tableEmpresa',base_url+"empresas/getEmpresas",columnData);
+
     const listCamps =  ["#id_empresa","#ruc_empresa","#nombre_empresa","#direccion_empresa","#correo_empresa","#telefono_empresa",
                             "#cedula_representante","#nombre_representante","#telefono_representante","#descripcion_empresa"];
 
@@ -18,6 +19,8 @@ $(function(){
     const configValid = configToValidate();
 
     clickModal("#modalEmpresa","Crear | Empresa","#fntEmpresa");
+    sendingDataServerSide('#fntEmpresa',configValid,fieldsToValidate,listCamps,tableEmpresa,"empresas/setEmpresa","#modalEmpresa");
+
 })
 
 

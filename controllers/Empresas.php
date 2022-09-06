@@ -42,4 +42,33 @@
         }
 
 
+        public function setEmpresa(){
+            if ($_POST) {
+                $id_empresa = Intval(strclean($_POST['id_empresa']));
+                $ruc_empresa = strclean($_POST['ruc_empresa']);
+                $nombre_empresa = ucwords(strtolower(strclean($_POST['nombre_empresa'])));
+                $direccion_empresa = strclean($_POST['direccion_empresa']);
+                $correo_empresa = strclean($_POST['correo_empresa']);
+                $telefono_empresa = strclean($_POST['telefono_empresa']);
+                $cedula_representante = strclean($_POST['cedula_representante']);
+                $nombre_representante = ucwords(strtolower(strclean($_POST['nombre_representante'])));
+                $telefono_representante = strclean($_POST['telefono_representante']);
+                $descripcion_empresa = ucwords(strtolower(strclean($_POST['descripcion_empresa'])));
+                
+
+                $validate_data = array($id_empresa,$ruc_empresa,$nombre_empresa,$direccion_empresa,$correo_empresa,
+                    $telefono_empresa,$cedula_representante,$nombre_representante,$telefono_representante);
+
+                if(!validateEmptyFields($validate_data)){
+                    $data = array('status' => false,'msg' => "Verifique que algunos de los campos no se encuentre vacio");
+                }
+                $data = array(true,"msg" => $validate_data);
+            }else{
+                header('location:'.server_url.'Errors');
+            }
+            echo json_encode($data,JSON_UNESCAPED_UNICODE);
+            die();
+        }
+
+
     }
