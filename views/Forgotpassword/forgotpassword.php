@@ -27,7 +27,7 @@
                 <br>
                 <div class=""><h4 class="text-center">Restablecer contraseña</h4></div>
                 <div class="card-body">
-                    <p class="text-muted">Ingrese su dirección de correo electrónico a continuación y le enviaremos un enlace para restablecer su contraseña.</p>
+                    <p class="text-dark">Ingrese su dirección de correo electrónico a continuación y le enviaremos un enlace para restablecer su contraseña.</p>
                     <form  id="fntForgotpassword" name="fntForgotpassword" method="POST" 
                         action="<?php echo server_url; ?>forgotpassword/sendEmailCode" class="needs-validation" novalidate="">
                         <input id="csrf" name="csrf" type="hidden" value="<?php echo $data["csrf"]; ?>">

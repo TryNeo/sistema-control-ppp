@@ -6,6 +6,8 @@ $(function(){
         {"data":"nombre_representante"},
         {"data":"telefono_representante"},
         {"data":"estado"},
+        {"data":"opciones"}
+        ,
     ]
 
     const tableEmpresa = configDataTables('.tableEmpresa',base_url+"empresas/getEmpresas",columnData);
@@ -22,6 +24,9 @@ $(function(){
     sendingDataServerSide('#fntEmpresa',configValid,fieldsToValidate,listCamps,tableEmpresa,"empresas/setEmpresa","#modalEmpresa");
 
 })
+
+setInterval(function(){ $(".tableEmpresa").DataTable().ajax.reload(); },10000);
+
 
 
 function configToValidate(){

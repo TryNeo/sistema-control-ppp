@@ -3,8 +3,6 @@ $(function(){
     const fieldsToValidate = ['password','password_confirm']
 
 
-
-
     let validatorServerSide = $('form.needs-validation').jbvalidator({
         errorMessage: true,
         successClass: true,
@@ -40,7 +38,6 @@ $(function(){
 
         }
     }
-
     sendingDataServerSideResetpasword('#fntResetpassword',validatorServerSide,fieldsToValidate);
 });
 
@@ -107,7 +104,6 @@ function sendingDataServerSideResetpasword(idForm,validatorServerSide,fieldsToVa
         }).then((result) => {
             if (result.isConfirmed) {
                 $("*", "#fntForgotpassword").prop('disabled',true);
-                window.close();
             }
         });
 

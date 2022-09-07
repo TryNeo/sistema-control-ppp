@@ -27,6 +27,7 @@
                                             <th scope="col">NOMBRE REPRESENTANTE</th>
                                             <th scope="col">TELEFONO REPRESENTANTE</th>
                                             <th scope="col">ESTADO</th>
+                                            <th scope="col">OPCIONES</th>
                                         </tr>
                                     </thead>
                                     <tbody>

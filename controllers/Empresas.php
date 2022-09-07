@@ -30,11 +30,20 @@
             }else{
                 $data = $this->model->selectEmpresas();
                 for ($i=0; $i < count($data); $i++) { 
+                    $btnEliminarEmpresa='';
+
                     if ($data[$i]['estado'] == 1){
                         $data[$i]['estado']= '<span  class="btn btn-success btn-icon-split btn-custom-sm"><i class="icon fas fa-check-circle "></i><span class="label text-padding text-white-50">&nbsp;&nbsp;Activo</span></span>';
                     }else{
                         $data[$i]['estado']='<span  class="btn btn-danger btn-icon-split btn-custom-sm"><i class="icon fas fa-ban "></i><span class="label text-padding text-white-50">Inactivo</span></span>';
                     }
+
+                    if ($_SESSION['permisos_modulo']['d']) {
+                        $btnEliminarEmpresa = '<button  class="btn btn-danger btn-circle btnEliminarAlumno" 
+                            title="eliminar" onClick="return deleteServerSide('."'delEmpresa/'".','.$data[$i]['id_empresa'].','."'¿Desea eliminar la empresa ".$data[$i]['nombre_empresa']."?'".','."'.tableEmpresa'".');"><i class="far fa-thumbs-down"></i></button>';
+                    }
+
+                    $data[$i]['opciones'] = $btnEliminarEmpresa;
                 }
             }
             echo json_encode($data,JSON_UNESCAPED_UNICODE);
@@ -55,20 +64,77 @@
                 $telefono_representante = strclean($_POST['telefono_representante']);
                 $descripcion_empresa = ucwords(strtolower(strclean($_POST['descripcion_empresa'])));
                 
-
                 $validate_data = array($id_empresa,$ruc_empresa,$nombre_empresa,$direccion_empresa,$correo_empresa,
                     $telefono_empresa,$cedula_representante,$nombre_representante,$telefono_representante);
 
                 if(!validateEmptyFields($validate_data)){
                     $data = array('status' => false,'msg' => "Verifique que algunos de los campos no se encuentre vacio");
                 }
-                $data = array(true,"msg" => $validate_data);
+
+                if ($id_empresa == 0){
+                    if (empty($_SESSION['permisos_modulo']['w'])){
+                        header('location:'.server_url.'Errors');
+                        $data= array("status" => false, "msg" => "Error no tiene permisos");
+                        $response_empresa = 0;
+                    }else{
+                        $response_empresa = $this->model->insertEmpresa($ruc_empresa,$nombre_empresa,
+                                    $direccion_empresa,$correo_empresa,$telefono_empresa,$cedula_representante,
+                                    $nombre_empresa,$telefono_representante,$descripcion_empresa);
+                        $option = 1;
+                    }
+                }
+
+                if ($response_empresa > 0){ 
+                    if ($option == 1){
+                        $data = array('status' => true, 'msg' => 'Datos guardados correctamente');
+                    }
+                }else if ($response_empresa == 'exist'){
+                    $data = array('status' => false,'formErrors'=> array(
+                            'ruc_empresa' => "El Ruc ".$ruc_empresa." ya existe, ingrese uno nuevo",
+                    ));
+                }else{
+                    $data = array('status' => false,'msg' => 'Hubo un error no se pudieron guardar los datos');
+                }
+                
             }else{
                 header('location:'.server_url.'Errors');
             }
             echo json_encode($data,JSON_UNESCAPED_UNICODE);
             die();
         }
+
+
+        public function delEmpresa(){
+            if (empty($_SESSION['permisos_modulo']['d']) ) {
+                header('location:'.server_url.'Errors');
+                $data = array("status" => false, "msg" => "Error no tiene permisos");
+            }else{
+
+                if (!$_POST){
+                    $data = array("status" => false, "msg" => "Error Hubo problemas");
+                }
+
+                $id_empresa = intval(strclean($_POST["id"]));
+
+                if(!validateEmptyFields([$id_empresa])){
+                    $data = array('status' => false,'msg' => 'El campo se encuentra vacio , verifique y vuelva a ingresarlo');
+                }
+
+                if(!empty(preg_matchall([$id_empresa],regex_numbers))){
+                    $data = array('status' => false,'msg' => 'El campo estan mal escrito , verifique y vuelva a ingresarlo');
+                }
+
+                $response_del = $this->model->deleteEmpresa($id_empresa);
+                if($response_del == "ok"){
+                    $data = array("status" => true, "msg" => "Se ha eliminado la empresa");
+                }else{
+                    $data = array("status" => false, "msg" => "Error al eliminar la empresa");
+                }
+            }
+            echo json_encode($data,JSON_UNESCAPED_UNICODE);
+            die();
+        }
+
 
 
     }

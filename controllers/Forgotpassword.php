@@ -95,6 +95,7 @@ class Forgotpassword extends Controllers
     public function reset()
     {
         if (isset($_GET['token'])) {
+            unset($_SESSION['destroy-form']);
             if (empty($_SESSION['token'])) {
                 $_SESSION['token'] = bin2hex(random_bytes(32));
             }
@@ -105,6 +106,7 @@ class Forgotpassword extends Controllers
                 if (isset($_SESSION['token-expire']) and  isset($_SESSION['emailtemp'])) {
                     if ($_SESSION['token-expire'] != NULL and $_SESSION['emailtemp'] != NULL) {
                         if (time() >=  $_SESSION['token-expire']) {
+                            $_SESSION['destroy-form'] = true;
                             $this->model->resetCodeEmail($_SESSION['emailtemp']);
                             $data_res = array("status" => false, "msg" => "El token a expirado, porfavor reenvie el enlace para restablecer su contraseña nuevamente");
                         } else {
@@ -115,6 +117,7 @@ class Forgotpassword extends Controllers
                     $data_res = array("status" => false, "msg" => "Error !, Esta tratando de reestablacer su contraseña en distintos navagedores");
                 }
             } else {
+                $_SESSION['destroy-form'] = true;
                 $data_res = array("status" => false, "msg" => "El token a expirado, porfavor reenvie el enlace para restablecer su contraseña nuevamente");
             }
         } else {
@@ -128,6 +131,7 @@ class Forgotpassword extends Controllers
     public function resetPassword()
     {
         if ($_POST) {
+            unset($_SESSION['destroy-form']);
             if (!isset($_SESSION['token-expire'])) {
                 header('location:' . server_url . 'Errors');
             }
@@ -136,6 +140,7 @@ class Forgotpassword extends Controllers
                 header('location:' . server_url . 'Errors');
             }
             if (!time() >=  $_SESSION['token-expire']) {
+                $_SESSION['destroy-form'] = true;
                 $data = array("status" => false, "msg" => "El token a expirado, porfavor reenvie el enlace para restablecer su contraseña nuevamente");
             }
 
@@ -150,6 +155,15 @@ class Forgotpassword extends Controllers
                     if ($password != $password_confirm) {
                         $data = array("status" => false, "msg" => "Las contraseñas no coinciden, verifique que estén escritas bien");
                     }
+
+                    if(!isset($_SESSION['emailtemp'])){
+                        header('location:' . server_url . 'Errors');
+                    }
+
+                    if(!$_SESSION['emailtemp'] != NUlL){
+                        header('location:' . server_url . 'Errors');
+                    }
+
                     $str_password = password_hash(strclean($_POST['password']), PASSWORD_DEFAULT, ['cost' => 10]);
                     $response = $this->model->updatePassword($str_password, $_SESSION['emailtemp']);
                     if ($response > 0) {
