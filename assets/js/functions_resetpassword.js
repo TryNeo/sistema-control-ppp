@@ -38,7 +38,27 @@ $(function(){
 
         }
     }
+
+
     sendingDataServerSideResetpasword('#fntResetpassword',validatorServerSide,fieldsToValidate);
+
+    setTimeout(function(){
+        Swal.fire({
+            icon: 'warning',
+            title: "Error",
+            text: 'El tiempo de espera para cambiar la contraseña ha expirado',
+            showCancelButton: false,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ok',
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        }).then((result) => {
+            if (result.isConfirmed) {
+                location.reload();
+            }
+        });
+    }, 5 * 60 * 1000);
 });
 
 

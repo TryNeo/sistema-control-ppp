@@ -15,20 +15,20 @@
     <link rel="stylesheet" href="<?php echo server_url; ?>assets/css/custom.css">
 </head>
 
-<body>
+<body oncontextmenu="return false;" style="background: rgb(4,138,194); background: linear-gradient(90deg, rgba(4,138,194,1) 0%, rgba(41,150,223,1) 47%, rgba(4,76,116,1) 100%);">
   <div id="app">
     <section class="section">
       <div class="container mt-5">
         <div class="row">
           <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
             <div class="login-brand">
-                <img src="https://i.ibb.co/DQstGsn/favicon1.png" alt="logo" width="160" class="shadow-light">
+                <img src="https://i.ibb.co/DQstGsn/favicon1.png" alt="logo" width="100">
             </div>
 
-            <div class="card card-primary">
+            <div class="card shadow mb-5 bg-body">
                 <br>
                 <div class="">
-                    <h4 class="text-center">Iniciar Sesión</h4>
+                    <h4 class="text-center">Inicio de sesión</h4>
                 </div>
                 <div class="card-body">
                     <form id="fntLogin" name="fntLogin" method="POST" action="<?php echo server_url; ?>login/loginUser" class="needs-validation" novalidate="">
@@ -78,14 +78,14 @@
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4" >
-                            Login <i class="fas fa-sign-in"></i>
+                            Iniciar Sesión <i class="fas fa-sign-in"></i>
                             </button>
                         </div>
 
                     </form>
                 </div>
             </div>
-            <div class="simple-footer">
+            <div class="simple-footer" style="color:white;font-weight:700;">
                 Copyright &copy; Instituto Tecnológico Superior Tres De Marzo - <?php echo date("Y");?>
             </div>
             </div>
@@ -111,6 +111,7 @@
     <script src="<?php echo server_url; ?>assets/js/dashboard_validate.js"></script>
     <script src="<?php echo server_url; ?>assets/js/functions_principales.js"></script>
     <script src="<?php echo server_url; ?>assets/js/functions_login.js"></script>
+    
     
 </body>
 </html>

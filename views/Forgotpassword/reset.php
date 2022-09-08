@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="<?php echo server_url; ?>assets/libs/stisla/assets/css/components.css">
 </head>
 
-<body oncontextmenu="return false;">
+<body oncontextmenu="return false;" style="background: rgb(4,138,194); background: linear-gradient(90deg, rgba(4,138,194,1) 0%, rgba(41,150,223,1) 47%, rgba(4,76,116,1) 100%);">
     <div id="app">
         <section class="section">
             <div class="container mt-5">
@@ -20,10 +20,10 @@
                     <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
                         <div class="login-brand">
 
-                            <img src="https://i.ibb.co/DQstGsn/favicon1.png" alt="logo" width="160" class="shadow-light">
+                            <img src="https://i.ibb.co/DQstGsn/favicon1.png" alt="logo" width="100">
                         </div>
 
-                        <div class="card card-primary">
+                        <div class="card shadow mb-5 bg-body">
                             <div class="card-body">
                                 <?php if (isset($_SESSION['destroy-form'])) { ?>
                                     <div class=""><h4 class="text-center">
@@ -63,13 +63,13 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">Restablecer la contraseña</button>
+                                            <button type="submit" id="fntResetPass" class="btn btn-primary btn-lg btn-block" tabindex="4">Restablecer la contraseña</button>
                                         </div>
                                     </form>
                                 <?php } ?>
                             </div>
                         </div>
-                        <div class="simple-footer">
+                        <div class="simple-footer" style="color:white;font-weight:700;">
                             Copyright &copy; Instituto Tecnológico Superior Tres De Marzo - <?php echo date("Y"); ?>
                         </div>
                     </div>
