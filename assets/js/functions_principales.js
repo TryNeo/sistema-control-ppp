@@ -1,4 +1,3 @@
-document.body.style.zoom = "84%"; 
 
 const base_url = "http://localhost/sistema-control-ppp/";
 const base_url_assets = "http://localhost/sistema-control-ppp/assets/";

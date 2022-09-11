@@ -76,5 +76,4 @@
 <!--<script src="/assets/libs/datatables/DataTables-1.10.16/js/dataTables.boostrap4.min.js"></script>-->
 
 </body>
-
 </html>

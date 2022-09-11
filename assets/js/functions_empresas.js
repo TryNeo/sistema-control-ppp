@@ -43,12 +43,12 @@ function configToValidate(){
             if (!validateEmptyField(value)){
                 return 'Este campo es obligatorio';
             }
-            if(value.length >= 13){
-                return 'El campo ruc debe tener 13 caracteres';
-            }
+            
             if(!validaNumber(value)){
                 return 'El campo ruc debe ser numerico';
             }
+
+            if(!verificarRuc(value)){ return 'El ruc '+value+' no es valido'; }
         }
 
         if($(el).is('[name=nombre_empresa]')){

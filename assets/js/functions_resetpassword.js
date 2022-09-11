@@ -1,4 +1,5 @@
 $(function(){
+    document.body.style.zoom = "84%"; 
 
     const fieldsToValidate = ['password','password_confirm']
 

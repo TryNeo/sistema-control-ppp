@@ -62,7 +62,7 @@
                                 }else{
                                     $data = $request_user;
                                     if ($data['ultimo_online'] == 1){
-                                        $data = array('status' => false,'msg' => 'Error!,Ya hay una session activa , cierre la session para iniciar una nueva, 
+                                        $data = array('status' => false,'msg' => 'Ya hay una sesion activa , cierre la sesiones para iniciar una nueva, 
                                                     si el problema persiste reestablesca su contraseña',
                                             'formErrors'=> array());
                                     }else{
