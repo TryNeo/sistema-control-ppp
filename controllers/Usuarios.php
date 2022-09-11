@@ -10,8 +10,6 @@ class Usuarios extends Controllers
         if (empty($_SESSION['login'])) {
             header('location:' . server_url . 'login');
         }
-
-
         getPermisos(2);
     }
 

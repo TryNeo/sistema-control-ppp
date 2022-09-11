@@ -11,6 +11,7 @@ class Forgotpassword extends Controllers
         if (isset($_SESSION['login'])) {
             header('location:' . server_url . 'dashboard');
         }
+        
         parent::__construct();
     }
 

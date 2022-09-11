@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title><?php echo $data['page_title']; ?></title>
+    <link rel="icon" type="image/png" href="https://i.ibb.co/DQstGsn/favicon1.png" sizes="16x16" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" integrity="sha512-q3eWabyZPc1XTCmF+8/LuE1ozpg5xxn7iO89yfSOd5/oKvyqLngoNGsx8jq92Y8eXJ/IRxQbEC+FGSYxtk2oiw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="<?php echo server_url; ?>assets/libs/stisla/assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo server_url; ?>assets/libs/stisla/assets/css/components.css">
+</head>
+<body>
+    <div id="app">
+        <section class="section">
+            <div class="container mt-5">
+                <div class="page-error">
+                    <div class="page-inner">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <img class="mx-auto d-block" src="https://i.ibb.co/DQstGsn/favicon1.png" width="150">
+                                </div>
+                            </div>
+                            <hr width="350">
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <h2 class="error-subtitle">La sesión ha expirado</h2>
+                                    <p class="error-message" style="font-size: 20px;">
+                                        Lo sentimos, la sesión ha expirado por inactividad. Por favor, inicie sesión nuevamente.
+                                    </p>
+                                    <p class="error-message">
+                                        <a href="<?php echo server_url; ?>" class="btn btn-sm  btn-outline-primary">Ir a la pagina principal</a>.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="simple-footer mt-5">
+                    Copyright &copy; Instituto Tecnológico Superior Tres De Marzo - <?php echo date("Y"); ?> </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="<?php echo server_url; ?>assets/libs/stisla/assets/js/custom.js"></script>
+
+</body>
+</html>

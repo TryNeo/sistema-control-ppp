@@ -58,7 +58,7 @@
 
       </a>
       <div class="dropdown-menu dropdown-menu-right">
-        <div class="dropdown-divider"></div>
+        <div class="dropdown-title text-center" >Sesión<h6 id="tiempoRestante">00:00.0</h6></div>
         <a href="<?php echo server_url; ?>logout/" class="dropdown-item has-icon text-danger">
           <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
         </a>

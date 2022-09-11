@@ -15,8 +15,6 @@
 </div>
 </div>
 
-
-
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -74,6 +72,81 @@
 
 <script src="<?php echo server_url; ?>assets/libs/datatables/datatables.min.js"></script>
 <!--<script src="/assets/libs/datatables/DataTables-1.10.16/js/dataTables.boostrap4.min.js"></script>-->
+<script>
+    const $tiempoRestante = document.querySelector("#tiempoRestante");
+    let idInterval = null, diferenciaTemporal = 0,
+    fechaFuturo = null;
 
+    const iniciarTemporizador = (minutos, segundos) => {
+        if (fechaFuturo) {
+            fechaFuturo = new Date(new Date().getTime() + diferenciaTemporal);
+            diferenciaTemporal = 0;
+        } else {
+            const milisegundos = (segundos + (minutos * 60)) * 1000;
+            fechaFuturo = new Date(new Date().getTime() + milisegundos);
+        }
+        clearInterval(idInterval);
+        idInterval = setInterval(() => {
+            const tiempoRestante = fechaFuturo.getTime() - new Date().getTime();
+            if (tiempoRestante <= 0) {
+                diferenciaTemporal = fechaFuturo.getTime() - new Date().getTime();
+                clearInterval(idInterval);
+                Swal.fire({
+                    icon: 'warning',
+                    title: "¡Tiempo de sesión agotado!",
+                    text: 'La sesión ha expirado por inactividad',
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ok',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.href = "<?php echo server_url; ?>Expired";
+                    }
+                });
+            } else {
+                $tiempoRestante.textContent = milisegundosAMinutosYSegundos(tiempoRestante);
+            }
+        }, 50);
+    };
+
+    const detenerTemporizador = () => {
+            clearInterval(idInterval);
+            fechaFuturo = null;
+            diferenciaTemporal = 0;
+            init(0,0);
+    };
+
+    const agregarCeroSiEsNecesario = valor => {
+        if (valor < 10) {
+            return "0" + valor;
+        } else {
+            return "" + valor;
+        }
+    }
+    const milisegundosAMinutosYSegundos = (milisegundos) => {
+        const minutos = parseInt(milisegundos / 1000 / 60);
+        milisegundos -= minutos * 60 * 1000;
+        segundos = (milisegundos / 1000);
+        return `${agregarCeroSiEsNecesario(minutos)}:${agregarCeroSiEsNecesario(segundos.toFixed(1))}`;
+    };
+
+    const init = (minutos,segundos) => {
+        minutos = "";
+        segundos = "";
+    };
+
+    var idaa = window.setInterval(function () {
+        document.onmousemove = function () {
+            detenerTemporizador();
+            iniciarTemporizador(30, 00);
+        };
+    }, 1200);
+
+    iniciarTemporizador(30, 00);
+    init(0,0);
+</script>
 </body>
 </html>
