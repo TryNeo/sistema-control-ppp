@@ -14,7 +14,7 @@ $(function(){
     const fieldsToValidate = ['nombre_rol','descripcion']
     const configValid = configToValidate()
 
-    clickModal("#modalRol","Crear | Rol","#fntRol");
+    clickModal("#modalRol","Crear | Rol","#fntRol","#id_rol");
     sendingDataServerSide('#fntRol',configValid,fieldsToValidate,listCamps,tableRoles,"roles/setRol","#modalRol");
 })
 

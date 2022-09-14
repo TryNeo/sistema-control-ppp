@@ -18,7 +18,7 @@ $(function(){
 
     const configValid = configToValidate()
 
-    clickModal("#modalUsuario","Crear | Usuario","#fntUsuario");
+    clickModal("#modalUsuario","Crear | Usuario","#fntUsuario","#id_usuario");
     fetchSelect(base_url+"roles/getSelectRoles","#id_rol","Selecciona un rol")
     sendingDataServerSide('#fntUsuario',configValid,fieldsToValidate,listCamps,tableUsuarios,"usuarios/setUsuario","#modalUsuario");
 

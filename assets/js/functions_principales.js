@@ -4,7 +4,7 @@ const base_url_assets = "http://localhost/sistema-control-ppp/assets/";
 const base_url_image = "http://localhost/sistema-control-ppp/assets/images/";
 
 
-function clickModal(nameSelector,modalName,formSelector='',formSelect2='',select2=[]){
+function clickModal(nameSelector,modalName,formSelector='',selectId='',formSelect2='',select2=[]){
     $('#openModal').on('click',function (e) {
         var options = {
             "backdrop" : "static",
@@ -27,6 +27,10 @@ function clickModal(nameSelector,modalName,formSelector='',formSelect2='',select
                 $(element).prop('selectedIndex',0);
             })
 
+        }
+
+        if(selectId != ''){
+            document.querySelector(selectId).value = '';   
         }
 
         if(formSelect2 != ''){
@@ -224,10 +228,10 @@ async function fetchSelect(urlData,nameSelectorSelect,messageDefault){
                 document.querySelector(nameSelectorSelect).innerHTML = "<option  selected disabled='disabled'  value=''>"+messageDefault+"</option>"+data;
             }
         }else {
-            mensaje("error","Error | Peticion Ajax","Oops hubo un error al realizar la peticion")
+            mensaje("error","Error",'Hubo problemas con el servidor,intentelo nuevamente ,si el problema persiste comuniquese con el administrador del sistema');
         }
     } catch (err) {
-        mensaje("error","Error | Peticion Ajax","Oops hubo un error al realizar la peticion")
+        mensaje("error","Error",'Hubo problemas con el servidor,intentelo nuevamente ,si el problema persiste comuniquese con el administrador del sistema');
     }
 };
 

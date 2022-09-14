@@ -16,7 +16,7 @@ $(function(){
     const fieldsToValidate = ["cedula","email_personal","nombre","apellido","telefono","sexo","id_carrera","id_usuario"];
     const configValid = configToValidate();
 
-    clickModal("#modalAlumno","Crear | Alumno","#fntAlumno","#id_usuario",['#id_carrera','#sexo']);
+    clickModal("#modalAlumno","Crear | Alumno","#fntAlumno","#id_alumno","#id_usuario",['#id_carrera','#sexo']);
     fetchSelect(base_url+"alumnos/getSelectCarreras","#id_carrera","Selecciona una carrera")
     sendingDataServerSide('#fntAlumno',configValid,fieldsToValidate,listCamps,tableAlumno,"alumnos/setAlumno","#modalAlumno");
     searchUsuarioA();

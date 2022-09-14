@@ -22,7 +22,7 @@ class expired extends Controllers
         $logout->updateLastLogin($_SESSION['id_usuario']);
         session_unset();
         session_destroy();
-        $data['page_title'] = "Error | Ha expirado la sesión";
+        $data['page_title'] = "Ha expirado la sesión";
         $error = "errorExpired";
         $this->views->getView($this, $error, $data);
     }

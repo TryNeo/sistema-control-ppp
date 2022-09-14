@@ -20,7 +20,7 @@ $(function(){
 
     const configValid = configToValidate();
 
-    clickModal("#modalEmpresa","Crear | Empresa","#fntEmpresa");
+    clickModal("#modalEmpresa","Crear | Empresa","#fntEmpresa",'#id_empresa');
     sendingDataServerSide('#fntEmpresa',configValid,fieldsToValidate,listCamps,tableEmpresa,"empresas/setEmpresa","#modalEmpresa");
 
 })

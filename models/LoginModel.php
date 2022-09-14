@@ -22,7 +22,7 @@
             $this->int_id_usuario = $int_id_usuario;
             $this->int_id_rol = $int_id_rol;
             
-            $sql_update = "UPDATE usuarios SET ultimo_online = ?,fecha_modifica = now() WHERE id_usuario = $this->int_id_usuario";
+            $sql_update = "UPDATE usuarios SET ultimo_online = ? WHERE id_usuario = $this->int_id_usuario";
             $data = array(1);
             $request_update = $this->update_sql($sql_update,$data);
             if($request_update > 0){

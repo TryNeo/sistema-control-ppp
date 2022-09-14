@@ -46,3 +46,64 @@ let actualizarHora = function(){
 actualizarHora();
 let intervalo = setInterval(actualizarHora, 1000);
 
+
+const $tiempoRestante = document.querySelector("#tiempoRestante");
+let idInterval = null, diferenciaTemporal = 0,
+fechaFuturo = null;
+
+const iniciarTemporizador = (minutos, segundos) => {
+	if (fechaFuturo) {
+		fechaFuturo = new Date(new Date().getTime() + diferenciaTemporal);
+		diferenciaTemporal = 0;
+	} else {
+		const milisegundos = (segundos + (minutos * 60)) * 1000;
+		fechaFuturo = new Date(new Date().getTime() + milisegundos);
+	}
+	clearInterval(idInterval);
+	idInterval = setInterval(() => {
+		const tiempoRestante = fechaFuturo.getTime() - new Date().getTime();
+		if (tiempoRestante <= 0) {
+			diferenciaTemporal = fechaFuturo.getTime() - new Date().getTime();
+			clearInterval(idInterval);
+				location.href = base_url+"Expired";
+		} else {
+			$tiempoRestante.textContent = milisegundosAMinutosYSegundos(tiempoRestante);
+		}
+	}, 50);
+};
+
+const detenerTemporizador = () => {
+		clearInterval(idInterval);
+		fechaFuturo = null;
+		diferenciaTemporal = 0;
+		init(0,0);
+};
+
+const agregarCeroSiEsNecesario = valor => {
+	if (valor < 10) {
+		return "0" + valor;
+	} else {
+		return "" + valor;
+	}
+}
+const milisegundosAMinutosYSegundos = (milisegundos) => {
+	const minutos = parseInt(milisegundos / 1000 / 60);
+	milisegundos -= minutos * 60 * 1000;
+	segundos = (milisegundos / 1000);
+	return `${agregarCeroSiEsNecesario(minutos)}:${agregarCeroSiEsNecesario(segundos.toFixed(1))}`;
+};
+
+const init = (minutos,segundos) => {
+	minutos = "";
+	segundos = "";
+};
+
+var idaa = window.setInterval(function () {
+	document.onmousemove = function () {
+		detenerTemporizador();
+		iniciarTemporizador(10, 00);
+	};
+}, 1200);
+
+iniciarTemporizador(10, 00);
+init(0,0);
