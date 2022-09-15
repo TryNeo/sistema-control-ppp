@@ -76,10 +76,12 @@
                                 <label class="custom-control-label no-valid" for="remember-me" >Recordarme</label>
                             </div>
                         </div>
+
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4" >
-                            Iniciar Sesión <i class="fas fa-sign-in"></i>
-                            </button>
+                            <button class="g-recaptcha btn btn-primary btn-lg btn-block" 
+                                    data-sitekey="6LdBdushAAAAACDLXq_sGAIEU4BVY59r4aLHKeZM" 
+                                    data-callback='onSubmit' 
+                                    data-action='submit' id="loginEc">Iniciar Sesión <i class="fas fa-sign-in"></i></button>
                         </div>
 
                     </form>
@@ -104,7 +106,16 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emretulek/jbvalidator"></script>
     <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
-
+    <script src="https://www.google.com/recaptcha/api.js?render=6LdBdushAAAAACDLXq_sGAIEU4BVY59r4aLHKeZM"></script>
+    <script>
+            $('#loginEc').click(function(){
+                grecaptcha.ready(function() {
+                    grecaptcha.execute('6LdBdushAAAAACDLXq_sGAIEU4BVY59r4aLHKeZM', {action: 'submit'}).then(function(token) {
+                        $('#fntLogin').submit();
+                    });
+                });
+            })
+    </script>
     <script src="<?php echo server_url; ?>assets/libs/stisla/assets/js/stisla.js"></script>
     <script src="<?php echo server_url; ?>assets/libs/stisla/assets/js/scripts.js"></script>
     <script src="<?php echo server_url; ?>assets/libs/stisla/assets/js/custom.js"></script>
