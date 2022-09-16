@@ -9,7 +9,6 @@
     <!--
             AUTHOR:JOEL JOSUE HUACON LOPEZ
             GITHUB:https://github.com/TryNeo
-            MAIL:ts.josu3@gmail.com
         --->
 </footer>
 </div>

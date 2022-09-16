@@ -10,6 +10,7 @@
 
     <link rel="stylesheet" href="<?php echo server_url; ?>assets/libs/stisla/assets/css/style.css">
     <link rel="stylesheet" href="<?php echo server_url; ?>assets/libs/stisla/assets/css/components.css">
+    <link rel="stylesheet" href="<?php echo server_url; ?>assets/css/custom.css">
 
 </head>
 
@@ -22,7 +23,11 @@
                 <div class="login-brand">
                     <img src="https://i.ibb.co/DQstGsn/favicon1.png" alt="logo" width="100">
                 </div>
-
+                <div class="sw-social-bar">
+                    <a href="https://www.facebook.com/ist.tresdemarzo"  class="sw-icon sw-icon-facebook"   target="_blank"><i class="fab fa-facebook" style="font-size: 20px;"></i></a>
+                    <a href="https://twitter.com/ist_tresdemarzo"       class="sw-icon sw-icon-twitter"    target="_blank"><i class="fab fa-twitter"  style="font-size: 20px;"></i></a>
+                    <a href="https://www.instagram.com/ist.tresdemarzo" class="sw-icon sw-icon-instagram" target="_blank"><i class="fab fa-instagram" style="font-size: 20px;"></i></a>
+                </div>
                 <div class="card shadow mb-5 bg-body">
                 <br>
                 <div class=""><h4 class="text-center">Restablecer contraseña</h4></div>

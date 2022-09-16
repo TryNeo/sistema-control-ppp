@@ -18,13 +18,18 @@
 <body oncontextmenu="return false;" style="background: rgb(4,138,194); background: linear-gradient(90deg, rgba(4,138,194,1) 0%, rgba(41,150,223,1) 47%, rgba(4,76,116,1) 100%);">
   <div id="app">
     <section class="section">
+
       <div class="container mt-5">
         <div class="row">
           <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
             <div class="login-brand">
                 <img src="https://i.ibb.co/DQstGsn/favicon1.png" alt="logo" width="100">
             </div>
-
+            <div class="sw-social-bar">
+                <a href="https://www.facebook.com/ist.tresdemarzo"  class="sw-icon sw-icon-facebook"   target="_blank"><i class="fab fa-facebook" style="font-size: 20px;"></i></a>
+                <a href="https://twitter.com/ist_tresdemarzo"       class="sw-icon sw-icon-twitter"    target="_blank"><i class="fab fa-twitter"  style="font-size: 20px;"></i></a>
+                <a href="https://www.instagram.com/ist.tresdemarzo" class="sw-icon sw-icon-instagram" target="_blank"><i class="fab fa-instagram" style="font-size: 20px;"></i></a>
+            </div>
             <div class="card shadow mb-5 bg-body">
                 <br>
                 <div class="">
