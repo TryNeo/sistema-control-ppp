@@ -34,6 +34,12 @@ function sendingDataServerSideForgotpassword(idForm,validatorServerSide,fieldsTo
         e.preventDefault();
         if(validatorServerSide.checkAll('.needs-validation') === 0){
             let formData = $(this).serializeArray();
+            $.LoadingOverlaySetup({
+                image           : "https://i.ibb.co/DQstGsn/favicon1.png",
+                imageColor      : "#ffcc00",
+                imageAnimation  : "pulse 2.5s",
+                imageAutoResize         : true,
+            });
             $.LoadingOverlay("show");
             $.ajax({
                 url: url,
@@ -51,7 +57,6 @@ function sendingDataServerSideForgotpassword(idForm,validatorServerSide,fieldsTo
                     },900);
                 }else{
                     if (!jQuery.isEmptyObject(data.formErrors)){
-                        console.log(data.formErrors)
                         fieldsToValidate.forEach((value,index) => {
                             if (data.formErrors.hasOwnProperty(fieldsToValidate[index])){
                                 validatorServerSide.errorTrigger($('[name='+fieldsToValidate[index]+']'), data.formErrors[''+fieldsToValidate[index]+'']);
@@ -63,9 +68,11 @@ function sendingDataServerSideForgotpassword(idForm,validatorServerSide,fieldsTo
                     }
                 }
             }).fail(function (error) {
+                $.LoadingOverlay("hide");
                 mensaje("error","Error",'Hubo problemas con el servidor, intentelo nuevamente')
             })
         }else{
+            $.LoadingOverlay("hide");
             console.log("error")
         }
     })

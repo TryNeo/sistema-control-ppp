@@ -50,6 +50,13 @@ function sendingDataServerSideLogin(idForm,validatorServerSide,fieldsToValidate)
         e.preventDefault();
         if(validatorServerSide.checkAll('.needs-validation') === 0){
             let formData = $(this).serializeArray();
+            $.LoadingOverlaySetup({
+                image           : "https://i.ibb.co/DQstGsn/favicon1.png",
+                imageColor      : "#ffcc00",
+                imageAnimation  : "pulse 2.5s",
+                imageAutoResize         : true,
+            });
+            $.LoadingOverlay("show");
             $.ajax({
                 url: url,
                 type: $(idForm).attr("method"),
@@ -57,13 +64,9 @@ function sendingDataServerSideLogin(idForm,validatorServerSide,fieldsToValidate)
                 dataType: 'json'
             }).done(function (data) {
                 if(data.status){
-                    mensaje('success','Exitoso',data.msg);
-                    setTimeout(function(){
-                        $.LoadingOverlay("show");
-                    }, 1500);
-                    
                     setTimeout(function(){
                         $.LoadingOverlay("hide");
+                        mensaje('success','Exitoso',data.msg);
                         window.location = data.url;
                     }, 4000);
                 }else{
@@ -74,15 +77,18 @@ function sendingDataServerSideLogin(idForm,validatorServerSide,fieldsToValidate)
                             }
                         });
                     }else{
+                        $.LoadingOverlay("hide");
                         mensaje("error","Error",data.msg);
                     }
     
                 }
             }).fail(function (error) {
                 console.log(error)
+                $.LoadingOverlay("hide");
                 mensaje("error","Error",'Hubo problemas con el servidor, intentelo nuevamente')
             })
         }else{
+            $.LoadingOverlay("hide");
             console.log("error")
         }
     })
