@@ -124,7 +124,7 @@ ALTER TABLE alumnos ADD CONSTRAINT fk_usuario_al FOREIGN KEY (id_usuario) REFERE
 ALTER TABLE alumnos ADD CONSTRAINT fk_carrera FOREIGN KEY (id_carrera) REFERENCES carreras(id_carrera);
 ALTER TABLE profesores ADD CONSTRAINT fk_usuario_prof FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario);
 
-INSERT INTO modulos (nombre,descripcion,estado,fecha_crea) values('Dashboard','modulo de dashboard',1,now());
+INSERT INTO modulos (nombre,descripcion,estado,fecha_crea) values('Principal','modulo de pagina principal',1,now());
 INSERT INTO modulos (nombre,descripcion,estado,fecha_crea) values('Usuarios','modulo de usuarios',1,now());
 INSERT INTO modulos (nombre,descripcion,estado,fecha_crea) values('Roles','modulo de roles',1,now());
 INSERT INTO modulos (nombre,descripcion,estado,fecha_crea) values('Respaldo','modulo de respaldo',1,now());

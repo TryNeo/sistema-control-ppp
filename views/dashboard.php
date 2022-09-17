@@ -36,7 +36,7 @@
                         <h4>Total Docentes</h4>
                     </div>
                     <div class="card-body">
-                        0
+                        <?php echo $data["total_profesores"]; ?>
                     </div>
                 </div>
             </div>

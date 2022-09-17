@@ -62,6 +62,12 @@
         <script type="text/javascript" src="<?php echo server_url; ?>assets/js/functions_alumnos.js"></script>
     <?php } ?>
 
+
+    <?php if ($data['page'] == 'profesores') { ?>
+        <script type="text/javascript" src="<?php echo server_url; ?>assets/js/functions_profesores.js"></script>
+    <?php } ?>
+
+
     <?php if ($data['page'] == 'empresas') { ?>
         <script type="text/javascript" src="<?php echo server_url; ?>assets/js/functions_empresas.js"></script>
     <?php } ?>

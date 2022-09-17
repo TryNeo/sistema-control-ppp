@@ -31,6 +31,12 @@
             return $request_query;
         }
 
+        public function getProfesores(){
+            $query = "SELECT * FROM profesores as pr 
+            INNER JOIN usuarios as us ON us.id_usuario = pr.id_usuario WHERE us.estado !=0 and pr.estado !=0 and us.email_activo !=0";
+            $request_query = $this->select_count($query);
+            return $request_query;
+        }
     }
 
 ?>

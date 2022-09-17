@@ -24,6 +24,7 @@
             $data["total_usuarios_online"] = $this->model->getUsuariosOnline();
             $data["total_alumnos"] = $this->model->getAlumnos();
             $data["total_empresas"] = $this->model->getEmpresas();
+            $data["total_profesores"] = $this->model->getProfesores();
             $this->views->getView($this,"dashboard",$data);
 
         }
