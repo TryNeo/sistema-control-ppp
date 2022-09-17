@@ -12,7 +12,7 @@ class ProfesoresModel extends Mysql
     public $str_email_personal;
     public $str_telefono;
     public $str_sexo;
-    public $int_id_carrera;
+    public $int_id_campus;
     public $int_id_usuario;
 
     public function __construct()
@@ -31,10 +31,19 @@ class ProfesoresModel extends Mysql
         return $request;
     }
 
+    public function selectCampusNoInactivos()
+    {
+        $sql = "SELECT id_campus,nombre_campus,descripcion FROM campus WHERE estado =1";
+        $request = $this->select_sql_all($sql);
+        return $request;
+    }
+
+
+
     public function selectProfesor(int $id_profesor)
     {
         $this->int_id_profesor = $id_profesor;
-        $sql = "SELECT id_profesor,cedula,email_personal,nombre,apellido,telefono,sexo,id_usuario FROM profesores where id_profesor =$this->int_id_profesor";
+        $sql = "SELECT id_profesor,cedula,email_personal,nombre,apellido,telefono,sexo,id_campus,id_usuario FROM profesores where id_profesor =$this->int_id_profesor";
         $request = $this->select_sql($sql);
         return $request;
     }
@@ -55,6 +64,7 @@ class ProfesoresModel extends Mysql
         string $email_personal,
         string $telefono,
         string $sexo,
+        int $id_campus,
         int $id_usuario
     ) {
         $this->str_cedula = $cedula;
@@ -63,6 +73,7 @@ class ProfesoresModel extends Mysql
         $this->str_email_personal = $email_personal;
         $this->str_telefono = $telefono;
         $this->str_sexo = $sexo;
+        $this->int_id_campus = $id_campus;
         $this->int_id_usuario = $id_usuario;
 
         $sql_email_ver = "SELECT email_institucional FROM usuarios WHERE email_institucional = '{$this->str_email_personal}' and estado = 1";
@@ -74,11 +85,11 @@ class ProfesoresModel extends Mysql
                             WHERE pr.cedula = '{$this->str_cedula}' or pr.email_personal='{$this->str_email_personal}' and estado = 1";
             $request = $this->select_sql_all($sql);
             if (empty($request)) {
-                $sql_insert = "INSERT INTO profesores (cedula,nombre,apellido,email_personal,telefono,sexo,id_usuario,estado,fecha_crea)  
-                                    values (?,?,?,?,?,?,?,1,now())";
+                $sql_insert = "INSERT INTO profesores (cedula,nombre,apellido,email_personal,telefono,sexo,id_campus,id_usuario,estado,fecha_crea)  
+                                    values (?,?,?,?,?,?,?,?,1,now())";
                 $data = array(
                     $this->str_cedula, $this->str_nombre, $this->str_apellido, $this->str_email_personal,
-                    $this->str_telefono, $this->str_sexo, $this->int_id_usuario
+                    $this->str_telefono, $this->str_sexo,$this->int_id_campus,$this->int_id_usuario
                 );
                 $request_insert = $this->insert_sql($sql_insert, $data);
 
@@ -102,7 +113,8 @@ class ProfesoresModel extends Mysql
         string $apellido,
         string $email_personal,
         string $telefono,
-        string $sexo
+        string $sexo,
+        int $id_campus
     ) {
 
         $this->int_id_profesor = $id_profesor;
@@ -112,6 +124,7 @@ class ProfesoresModel extends Mysql
         $this->str_email_personal = $email_personal;
         $this->str_telefono = $telefono;
         $this->str_sexo = $sexo;
+        $this->int_id_campus = $id_campus;
 
         $sql = "SELECT cedula FROM profesores WHERE cedula = '{$this->str_cedula}'
             and estado=1  and id_profesor = $this->int_id_profesor";
@@ -120,10 +133,10 @@ class ProfesoresModel extends Mysql
         if (empty($request)) {
             $request = 'exist';
         } else {
-            $sql = "UPDATE profesores SET cedula = ?,nombre = ?,apellido = ?,email_personal = ?,telefono = ?,sexo = ?,fecha_modifica = now() WHERE id_profesor = $this->int_id_profesor";
+            $sql = "UPDATE profesores SET cedula = ?,nombre = ?,apellido = ?,email_personal = ?,telefono = ?,sexo = ?,id_campus=?,fecha_modifica = now() WHERE id_profesor = $this->int_id_profesor";
             $data = array(
                 $this->str_cedula, $this->str_nombre, $this->str_apellido, $this->str_email_personal,
-                $this->str_telefono, $this->str_sexo
+                $this->str_telefono, $this->str_sexo,$this->int_id_campus
             );
             $request = $this->update_sql($sql, $data);
         }

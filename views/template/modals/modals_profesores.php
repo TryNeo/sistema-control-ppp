@@ -89,6 +89,21 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">
+                                        <i class="fas fa-door-open"></i>
+                                        </span>
+                                    </div>
+                                    <select name="id_campus" id="id_campus" class="form-control" required>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="col-md-12">
                             <div class="form-group">
                                 <select id="id_usuario" class="form-control select2" name="id_usuario" required>

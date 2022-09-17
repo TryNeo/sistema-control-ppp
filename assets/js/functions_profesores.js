@@ -11,11 +11,12 @@ $(function(){
     ]
 
     const tableProfesor = configDataTables('.tableProfesores',base_url+"profesores/getProfesores",columnData);
-    const listCamps =  ["#id_profesor","#cedula","#email_personal","#nombre","#apellido","#telefono","#sexo","#id_usuario"];
-    const fieldsToValidate = ["cedula","email_personal","nombre","apellido","telefono","sexo","id_usuario"];
+    const listCamps =  ["#id_profesor","#cedula","#email_personal","#nombre","#apellido","#telefono","#sexo","#id_campus","#id_usuario"];
+    const fieldsToValidate = ["cedula","email_personal","nombre","apellido","telefono","sexo","id_campus","id_usuario"];
     const configValid = configToValidate();
 
-    clickModal("#modalProfesor","Crear | Docente","#fntProfesor","#id_profesor","#id_usuario",['#sexo']);
+    clickModal("#modalProfesor","Crear | Docente","#fntProfesor","#id_profesor","#id_usuario",['#sexo','#id_campus']);
+    fetchSelect(base_url+"profesores/getSelectCampus","#id_campus","Selecciona un campus")
     sendingDataServerSide('#fntProfesor',configValid,fieldsToValidate,listCamps,tableProfesor,"profesores/setProfesor","#modalProfesor");
     searchUsuarioP();
 })
@@ -87,6 +88,13 @@ function configToValidate(){
                 return 'El apellido '+value+' contiene numeros o caracteres especiales';
             }
             
+        }
+
+        if($(el).is('[name=id_campus]')){
+            let value= $(el).val()
+            if (!validateEmptyField(value)){
+                return 'Este campo es obligatorio';
+            }
         }
 
         if($(el).is('[name=sexo]')){

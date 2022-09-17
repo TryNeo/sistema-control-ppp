@@ -44,7 +44,7 @@
                         $btnEditarProfesor = '<button class="btn btn-primary btn-circle " title="editar" 
                         onClick="return clickModalEditingPr('."'getProfesor/".$data[$i]['id_profesor']."'".
                         ','."'Actualizacion | Profesor'".','."'id_profesor'".','."['cedula','email_personal','nombre','apellido','telefono']".
-                        ','."'#modalProfesor'".','.'true'.','."['sexo']".','.'true'.','."'#id_usuario'".');">
+                        ','."'#modalProfesor'".','.'true'.','."['sexo','id_campus']".','.'true'.','."'#id_usuario'".');">
                         <i class="fa fa-edit"></i></button>';
                     }
 
@@ -61,6 +61,25 @@
             die();
         }
 
+        public function getSelectCampus()
+        {   
+            if (empty($_SESSION['permisos_modulo']['r']) ) {
+                header('location:'.server_url.'Errors');
+                $data = array("status" => false, "msg" => "Error no tiene permisos");
+            }else{
+                $html_options = "";
+                $data = $this->model->selectCampusNoInactivos();
+                if (count($data) > 0) {
+                    for ($i=0; $i < count($data) ; $i++) { 
+                        $html_options .='<option value="'.$data[$i]['id_campus'].'">'.$data[$i]['nombre_campus'].'</option>';
+                    }
+                }
+                echo $html_options;                
+                die();
+            }
+            echo json_encode($data,JSON_UNESCAPED_UNICODE);
+        }
+
 
         public function setProfesor(){
             if ($_POST) {
@@ -71,14 +90,14 @@
                 $email_personal = strtolower(strclean($_POST['email_personal']));
                 $telefono = strclean($_POST['telefono']);
                 $sexo   =  strclean($_POST['sexo']);
-
+                $id_campus = Intval(strclean($_POST['id_campus']));
                 if ($id_profesor == 0) {
                     $id_usuario = Intval(strclean($_POST['id_usuario']));
                 }else{
                     $id_usuario = 1;
                 }
                 
-                $validate_data = array($id_profesor,$cedula,$nombre,$apellido,$email_personal,$telefono,$sexo,$id_usuario);
+                $validate_data = array($id_profesor,$cedula,$nombre,$apellido,$email_personal,$telefono,$sexo,$id_campus,$id_usuario);
 
                 if(!validateEmptyFields($validate_data)){
                     $data = array('status' => false,'msg' => "Verifique que algunos de los campos no se encuentre vacio");
@@ -91,9 +110,9 @@
                     ));
                 }
 
-                if(!empty(preg_matchall(array($sexo,$id_usuario),regex_numbers))){
+                if(!empty(preg_matchall(array($id_campus,$id_usuario),regex_numbers))){
                     $data = array('status' => false,'formErrors'=> array(
-                        'sexo' => "La carrera contiene letras o caracteres especiales",
+                        'id_campus' => "La carrera contiene letras o caracteres especiales",
                         'id_usuario' => "El usuario contiene letras o caracteres especiales",
                     ));
                 }
@@ -105,7 +124,7 @@
                         $response_profesor = 0;
                     }else{
                         $response_profesor = $this->model->insertProfesor($cedula,$nombre,$apellido,$email_personal,
-                                        $telefono,$sexo,$id_usuario);
+                                        $telefono,$sexo,$id_campus,$id_usuario);
                         $option = 1;
                     }
                 }else{
@@ -115,7 +134,7 @@
                         $response_profesor = 0;
                     }else{
                         $response_profesor = $this->model->updateProfesor($id_profesor,$cedula,$nombre,$apellido,$email_personal,
-                                        $telefono,$sexo);
+                                        $telefono,$sexo,$id_campus);
                         $option = 2;
                     }
                 }

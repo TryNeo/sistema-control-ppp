@@ -64,6 +64,18 @@ CREATE TABLE carreras(
     PRIMARY KEY(id_carrera)
 )ENGINE=InnoDB CHARACTER SET utf8;
 
+DROP TABLE IF EXISTS campus;
+CREATE TABLE campus(
+    id_campus int(11) auto_increment,
+    nombre_campus varchar(200),
+    descripcion text,
+    estado boolean,
+    fecha_crea DATETIME,
+    fecha_modifica DATETIME default now(),
+    PRIMARY KEY(id_campus)
+)ENGINE=InnoDB CHARACTER SET utf8;
+
+
 
 DROP TABLE IF EXISTS alumnos;
 CREATE TABLE alumnos(
@@ -91,6 +103,7 @@ CREATE TABLE profesores(
     email_personal  varchar(100),
     telefono  varchar(12),
     sexo varchar(1),
+    id_campus int(11),
     id_usuario  int(11),
     estado boolean,
     fecha_crea DATETIME,
@@ -120,9 +133,12 @@ CREATE TABLE empresas(
 
 ALTER TABLE permisos ADD CONSTRAINT fk_modulo FOREIGN KEY (id_modulo) REFERENCES modulos(id_modulo);
 ALTER TABLE permisos ADD CONSTRAINT fk_rol FOREIGN KEY (id_rol) REFERENCES roles(id_rol);
+
 ALTER TABLE alumnos ADD CONSTRAINT fk_usuario_al FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario);
 ALTER TABLE alumnos ADD CONSTRAINT fk_carrera FOREIGN KEY (id_carrera) REFERENCES carreras(id_carrera);
+
 ALTER TABLE profesores ADD CONSTRAINT fk_usuario_prof FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario);
+ALTER TABLE profesores ADD CONSTRAINT fk_campus FOREIGN KEY (id_campus) REFERENCES campus(id_campus);
 
 INSERT INTO modulos (nombre,descripcion,estado,fecha_crea) values('Principal','modulo de pagina principal',1,now());
 INSERT INTO modulos (nombre,descripcion,estado,fecha_crea) values('Usuarios','modulo de usuarios',1,now());
@@ -162,6 +178,14 @@ INSERT INTO carreras (nombre_carrera,descripcion,estado,fecha_crea) values ("Tec
 INSERT INTO carreras (nombre_carrera,descripcion,estado,fecha_crea) values ("Tecnología Superior en Producción Pecuaria","Formar tecnólogos superiores en producción pecuaria, a través de un proceso de formación integral innovador, con habilidades, destrezas, conocimientos y valores, que le permitan aportar soluciones eficientes para el crecimiento y desarrollo del sector pecuario nacional",1,now());
 INSERT INTO carreras (nombre_carrera,descripcion,estado,fecha_crea) values ("Tecnología Superior en Desarrollo Infantil","Formar profesionales a nivel tecnológico superior con calidad humana capaces de diseñar, ejecutar y evaluar procesos de atención integral a la primera infancia y a mujeres estantes, que integren conocimientos teórico-prácticos en la generación de estrategias, técnicas y herramientas de cuidado materno infantil",1,now());
 INSERT INTO carreras (nombre_carrera,descripcion,estado,fecha_crea) values ("Tecnología Superior en Seguridad Ciudadana y Orden Púbilco","Formar profesionales a nivel tecnológico superior con calidad humana capaces de diseñar, ejecutar y evaluar procesos de atención integral a la primera infancia y a mujeres estantes, que integren conocimientos teórico-prácticos en la generación de estrategias, técnicas y herramientas de cuidado materno infantil",1,now());
+
+
+INSERT INTO campus (nombre_campus,descripcion,estado,fecha_crea) values ("Campus Cuerpo Docente Matriz Chimbo","no hay descripcion",1,now());
+INSERT INTO campus (nombre_campus,descripcion,estado,fecha_crea) values ("Campus Campus Guaranda","no hay descripcion",1,now());
+INSERT INTO campus (nombre_campus,descripcion,estado,fecha_crea) values ("Campus Campus Ángel Polibio Chávez","no hay descripcion",1,now());
+INSERT INTO campus (nombre_campus,descripcion,estado,fecha_crea) values ("Campus Campus San Pablo","no hay descripcion",1,now());
+INSERT INTO campus (nombre_campus,descripcion,estado,fecha_crea) values ("Campus Simiátug","no hay descripcion",1,now());
+
 
 INSERT INTO usuarios (usuario,password,email_institucional,email_activo,id_rol,estado,fecha_crea) VALUES ("superadmin","$2y$10$nLtnKbUrAQnMMfWi9bqsEuQ53U5k1pKCRsKYWEw0x/R5hgKNcHiYK","jjhuacon@est.itsgg.edu.ec",1,1,1,now());
 
