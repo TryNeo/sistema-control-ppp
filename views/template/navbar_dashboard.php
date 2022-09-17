@@ -25,26 +25,26 @@
     </li>
     <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
         <?php if ($_SESSION['user_data']['id_usuario'] == 1) { ?>
-          <figure class="avatar mr-2 avatar-sm">
-            <img alt="image" src="<?php echo server_url_image; ?>default.png" class="rounded-circle mr-1">
-            <?php if ($_SESSION['user_data']['ultimo_online'] == 1) { ?>
-              <i class="avatar-presence online"></i>
-            <?php } ?>
+          <figure class="avatar mr-2 avatar-sm" 
+              data-initial="AD">
+              <?php if ($_SESSION['user_data']['ultimo_online'] == 1) { ?>
+                  <i class="avatar-presence online"></i>
+              <?php } ?>
 
-            <?php if ($_SESSION['user_data']['ultimo_online'] == 0) { ?>
-              <i class="avatar-presence offline"></i>
-            <?php } ?>
+              <?php if ($_SESSION['user_data']['ultimo_online'] == 0) { ?>
+                  <i class="avatar-presence offline"></i>
+              <?php } ?>
           </figure>
         <?php }else{ ?>
-          <figure class="avatar mr-2 avatar-sm">
-            <img alt="image" src="<?php echo server_url_image; ?>default.png" class="rounded-circle mr-1">
-            <?php if ($_SESSION['user_data']['ultimo_online'] == 1) { ?>
-              <i class="avatar-presence online"></i>
-            <?php } ?>
+          <figure class="avatar mr-2 avatar-sm" 
+              data-initial="<?php echo $_SESSION['user_data']['nombre'][0]; ?><?php echo $_SESSION['user_data']['apellido'][0]; ?>">
+              <?php if ($_SESSION['user_data']['ultimo_online'] == 1) { ?>
+                  <i class="avatar-presence online"></i>
+              <?php } ?>
 
-            <?php if ($_SESSION['user_data']['ultimo_online'] == 0) { ?>
-              <i class="avatar-presence offline"></i>
-            <?php } ?>
+              <?php if ($_SESSION['user_data']['ultimo_online'] == 0) { ?>
+                  <i class="avatar-presence offline"></i>
+              <?php } ?>
           </figure>
         <?php } ?>
 

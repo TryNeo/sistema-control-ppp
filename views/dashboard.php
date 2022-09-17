@@ -66,7 +66,7 @@
                         <h4>Total Convenios</h4>
                     </div>
                     <div class="card-body">
-                        0
+                        <?php echo $data["total_empresas"]; ?>
                     </div>
                 </div>
             </div>

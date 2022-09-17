@@ -1,3 +1,8 @@
+a:link, a:visited, a:active {
+	text-decoration:none;
+}
+
+
 .btn-custom-sm{
     padding: .10rem 2.4rem;
     font-size: 12px;
@@ -88,7 +93,12 @@
 	padding: .7rem;
 	display: flex;
 	transition: all .5s;
+	text-decoration:none;
 }
+.sw-icon:link, .sw-icon:visited, .sw-icon:active {
+	text-decoration:none;
+}
+.sw-icon:hover {color: white; font-family: arial; text-decoration: none;}
 
 .sw-icon-facebook {
 	background: #2E406E;
@@ -100,6 +110,10 @@
 
 .sw-icon-instagram {
 	background: #E1306C;
+}
+
+.sw-icon-whatsapp{
+	background: #25D366;
 }
 
 .sw-icon:first-child {
@@ -115,3 +129,4 @@
 	border-radius: 1rem 0 0 1rem;
 	box-shadow: 0 0 .5rem rgba(0, 0, 0, 0.42);
 }
+

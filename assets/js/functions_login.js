@@ -71,6 +71,7 @@ function sendingDataServerSideLogin(idForm,validatorServerSide,fieldsToValidate)
                     }, 4000);
                 }else{
                     if (!jQuery.isEmptyObject(data.formErrors)){
+                        $.LoadingOverlay("hide");
                         fieldsToValidate.forEach((value,index) => {
                             if (data.formErrors.hasOwnProperty(fieldsToValidate[index])){
                                 validatorServerSide.errorTrigger($('[name='+fieldsToValidate[index]+']'), data.formErrors[''+fieldsToValidate[index]+'']);

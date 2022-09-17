@@ -25,6 +25,12 @@
             return $request_query;
         }
 
+        public function getEmpresas(){
+            $query = "SELECT * FROM empresas WHERE estado !=0 ";
+            $request_query = $this->select_count($query);
+            return $request_query;
+        }
+
     }
 
 ?>

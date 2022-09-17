@@ -50,8 +50,7 @@ class AlumnosModel extends Mysql
     {
         $this->str_search_usuario = $str_search_usuario;
         $sql = "SELECT us.id_usuario,us.usuario,us.email_institucional,rl.nombre_rol FROM usuarios as us INNER JOIN roles as rl ON us.id_rol = rl.id_rol 
-                INNER JOIN alumnos as al ON us.id_usuario = al.id_usuario
-                WHERE us.estado = 1 and us.email_activo = 0 and us.id_usuario != 1 and rl.id_rol = 2 and  us.id_usuario != al.id_usuario and us.usuario like '%" . $this->str_search_usuario . "%' ";
+                WHERE us.estado = 1 and us.email_activo = 0 and us.id_usuario != 1 and rl.id_rol = 2 and us.usuario like '%" . $this->str_search_usuario . "%' ";
         $request = $this->select_sql_all($sql);
         return $request;
     }
@@ -123,7 +122,7 @@ class AlumnosModel extends Mysql
         $this->str_sexo = $sexo;
         $this->int_id_carrera = $id_carrera;
 
-        $sql = "SELECT cedula FROM empresas WHERE cedula = '{$this->str_cedula}'
+        $sql = "SELECT cedula FROM alumnos WHERE cedula = '{$this->str_cedula}'
             and estado=1  and id_alumno = $this->int_id_alumno";
         $request = $this->select_sql_all($sql);
 
