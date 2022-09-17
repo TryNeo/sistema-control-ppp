@@ -25,7 +25,7 @@
     </li>
     <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
         <?php if ($_SESSION['user_data']['id_usuario'] == 1) { ?>
-          <figure class="avatar mr-2 avatar-sm" 
+          <figure class="avatar mr-2 avatar-sm bg-primary" 
               data-initial="AD">
               <?php if ($_SESSION['user_data']['ultimo_online'] == 1) { ?>
                   <i class="avatar-presence online"></i>
@@ -36,7 +36,7 @@
               <?php } ?>
           </figure>
         <?php }else{ ?>
-          <figure class="avatar mr-2 avatar-sm" 
+          <figure class="avatar mr-2 avatar-sm bg-primary" 
               data-initial="<?php echo $_SESSION['user_data']['nombre'][0]; ?><?php echo $_SESSION['user_data']['apellido'][0]; ?>">
               <?php if ($_SESSION['user_data']['ultimo_online'] == 1) { ?>
                   <i class="avatar-presence online"></i>
@@ -52,7 +52,7 @@
           <?php if ($_SESSION['user_data']['id_usuario'] == 1) { ?>
             ADMINISTRADOR
           <?php }else { ?>
-            <?php echo $_SESSION['user_data']['nombre']; ?> <?php echo $_SESSION['user_data']['apellido']; ?>
+            <?php echo strtoupper($_SESSION['user_data']['nombre']); ?> <?php echo strtoupper($_SESSION['user_data']['apellido']); ?>
           <?php } ?>
         </div>
 

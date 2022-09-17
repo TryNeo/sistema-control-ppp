@@ -92,10 +92,10 @@
                 $id_carrera = Intval(strclean($_POST['id_carrera']));
                 if ($id_alumno == 0) {
                     $id_usuario = Intval(strclean($_POST['id_usuario']));
+                }else{
+                    $id_usuario = Intval(strclean($_POST['id_usuario']));
                 }
                 
-                $id_usuario = 0;
-
                 $validate_data = array($id_alumno,$cedula,$nombre,$apellido,$email_personal,$telefono,$sexo,$id_carrera,$id_usuario);
 
                 if(!validateEmptyFields($validate_data)){

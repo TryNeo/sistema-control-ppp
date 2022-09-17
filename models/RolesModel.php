@@ -12,7 +12,7 @@
         }
 
         public function selectRoles(){
-            $sql = "SELECT id_rol,nombre_rol,descripcion,estado FROM roles where estado=1 ORDER BY id_rol DESC";
+            $sql = "SELECT id_rol,nombre_rol,descripcion,estado FROM roles where estado=1  and id_rol !=1 ORDER BY id_rol DESC";
             $request = $this->select_sql_all($sql);
             return $request;
         }
