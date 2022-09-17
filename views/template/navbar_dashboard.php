@@ -138,50 +138,49 @@
             </li>
           <?php } ?>
         <?php } ?>
-
         
-  </li>
-  <?php if ($_SESSION['user_data']['id_rol'] != 2) {?>
-  <li class="menu-header">Seguridad</li>
-  <li class="dropdown">
-    <a href="#" class="has-dropdown"><i class="fas fa-lock"></i><span>Configuracion</span></a>
-    <ul class="dropdown-menu" style="display: block;">
-      <?php if (!empty($_SESSION['permisos'][2]['r'])) { ?>
-        <?php if ($data['page_id'] == 2) { ?>
-          <li class="active"><a class="nav-link" href="<?php echo server_url; ?>usuarios/"><i class="fas fa-user-circle"></i>Usuarios</a></li>
-        <?php } else { ?>
-          <li><a class="nav-link" href="<?php echo server_url; ?>usuarios/"><i class="fas fa-user-circle"></i>Usuarios</a></li>
-        <?php } ?>
+      </li>
+      <?php if ($_SESSION['user_data']['id_rol'] != 2) {?>
+      <li class="menu-header">Seguridad</li>
+        <li class="nav-item">
+          <?php if (!empty($_SESSION['permisos'][2]['r'])) { ?>
+            <?php if ($data['page_id'] == 2) { ?>
+                <li class="active">
+                  <a class="nav-link" href="<?php echo server_url; ?>usuarios/"><i class="fas fa-user-circle"></i><span>Usuarios</span></a></li>
+              <?php } else { ?>
+                <li><a class="nav-link" href="<?php echo server_url; ?>usuarios/"><i class="fas fa-user-circle"></i><span>Usuarios</span></a></li>
+            <?php } ?>
+          <?php } ?>
+          <?php if (!empty($_SESSION['permisos'][3]['r'])) { ?>
+            <?php if ($data['page_id'] == 3) { ?>
+                <li class="active"><a class="nav-link" href="<?php echo server_url; ?>roles/"><i class="fas fa-users" aria-hidden="true"></i>
+                  <span>Roles</span></a></li>
+            <?php } else { ?>
+                <li><a class="nav-link" href="<?php echo server_url; ?>roles/"><i class="fas fa-users" aria-hidden="true"></i><span>Roles</span></a></li>
+            <?php } ?>
+          <?php } ?>
+          <?php if (!empty($_SESSION['permisos'][5]['r'])) { ?>
+            <?php if ($data['page_id'] == 5) { ?>
+                <li class="active"><a class="nav-link" href="<?php echo server_url; ?>permisos/"><i class="fas fa-shield-alt"></i><span>Permisos</span></a></li>
+            <?php } else { ?>
+                <li><a class="nav-link" href="<?php echo server_url; ?>permisos/"><i class="fas fa-shield-alt"></i><span>Permisos</span></a></li>
+            <?php } ?>
+          <?php } ?>
+          <?php if (!empty($_SESSION['permisos'][4]['r'])) { ?>
+            <?php if ($data['page_id'] == 4) { ?>
+              <li class="active"><a class="nav-link" href="<?php echo server_url; ?>respaldo/"><i class="fas fa-database"></i><span>Respaldos</span></a></li>
+            <?php } else { ?>
+              <li><a class="nav-link" href="<?php echo server_url; ?>respaldo/"><i class="fas fa-database"></i><span>Respaldos</span></a></li>
+            <?php } ?>
+          <?php } ?>
+          </li>
+        </li>
       <?php } ?>
-
-
-      <?php if (!empty($_SESSION['permisos'][3]['r'])) { ?>
-        <?php if ($data['page_id'] == 3) { ?>
-          <li class="active"><a class="nav-link" href="<?php echo server_url; ?>roles/"><i class="fas fa-users" aria-hidden="true"></i>Roles</a></li>
-        <?php } else { ?>
-          <li><a class="nav-link" href="<?php echo server_url; ?>roles/"><i class="fas fa-users" aria-hidden="true"></i>Roles</a></li>
-        <?php } ?>
-      <?php } ?>
-
-      <?php if (!empty($_SESSION['permisos'][5]['r'])) { ?>
-        <?php if ($data['page_id'] == 5) { ?>
-          <li class="active"><a class="nav-link" href="<?php echo server_url; ?>permisos/"><i class="fas fa-shield-alt"></i>Permisos</a></li>
-        <?php } else { ?>
-          <li><a class="nav-link" href="<?php echo server_url; ?>permisos/"><i class="fas fa-shield-alt"></i>Permisos</a></li>
-        <?php } ?>
-      <?php } ?>
-
-
-      <?php if (!empty($_SESSION['permisos'][4]['r'])) { ?>
-        <?php if ($data['page_id'] == 4) { ?>
-          <li class="active"><a class="nav-link" href="<?php echo server_url; ?>respaldo/"><i class="fas fa-database"></i>Respaldos</a></li>
-        <?php } else { ?>
-          <li><a class="nav-link" href="<?php echo server_url; ?>respaldo/"><i class="fas fa-database"></i>Respaldos</a></li>
-        <?php } ?>
-      <?php } ?>
-    </ul>
-  </li>
-  <?php } ?>
+      <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
+            <a href="https://institutotresdemarzo.edu.ec/" class="btn btn-primary btn-lg btn-block btn-icon-split" target="_blank">
+                Ir a la pagina web
+            </a>
+          </div>
     </ul>
   </aside>
 </div>
