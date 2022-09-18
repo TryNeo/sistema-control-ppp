@@ -11,8 +11,8 @@
                 <div class="card">
                     <div class="card-body">
                         <?php  if ($_SESSION['permisos_modulo']['w']) {?>
-                        <button id="openModal" type="button"  class="btn btn-primary mb-3 btn-lg mb-3">Agregar <i class="fa fa-plus"></i>
-                        </button>
+                        <a href="<?php echo server_url; ?>practicas-pre-profesionales/agregar" class="btn btn-primary mb-3 btn-lg mb-3">Agregar <i class="fa fa-plus"></i>
+                        </a>
                         <?php } ?>
                         <div class="row">
                             <div class="col-md-12">

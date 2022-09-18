@@ -65,7 +65,7 @@ const iniciarTemporizador = (minutos, segundos) => {
 		if (tiempoRestante <= 0) {
 			diferenciaTemporal = fechaFuturo.getTime() - new Date().getTime();
 			clearInterval(idInterval);
-				location.href = base_url+"Expired";
+				location.href = base_url+"sesion-expirada";
 		} else {
 			$tiempoRestante.textContent = milisegundosAMinutosYSegundos(tiempoRestante);
 		}

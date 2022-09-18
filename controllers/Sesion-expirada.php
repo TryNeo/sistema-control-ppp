@@ -2,7 +2,7 @@
 require_once("./libraries/core/controllers.php");
 require_once("./models/LogoutModel.php");
 
-class expired extends Controllers
+class Sesionexpirada extends Controllers
 {
     public function __construct()
     {
@@ -12,7 +12,7 @@ class expired extends Controllers
         
     }
 
-    public function expired()
+    public function sesionexpirada()
     {   
         if (empty($_SESSION['permisos_modulo']['r'])) { 
             header('location:'.server_url.'Errors');
