@@ -57,7 +57,7 @@
                             <div class="d-block">
                                 <label for="password" class="control-label">Contraseña</label>
                                 <div class="float-right">
-                                    <a href="<?php echo server_url; ?>forgotpassword" class="text-small">
+                                    <a href="<?php echo server_url; ?>forgot-password" class="text-small">
                                     ¿Se te olvidó tu contraseña?
                                     </a>
                                 </div>

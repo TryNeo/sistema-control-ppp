@@ -68,6 +68,10 @@
     <?php } ?>
 
 
+    <?php if ($data['page'] == 'practicas') { ?>
+        <script type="text/javascript" src="<?php echo server_url; ?>assets/js/functions_practicas.js"></script>
+    <?php } ?>
+
     <?php if ($data['page'] == 'empresas') { ?>
         <script type="text/javascript" src="<?php echo server_url; ?>assets/js/functions_empresas.js"></script>
     <?php } ?>

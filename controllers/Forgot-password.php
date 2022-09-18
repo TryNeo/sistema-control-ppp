@@ -65,7 +65,7 @@ class Forgotpassword extends Controllers
                                 $mail = new MailSender('smtp.gmail.com', CORREO, CONTRASEÑA, true);
                                 $mail->setTemplateURL('./views/template/mail/mail_forgotpassword.html');
                                 $mail->compose(array(
-                                    'link' => "'" . server_url . 'forgotpassword/reset?token=' . $code . "'",
+                                    'link' => "'" . server_url . 'forgot-password/reset?token=' . $code . "'",
                                 ));
                                 $_SESSION['emailtemp'] = $emaiL_user;
                                 $_SESSION['token-expire'] = time() + 5 * 60;
@@ -115,6 +115,7 @@ class Forgotpassword extends Controllers
                         }
                     }
                 } else {
+                    $_SESSION['destroy-form'] = true;
                     $data_res = array("status" => false, "msg" => "Error !, Esta tratando de reestablacer su contraseña en distintos navagedores");
                 }
             } else {

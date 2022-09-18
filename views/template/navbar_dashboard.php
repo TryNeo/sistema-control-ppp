@@ -130,11 +130,11 @@
         <?php if (!empty($_SESSION['permisos'][9]['r'])) { ?>
           <?php if ($data['page_id'] == 9) { ?>
             <li class="active">
-              <a href="<?php echo server_url; ?>practicas/" class="nav-link"><i class="fas fa-file-contract"></i><span>PPP</span></a>
+              <a href="<?php echo server_url; ?>practicas-pre-profesionales/" class="nav-link"><i class="fas fa-pencil-ruler"></i><span>Pasantias</span></a>
             </li>
           <?php } else { ?>
             <li>
-              <a href="<?php echo server_url; ?>practicas/" class="nav-link"><i class="fas fa-file-contract"></i><span>PPP</span></a>
+              <a href="<?php echo server_url; ?>practicas-pre-profesionales/" class="nav-link"><i class="fas fa-pencil-ruler"></i><span>Pasantias</span></a>
             </li>
           <?php } ?>
         <?php } ?>

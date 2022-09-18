@@ -35,7 +35,7 @@
                                     </p>
                                     <a href="<?php echo server_url; ?>" class="btn btn-primary btn-lg btn-block">Restablecer la contraseña</a>
                                 <?php } else { ?>
-                                    <form id="fntResetpassword" name="fntResetpassword" method="POST" action="<?php echo server_url; ?>forgotpassword/resetPassword" class="needs-validation" novalidate="">
+                                    <form id="fntResetpassword" name="fntResetpassword" method="POST" action="<?php echo server_url; ?>forgot-password/resetPassword" class="needs-validation" novalidate="">
                                         <input id="csrf" name="csrf" type="hidden" value="<?php echo $data["csrf"]; ?>">
 
                                         <div class="form-group">
