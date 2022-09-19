@@ -56,6 +56,7 @@ function searchAlumno(){
         let data = e.params.data;
         $('#cedula_temp').val(data.cedula);
         $('#nombre_apellido').val(data.text);
+        $('#carrera').val(data.carrera);
         $('#id_alumno').val('');
         $('#id_alumno').trigger('change.select2');
     });

@@ -27,6 +27,13 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" name="carrera" class="form-control col-md-3" id="carrera" placeholder="carrera" disabled>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <button type="submit" id="PracticaCr" class="btn btn-primary mt-4 pr-4 pl-4 is-valid"><span class="changeText">Crear </span><i class="fa fa-plus"></i></button>
                     </form>
