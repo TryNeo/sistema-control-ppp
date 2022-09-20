@@ -64,5 +64,59 @@
             die();
         }
 
+        
+        public function getSelectProfesor(){
+            if (empty($_SESSION['permisos_modulo']['r']) ) {
+                header('location:'.server_url.'Errors');
+                $data = array("status" => false, "msg" => "Error no tiene permisos");
+            }else{
+                if(empty($_POST)){
+                    $request_data =  $this->model->selectProfesorNoInactivos('');
+                    foreach ($request_data as $row) {    
+                        $data[] = array("id"=>$row['id_profesor'], "text"=>$row['nombre']." ".$row['apellido'],
+                        "cedula" => $row['cedula'],"campus" => $row['nombre_campus']);
+                    }
+                }else{
+                    $search_profesor = strclean($_POST['search']);
+                    $request_data = $this->model->selectProfesorNoInactivos($search_profesor);
+                    foreach ($request_data as $row) {    
+                        $data[] = array("id"=>$row['id_profesor'], "text"=>$row['nombre']." ".$row['apellido'],
+                        "cedula" => $row['cedula'],"campus" => $row['nombre_campus']);
+                    }
+                }      
+            }
+            if (!isset($data)) {
+                $data = array();
+            }
+            echo json_encode($data,JSON_UNESCAPED_UNICODE);
+            die();
+        }
 
+
+        public function getSelectEmpresas(){
+            if (empty($_SESSION['permisos_modulo']['r']) ) {
+                header('location:'.server_url.'Errors');
+                $data = array("status" => false, "msg" => "Error no tiene permisos");
+            }else{
+                if(empty($_POST)){
+                    $request_data =  $this->model->selectEmpresaNoInactivos('');
+                    foreach ($request_data as $row) {    
+                        $data[] = array("id"=>$row['id_empresa'], "text"=>$row['nombre_empresa'],
+                        "nombre" => $row['nombre_representante'],"telefono" => $row['telefono_representante']);
+                    }
+                }else{
+                    $search_empresa = strclean($_POST['search']);
+                    $request_data = $this->model->selectEmpresaNoInactivos($search_empresa);
+                    foreach ($request_data as $row) {    
+                        $data[] = array("id"=>$row['id_empresa'], "text"=>$row['nombre_empresa'],
+                        "nombre" => $row['nombre_representante'],"telefono" => $row['telefono_representante']);
+                    }
+                }      
+            }
+            if (!isset($data)) {
+                $data = array();
+            }
+            echo json_encode($data,JSON_UNESCAPED_UNICODE);
+            die();
+        }
     }
