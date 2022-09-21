@@ -8,7 +8,7 @@
         <form class="needs-validation" id="fntPracticas" method="post" role="form" novalidate="">
             <input type="hidden" id="id_practicas" name="id_practicas" value="">
             <div class="row">
-                <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="card-body">
                             <div class="card-body-lg row">
@@ -34,7 +34,6 @@
                                     </div>
                                     <div class="form-group">
                                         <label><b>Nombre y apellido alumno:</b></label>
-
                                         <div class="input-group">
                                             <input type="text" name="nombre_apellido_al" class="form-control" id="nombre_apellido_al" disabled>
                                         </div>
@@ -161,10 +160,41 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="card-body">
-
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label><b>Horas empresariales acumuladas:</b></label>
+                                    <div class="input-group">
+                                        <input type="number" name="total_emp" class="form-control" id="total_emp"  value="0" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label><b>Horas de servicio a la comunidad acumuladas:</b></label>
+                                    <div class="input-group">
+                                        <input type="number" name="total_serv" class="form-control" id="total_serv"  value="0" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label><b>Total horas ppp acumuladas:</b></label>
+                                    <div class="input-group">
+                                        <input type="number" name="total_ppp" class="form-control" id="total_ppp"  value="0" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label><b>Total horas:</b></label>
+                                    <div class="input-group">
+                                        <input type="number" name="total_horas" class="form-control" id="total_horas"  value="0">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
