@@ -131,7 +131,7 @@ function searchProfesor(){
             },
             cache: true
         },
-        placeholder:"Buscar profesor",
+        placeholder:"Buscar tutor docente",
         templateResult: formatRepoPr,
     }).on('select2:select',function(e){
         e.preventDefault();
@@ -173,6 +173,10 @@ function searchEmpresas(){
     }).on('select2:select',function(e){
         e.preventDefault();
         let data = e.params.data;
+        $('#nombre_empresa_ep').val(data.text);
+        $('#nombre_representante_ep').val(data.nombre);
+        $('#telefono_ep').val(data.telefono);
+
         $('#id_empresa').val('');
         $('#id_empresa').trigger('change.select2');
     });
