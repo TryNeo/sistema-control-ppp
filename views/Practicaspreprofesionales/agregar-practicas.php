@@ -155,6 +155,7 @@
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                             <button type="submit" id="PracticaCr" class="btn btn-primary mt-4 pr-4 pl-4 is-valid"><span class="changeText">Crear </span><i class="fa fa-plus"></i></button>
                         </div>
@@ -165,9 +166,21 @@
                         <div class="card-body">
                             <div class="col-md-12">
                                 <div class="form-group">
+                                    <label><b>Fecha inicial</b></label>
+                                    <input type="text" class="form-control datepicker" id="fecha_ini" name="fecha_ini">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label><b>Fecha fin</b></label>
+                                    <input type="text" class="form-control datepicker"  id="fecha_fin" name="fecha_fin">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
                                     <label><b>Horas empresariales acumuladas:</b></label>
                                     <div class="input-group">
-                                        <input type="number" name="total_emp" class="form-control" id="total_emp"  value="0" disabled>
+                                        <input type="number" name="total_emp" class="form-control" id="total_emp" value="0" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -175,7 +188,7 @@
                                 <div class="form-group">
                                     <label><b>Horas de servicio a la comunidad acumuladas:</b></label>
                                     <div class="input-group">
-                                        <input type="number" name="total_serv" class="form-control" id="total_serv"  value="0" disabled>
+                                        <input type="number" name="total_serv" class="form-control" id="total_serv" value="0" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -183,7 +196,7 @@
                                 <div class="form-group">
                                     <label><b>Total horas ppp acumuladas:</b></label>
                                     <div class="input-group">
-                                        <input type="number" name="total_ppp" class="form-control" id="total_ppp"  value="0" disabled>
+                                        <input type="number" name="total_ppp" class="form-control" id="total_ppp" value="0" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -191,7 +204,7 @@
                                 <div class="form-group">
                                     <label><b>Total horas:</b></label>
                                     <div class="input-group">
-                                        <input type="number" name="total_horas" class="form-control" id="total_horas"  value="0">
+                                        <input type="number" name="total_horas" class="form-control" id="total_horas" value="0">
                                     </div>
                                 </div>
                             </div>
