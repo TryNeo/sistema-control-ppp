@@ -105,6 +105,17 @@
             </li>
           <?php } ?>
         <?php } ?>
+        <?php if (!empty($_SESSION['permisos'][6]['r'])) { ?>
+          <?php if ($data['page_id'] == 222) { ?>
+            <li class="active">
+              <a href="<?php echo server_url; ?>historial-alumno/" class="nav-link"><i class="fas fa-history"></i><span>Historial Alumno</span></a>
+            </li>
+          <?php } else { ?>
+            <li>
+              <a href="<?php echo server_url; ?>historial-alumno/" class="nav-link"><i class="fas fa-history"></i><span>Historial Alumno</span></a>
+            </li>
+          <?php } ?>
+        <?php } ?>
         <?php if (!empty($_SESSION['permisos'][7]['r'])) { ?>
           <?php if ($data['page_id'] == 7) { ?>
             <li class="active">

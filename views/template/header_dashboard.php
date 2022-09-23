@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="<?php echo server_url; ?>assets/css/custom.css">
 </head>
 
-<body oncontextmenu="return false;">
+<body oncontextmenu="return false;" class="sidebar-mini">
     <div id="app">
         <div class="main-wrapper">
             <?php require_once("./views/template/navbar_dashboard.php")?>
