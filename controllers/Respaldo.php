@@ -35,7 +35,7 @@
                     $year =date("Y");
                     $hora =date("H-i-s");
                     $fecha =$day.'_'.$mont.'_'.$year;
-                    $name_database = "controlppp_bd";
+                    $name_database = "CONTROLPPP_BD";
                     $data_base ='base_de_datos_'.$fecha."_(".$hora."_hrs).sql";
                     $tables=array();
                     $result=$this->model->respaldo_sql("SHOW TABLES");
@@ -44,7 +44,7 @@
                             $tables[] = $row[0];
                         }
                         $sql='SET FOREIGN_KEY_CHECKS=0;'."\n\n";
-                        $sql.='DROP DATABASE  IF EXISTS controlppp_bd;'."\n".'CREATE DATABASE IF NOT EXISTS '.$name_database.";\n\n";
+                        $sql.='DROP DATABASE  IF EXISTS CONTROLPPP_BD;'."\n".'CREATE DATABASE IF NOT EXISTS '.$name_database.";\n\n";
                         $sql.='USE '.$name_database.";\n\n";;
                         $error=0;
                         foreach($tables as $table){

@@ -18,7 +18,7 @@
                 $where_admin = " and us.id_usuario !=1";
             }
             $sql = "SELECT us.id_usuario,us.usuario,us.email_institucional,us.email_activo,us.ultimo_online,rl.id_rol,rl.nombre_rol,us.estado
-                FROM usuarios  as us INNER JOIN roles as rl ON us.id_rol = rl.id_rol WHERE rl.estado !=0 and us.estado!=0".$where_admin;
+                FROM Usuarios  as us INNER JOIN Roles as rl ON us.id_rol = rl.id_rol WHERE rl.estado !=0 and us.estado!=0".$where_admin;
             $request = $this->select_sql_all($sql);
             return $request;
         }
@@ -26,7 +26,7 @@
         public function selectUsuario(int $id_usuario){
             $this->int_id_usuario = $id_usuario;
             $sql = "SELECT us.id_usuario,us.usuario,us.email_institucional,rl.id_rol,us.estado
-                FROM usuarios  as us INNER JOIN roles as rl ON us.id_rol = rl.id_rol WHERE us.id_usuario =  $this->int_id_usuario ";
+                FROM Usuarios  as us INNER JOIN Roles as rl ON us.id_rol = rl.id_rol WHERE us.id_usuario =  $this->int_id_usuario ";
             $request = $this->select_sql($sql);
             return $request;
         }
@@ -38,10 +38,10 @@
             $this->str_email_institucional = $str_email_institucional;
             $this->int_id_rol = $int_id_rol;
             $this->str_password = $str_password;
-            $sql = "SELECT * FROM usuarios WHERE usuario = '{$this->str_usuario}' or email_institucional = '{$this->str_email_institucional}'";
+            $sql = "SELECT * FROM Usuarios WHERE usuario = '{$this->str_usuario}' or email_institucional = '{$this->str_email_institucional}'";
             $request = $this->select_sql_all($sql);
             if (empty($request)){
-                $sql_insert = "INSERT INTO usuarios (usuario,password,email_institucional,id_rol,estado,fecha_crea) values (?,?,?,?,1,now())";
+                $sql_insert = "INSERT INTO Usuarios (usuario,password,email_institucional,id_rol,estado,fecha_crea) values (?,?,?,?,1,now())";
                 $data = array($this->str_usuario,$this->str_password,$this->str_email_institucional,$this->int_id_rol);
                 $request_insert = $this->insert_sql($sql_insert,$data);
                 $return = $request_insert;
@@ -63,19 +63,19 @@
             $this->str_password = $str_password;
             $this->int_estado = $int_estado;
             
-            $sql = "SELECT * FROM usuarios WHERE
+            $sql = "SELECT * FROM Usuarios WHERE
                 (usuario = '{$this->str_usuario}' and id_usuario =  $this->int_id_usuario  and estado!=0) ";
             
             $request = $this->select_sql($sql);
             
             if (empty($request)){
                 if ($this->str_password != "" ) {
-                    $sql_update = "UPDATE usuarios SET nombre = ?, apellido = ?,
+                    $sql_update = "UPDATE Usuarios SET nombre = ?, apellido = ?,
                     foto = ?,usuario = ?,email = ?, id_rol = ?,password = ?,estado = ? ,fecha_modifica = now() WHERE id_usuario = $this->int_id_usuario  ";
                     $data = array($this->str_nombre,$this->str_apellido,$this->str_imagen,$this->str_usuario,
                     $this->str_email, $this->int_id_rol,$this->str_password,$this->int_estado);
                 }else{
-                    $sql_update = "UPDATE usuarios SET nombre = ?, apellido = ?,
+                    $sql_update = "UPDATE Usuarios SET nombre = ?, apellido = ?,
                     foto = ?,usuario = ?,email = ?,estado = ?,id_rol = ?,fecha_modifica = now() WHERE id_usuario = $this->int_id_usuario  ";
                     $data = array($this->str_nombre,$this->str_apellido,$this->str_imagen,$this->str_usuario,
                     $this->str_email,$this->int_estado,$this->int_id_rol);
@@ -90,7 +90,7 @@
         
         public function selectImage(int $int_id_usuario){
             $this->int_id_usuario = $int_id_usuario;
-            $sql = "SELECT foto FROM usuarios WHERE id_usuario = $this->int_id_usuario" ;
+            $sql = "SELECT foto FROM Usuarios WHERE id_usuario = $this->int_id_usuario" ;
             $request_image = $this->select_sql($sql);
             return $request_image;
         }
@@ -98,7 +98,7 @@
 
         public function selectPassword(int $int_id_usuario){
             $this->int_id_usuario = $int_id_usuario;
-            $sql = "SELECT * FROM usuarios WHERE id_usuario = $this->int_id_usuario" ;
+            $sql = "SELECT * FROM Usuarios WHERE id_usuario = $this->int_id_usuario" ;
             $request_password = $this->select_sql_all($sql);
             return $request_password;
         }
@@ -107,7 +107,7 @@
         public function updatePassword(int $int_id_usuario,string $str_password){
             $this->int_id_usuario = $int_id_usuario;
             $this->str_password = $str_password;
-            $sql_update = "UPDATE usuarios SET password = ?,fecha_modifica = now() WHERE id_usuario = $this->int_id_usuario";
+            $sql_update = "UPDATE Usuarios SET password = ?,fecha_modifica = now() WHERE id_usuario = $this->int_id_usuario";
             $data = array($this->str_password);
             $request = $this->update_sql($sql_update,$data);
             return $request;
@@ -115,12 +115,12 @@
 
         public function deleteUsuario(int $int_id_usuario){
             $this->int_id_usuario = $int_id_usuario;
-            $sql_ultimo_online = "SELECT ultimo_online FROM usuarios WHERE id_usuario = $this->int_id_usuario";
+            $sql_ultimo_online = "SELECT ultimo_online FROM Usuarios WHERE id_usuario = $this->int_id_usuario";
             $response_ultimo_online = $this->select_sql($sql_ultimo_online);
             if($response_ultimo_online['ultimo_online'] == 1){
                 $request_delete = 'error_online';
             }else{
-                $sql = "UPDATE usuarios SET email_activo= ?,estado = ?, fecha_modifica = now() WHERE id_usuario = $this->int_id_usuario";
+                $sql = "UPDATE Usuarios SET email_activo= ?,estado = ?, fecha_modifica = now() WHERE id_usuario = $this->int_id_usuario";
                 $data = array(0,0);
                 $request_delete = $this->update_sql($sql,$data);
             }

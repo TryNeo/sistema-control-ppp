@@ -12,7 +12,7 @@
         public function login_user(string $str_email){
             $this->str_email = $str_email;
             $sql = "SELECT id_usuario,password,ultimo_online,estado,id_rol
-                FROM usuarios WHERE email_institucional = '$this->str_email' and estado = 1 and email_activo = 1";
+                FROM Usuarios WHERE email_institucional = '$this->str_email' and estado = 1 and email_activo = 1";
             $request = $this->select_sql($sql);
             return $request;
         }        
@@ -22,13 +22,13 @@
             $this->int_id_usuario = $int_id_usuario;
             $this->int_id_rol = $int_id_rol;
             
-            $sql_update = "UPDATE usuarios SET ultimo_online = ? WHERE id_usuario = $this->int_id_usuario";
+            $sql_update = "UPDATE Usuarios SET ultimo_online = ? WHERE id_usuario = $this->int_id_usuario";
             $data = array(1);
             $request_update = $this->update_sql($sql_update,$data);
             if($request_update > 0){
                 if ($this->int_id_usuario == 1) {
                     $sql = "SELECT us.id_usuario,us.ultimo_online,us.usuario,us.email_institucional,r.id_rol,r.nombre_rol,us.estado 
-                    FROM usuarios us INNER JOIN roles r ON us.id_rol = r.id_rol WHERE us.id_usuario = $this->int_id_usuario";
+                    FROM Usuarios us INNER JOIN Roles r ON us.id_rol = r.id_rol WHERE us.id_usuario = $this->int_id_usuario";
                     $request = $this->select_sql($sql);
                 }else{
                     $sql = "SELECT us.id_usuario,
@@ -37,11 +37,11 @@
                         us.ultimo_online,
                         us.usuario,us.email_institucional,r.id_rol,r.nombre_rol,us.estado
                         FROM
-                            usuarios as us
-                        INNER JOIN roles as r ON
+                            Usuarios as us
+                        INNER JOIN Roles as r ON
                             us.id_rol = r.id_rol
-                        LEFT JOIN alumnos as al on us.id_usuario = al.id_usuario
-                        LEFT JOIN profesores as pro on us.id_usuario = pro.id_usuario
+                        LEFT JOIN Alumnos as al on us.id_usuario = al.id_usuario
+                        LEFT JOIN Profesores as pro on us.id_usuario = pro.id_usuario
                         WHERE us.id_usuario = $this->int_id_usuario and r.id_rol = $this->int_id_rol";
                         $request = $this->select_sql($sql);
                 }

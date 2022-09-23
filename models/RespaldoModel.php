@@ -6,7 +6,7 @@
         }
 
         public function respaldo_sql(string $query){
-            $con=mysqli_connect("localhost","root","","controlppp_bd");
+            $con=mysqli_connect("localhost","root","","CONTROLPPP_BD");
             mysqli_set_charset($con, "utf8");
             if (mysqli_connect_errno()) {
                 printf("Conexion fallida: %s\n", mysqli_connect_error());
@@ -30,7 +30,7 @@
             $sql=explode(";",file_get_contents($route));
             $totalErrors=0;
             set_time_limit (60);
-            $con = new mysqli("localhost","root","","controlppp_bd");
+            $con = new mysqli("localhost","root","","CONTROLPPP_BD");
             $con->query("SET FOREIGN_KEY_CHECKS=0");
             for($i = 0; $i < (count($sql)-1); $i++){
                 if($con->query($sql[$i].";")){  }else{ $totalErrors++; }
