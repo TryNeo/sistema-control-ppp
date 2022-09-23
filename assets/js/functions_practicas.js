@@ -4,6 +4,92 @@ $(function(){
     searchEmpresas();
 })
 
+function configToValidate(){
+
+    const validatorServerSide = $('form.needs-validation').jbvalidator({
+        errorMessage: true,
+        successClass: true,
+        language: base_url_assets+"js/jbvalidatorLangEs.json",
+    });
+    validatorServerSide.validator.custom = function(el, event){
+
+        if($(el).is('[name=cedula]')){
+            let value= $(el).val()
+            if (!validateEmptyField(value)){
+                return 'Este campo es obligatorio';
+            }
+
+            if(!validateStringLength(value,10)){
+                return 'El campo cedula debe tener 10 caracteres';
+            }
+
+            if (!validateCedula(value)){
+                return 'La cedula '+value+' es incorrecta';
+            }
+            
+        }
+        
+        if($(el).is('[name=email_personal]')){
+            let value= $(el).val()
+
+            if (!validateEmptyField(value)){
+                return 'Este campo es obligatorio';
+            }
+
+            if (!validaEmail(value)){
+                return 'El email '+value+' es invalido';
+            }
+            
+        }
+
+        if($(el).is('[name=nombre]')){
+            let value= $(el).val()
+
+            if (!validateEmptyField(value)){
+                return 'Este campo es obligatorio';
+            }
+
+
+            if (!validString(value)){
+                return 'El nombre '+value+' contiene numeros o caracteres especiales';
+            }
+            
+        }
+        
+        if($(el).is('[name=apellido]')){
+            let value= $(el).val()
+
+            if (!validateEmptyField(value)){
+                return 'Este campo es obligatorio';
+            }
+
+            if (!validString(value)){
+                return 'El apellido '+value+' contiene numeros o caracteres especiales';
+            }
+            
+        }
+
+        if($(el).is('[name=id_carrera]')){
+            let value= $(el).val()
+            if (!validateEmptyField(value)){
+                return 'Este campo es obligatorio';
+            }
+            
+        }
+
+        if($(el).is('[name=sexo]')){
+            let value= $(el).val()
+            if (!validateEmptyField(value)){
+                return 'Este campo es obligatorio';
+            }
+        }
+
+    }
+
+    return validatorServerSide
+}
+
+
 
 function formatRepo (repo) {
     if (repo.loading) {

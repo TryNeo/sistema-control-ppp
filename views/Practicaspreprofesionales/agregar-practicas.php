@@ -7,6 +7,9 @@
     <div class="section-body">
         <form class="needs-validation" id="fntPracticas" method="post" role="form" novalidate="">
             <input type="hidden" id="id_practicas" name="id_practicas" value="">
+            <input type="hidden" id="id_alumnos_re" name="id_alumnos_re" value=""  required>
+            <input type="hidden" id="id_profesores_re" name="id_profesores_re" value="" required>
+            <input type="hidden" id="id_empresas_re" name="id_empresas_re" value="" required>
             <div class="row">
                 <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
@@ -155,7 +158,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                             <button type="submit" id="PracticaCr" class="btn btn-primary mt-4 pr-4 pl-4 is-valid"><span class="changeText">Crear </span><i class="fa fa-plus"></i></button>
                         </div>

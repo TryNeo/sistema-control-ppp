@@ -130,6 +130,24 @@ CREATE TABLE Empresas(
     PRIMARY KEY(id_empresa)
 )ENGINE=InnoDB CHARACTER SET utf8;
 
+DROP TABLE IF EXISTS Practicas_pre_profesionales;
+CREATE TABLE IF NOT EXISTS Practicas_pre_profesionales(
+    id_practica int(11) auto_increment,
+    id_alumno int(11),
+    id_profesor int(11),
+    tipo_practica int(11),
+    alcance_proyecto int(11),
+    id_empresa int(11),
+    departamento varchar(80),
+    nivel int(11),
+    fecha_inicio date,
+    fecha_fin date,
+    total_horas_ppp int(11),
+    estado boolean,
+    fecha_crea DATETIME,
+    fecha_modifica DATETIME default now(),
+    PRIMARY KEY(id_practica)
+)ENGINE=InnoDB CHARACTER SET utf8;
 
 
 ALTER TABLE Permisos ADD CONSTRAINT fk_modulo FOREIGN KEY (id_modulo) REFERENCES Modulos(id_modulo);
@@ -140,6 +158,11 @@ ALTER TABLE Alumnos ADD CONSTRAINT fk_carrera FOREIGN KEY (id_carrera) REFERENCE
 
 ALTER TABLE Profesores ADD CONSTRAINT fk_usuario_prof FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario);
 ALTER TABLE Profesores ADD CONSTRAINT fk_campus FOREIGN KEY (id_campus) REFERENCES Campus(id_campus);
+
+ALTER TABLE Practicas_pre_profesionales ADD CONSTRAINT fk_alumno FOREIGN KEY (id_alumno) REFERENCES Alumnos(id_alumno);
+ALTER TABLE Practicas_pre_profesionales ADD CONSTRAINT fk_profesor FOREIGN KEY (id_profesor) REFERENCES Profesores(id_profesor);
+ALTER TABLE Practicas_pre_profesionales ADD CONSTRAINT fk_empresa FOREIGN KEY (id_empresa) REFERENCES Empresas(id_empresa);
+
 
 INSERT INTO Modulos (nombre,descripcion,estado,fecha_crea) values('Principal','modulo de pagina principal',1,now());
 INSERT INTO Modulos (nombre,descripcion,estado,fecha_crea) values('Usuarios','modulo de usuarios',1,now());
@@ -186,6 +209,9 @@ INSERT INTO Campus (nombre_campus,descripcion,estado,fecha_crea) values ("Campus
 INSERT INTO Campus (nombre_campus,descripcion,estado,fecha_crea) values ("Campus Campus Ángel Polibio Chávez","no hay descripcion",1,now());
 INSERT INTO Campus (nombre_campus,descripcion,estado,fecha_crea) values ("Campus Campus San Pablo","no hay descripcion",1,now());
 INSERT INTO Campus (nombre_campus,descripcion,estado,fecha_crea) values ("Campus Simiátug","no hay descripcion",1,now());
+
+
+
 
 
 INSERT INTO Usuarios (usuario,password,email_institucional,email_activo,id_rol,estado,fecha_crea) VALUES ("superadmin","$2y$10$nLtnKbUrAQnMMfWi9bqsEuQ53U5k1pKCRsKYWEw0x/R5hgKNcHiYK","jjhuacon@est.itsgg.edu.ec",1,1,1,now());
