@@ -141,6 +141,7 @@
                 }else if ($response_empresa == 'exist'){
                     $data = array('status' => false,'formErrors'=> array(
                             'ruc_empresa' => "El Ruc ".$ruc_empresa." ya existe, ingrese uno nuevo",
+                            'cedula_representante' => "La cedula ".$cedula_representante." ya existe, ingrese uno nuevo",
                     ));
                 }else{
                     $data = array('status' => false,'msg' => 'Hubo un error no se pudieron guardar los datos');
