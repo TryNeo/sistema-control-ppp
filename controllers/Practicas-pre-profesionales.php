@@ -35,7 +35,18 @@
             $this->views->getView($this, "agregar-practicas", $data);
             die();
         }
-
+    
+        
+        public function getPracticaspreprofesionales(){
+            if (empty($_SESSION['permisos_modulo']['r']) ) {
+                header('location:'.server_url.'Errors');
+                $data = array("status" => false, "msg" => "Error no tiene permisos");
+            }else{
+                $data = $this->model->selectPracticasPreProfesionales();
+            }
+            echo json_encode($data,JSON_UNESCAPED_UNICODE);
+            die();
+        }
 
         public function getSelectAlumnos(){
             if (empty($_SESSION['permisos_modulo']['r']) ) {
