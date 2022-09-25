@@ -14,7 +14,7 @@ $(function(){
 
     const listCamps =  ["#id_usuario","#usuario","#email_institucional","#password","#id_rol"];
 
-    const fieldsToValidate = ["usuario","email","id_rol"]
+    const fieldsToValidate = ["usuario","email_institucional","id_rol"]
 
     const configValid = configToValidate()
 

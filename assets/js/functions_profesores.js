@@ -36,8 +36,13 @@ function configToValidate(){
 
         if($(el).is('[name=cedula]')){
             let value= $(el).val()
+
             if (!validateEmptyField(value)){
                 return 'Este campo es obligatorio';
+            }
+            
+            if(!validaNumber(value)){
+                return 'El campo cedula solo debe contener numeros';
             }
 
             if(!validateStringLength(value,10)){
@@ -47,8 +52,9 @@ function configToValidate(){
             if (!validateCedula(value)){
                 return 'La cedula '+value+' es incorrecta';
             }
-            
+
         }
+
         
         if($(el).is('[name=email_personal]')){
             let value= $(el).val()
@@ -92,21 +98,21 @@ function configToValidate(){
 
         if($(el).is('[name=id_campus]')){
             let value= $(el).val()
-            if (!validateEmptyField(value)){
+            if (!validateSelect(value)){
                 return 'Este campo es obligatorio';
             }
         }
 
         if($(el).is('[name=sexo]')){
             let value= $(el).val()
-            if (!validateEmptyField(value)){
+            if (!validateSelect(value)){
                 return 'Este campo es obligatorio';
             }
         }
 
         if($(el).is('[name=id_usuario]')){
             let value= $(el).val()
-            if (!validateEmptyField(value)){
+            if (!validateSelect(value)){
                 return 'Este campo es obligatorio';
             }
         }
