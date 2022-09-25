@@ -60,15 +60,14 @@
             $this->strRol = $rolInput;
             $this->strDescrip = $descriInput;
             
-            $sql = "SELECT * FROM Roles WHERE nombre_rol = '$this->strRol' and  id_rol =  $this->intRol and estado !=0";
-            $request_update= $this->select_sql_all($sql);   
-
-            if (empty($request_update)){
+            $sql = "SELECT id_rol,nombre_rol FROM Roles WHERE (nombre_rol = '$this->strRol' and id_rol != $this->intRol)";
+            $request_update= $this->select_sql_all($sql);
+            if(empty($request_update)){
                 $sql_udpate = "UPDATE Roles SET nombre_rol = ?, descripcion = ?,fecha_modifica = now()  WHERE id_rol = $this->intRol";
                 $data = array($this->strRol,$this->strDescrip);
                 $request_update = $this->update_sql($sql_udpate,$data);
             }else{
-                $request_update= "exist";
+                $request_update = "exist";
             }
             return $request_update;
         }

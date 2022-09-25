@@ -63,10 +63,9 @@ class EmpresasModel extends Mysql
         $this->str_telefono_representante = $telefono_representante;
         $this->str_descripcion_empresa = $descripcion_empresa;
 
-        $sql = "SELECT ruc_empresa,cedula_representante FROM Empresas WHERE ruc_empresa = '{$this->str_ruc_empresa}' 
+        $sql = "SELECT ruc_empresa,cedula_representante FROM Empresas WHERE ruc_empresa = '{$this->str_ruc_empresa}' or cedula_representante = '{$this->str_cedula_representante}'
                 and estado=1";
         $request = $this->select_sql_all($sql);
-
         if (empty($request)) {
             $sql = "INSERT INTO Empresas(ruc_empresa,nombre_empresa,direccion_empresa,correo_empresa,telefono_empresa,
                             cedula_representante,nombre_representante,telefono_representante,descripcion_empresa,estado,fecha_crea)
@@ -115,18 +114,15 @@ class EmpresasModel extends Mysql
         $this->str_telefono_representante = $telefono_representante;
         $this->str_descripcion_empresa = $descripcion_empresa;
 
-        $sql = "SELECT ruc_empresa,cedula_representante FROM Empresas WHERE ruc_empresa = '{$this->str_ruc_empresa}'
-                and estado=1  and id_empresa = $this->int_id_empresa";
+        $sql = "SELECT id_empresa,ruc_empresa,cedula_representante FROM Empresas 
+            WHERE (ruc_empresa = '{$this->str_ruc_empresa}' and id_empresa != '{$this->int_id_empresa}' ) 
+                    or (cedula_representante = '{$this->str_cedula_representante}' and id_empresa != '{$this->int_id_empresa}')";
         $request = $this->select_sql_all($sql);
-
+        
         if (empty($request)) {
-            $return = 'exist';
-
-        } else {
             $sql = "UPDATE Empresas SET ruc_empresa = ?,nombre_empresa = ?,direccion_empresa = ?,correo_empresa = ?,telefono_empresa = ?,
             cedula_representante = ?,nombre_representante = ?,telefono_representante = ?,descripcion_empresa = ?,fecha_modifica = now()
             WHERE id_empresa = $this->int_id_empresa";
-
             $arrData = array(
             $this->str_ruc_empresa,
             $this->str_nombre_empresa,
@@ -138,10 +134,11 @@ class EmpresasModel extends Mysql
             $this->str_telefono_representante,
             $this->str_descripcion_empresa
             );
-
-            $return = $this->update_sql($sql, $arrData);
+            $request = $this->update_sql($sql, $arrData);
+        } else {
+            $request = 'exist';
         }
-        return $return;
+        return $request;
     }
 
 
@@ -156,6 +153,7 @@ class EmpresasModel extends Mysql
             $request_delete = 'ok';
         } else {
             $request_delete = 'error';
+
         }
         return $request_delete;
     }

@@ -38,9 +38,11 @@
             $this->str_email_institucional = $str_email_institucional;
             $this->int_id_rol = $int_id_rol;
             $this->str_password = $str_password;
-            $sql = "SELECT * FROM Usuarios WHERE usuario = '{$this->str_usuario}' or email_institucional = '{$this->str_email_institucional}'";
-            $request = $this->select_sql_all($sql);
-            if (empty($request)){
+            
+            $sql_usuario = "SELECT usuario,email_institucional FROM Usuarios WHERE usuario = '{$this->str_usuario}' or  email_institucional = '{$this->str_email_institucional}'";
+            $request_usuario = $this->select_sql_all($sql_usuario);
+
+            if (empty($request_email_inst) && empty($request_usuario)){
                 $sql_insert = "INSERT INTO Usuarios (usuario,password,email_institucional,id_rol,estado,fecha_crea) values (?,?,?,?,1,now())";
                 $data = array($this->str_usuario,$this->str_password,$this->str_email_institucional,$this->int_id_rol);
                 $request_insert = $this->insert_sql($sql_insert,$data);
@@ -64,7 +66,7 @@
             $this->int_estado = $int_estado;
             
             $sql = "SELECT * FROM Usuarios WHERE
-                (usuario = '{$this->str_usuario}' and id_usuario =  $this->int_id_usuario  and estado!=0) ";
+                (usuario = '{$this->str_usuario}' and id_usuario !=  $this->int_id_usuario )";
             
             $request = $this->select_sql($sql);
             

@@ -79,7 +79,7 @@ class AlumnosModel extends Mysql
         if (!empty($request_email_ver)) {
             $return = "error_email";
         } else {
-            $sql = "SELECT * FROM Alumnos as al
+            $sql = "SELECT al.cedula,al.email_personal FROM Alumnos as al
                             WHERE al.cedula = '{$this->str_cedula}' or al.email_personal='{$this->str_email_personal}' and estado = 1";
             $request = $this->select_sql_all($sql);
             if (empty($request)) {
@@ -122,21 +122,20 @@ class AlumnosModel extends Mysql
         $this->str_sexo = $sexo;
         $this->int_id_carrera = $id_carrera;
 
-        $sql = "SELECT cedula FROM Alumnos WHERE cedula = '{$this->str_cedula}'
-            and estado=1  and id_alumno = $this->int_id_alumno";
+        $sql = "SELECT id_alumno,cedula,email_personal FROM Alumnos WHERE (cedula = '{$this->str_cedula}' and id_alumno != {$this->int_id_alumno}) 
+                or (email_personal='{$this->str_email_personal} ' and id_alumno != {$this->int_id_alumno})";
         $request = $this->select_sql_all($sql);
 
         if (empty($request)) {
-            $request = 'exist';
-        } else {
             $sql = "UPDATE Alumnos SET cedula = ?,nombre = ?,apellido = ?,email_personal = ?,telefono = ?,sexo = ?,id_carrera = ?,fecha_modifica = now() WHERE id_alumno = $this->int_id_alumno";
             $data = array(
                 $this->str_cedula, $this->str_nombre, $this->str_apellido, $this->str_email_personal,
                 $this->str_telefono, $this->str_sexo, $this->int_id_carrera
             );
             $request = $this->update_sql($sql, $data);
+        } else {
+            $request = 'exist';
         }
-
         return $request;
     }
 

@@ -126,21 +126,21 @@ class ProfesoresModel extends Mysql
         $this->str_sexo = $sexo;
         $this->int_id_campus = $id_campus;
 
-        $sql = "SELECT cedula FROM Profesores WHERE cedula = '{$this->str_cedula}'
-            and estado=1  and id_profesor = $this->int_id_profesor";
+        $sql = "SELECT cedula FROM Profesores WHERE (cedula = '{$this->str_cedula}' and id_profesor != $this->int_id_profesor ) 
+                or (email_personal='{$this->str_email_personal}' and id_profesor != $this->int_id_profesor)";
+
         $request = $this->select_sql_all($sql);
 
         if (empty($request)) {
-            $request = 'exist';
-        } else {
             $sql = "UPDATE Profesores SET cedula = ?,nombre = ?,apellido = ?,email_personal = ?,telefono = ?,sexo = ?,id_campus=?,fecha_modifica = now() WHERE id_profesor = $this->int_id_profesor";
             $data = array(
                 $this->str_cedula, $this->str_nombre, $this->str_apellido, $this->str_email_personal,
                 $this->str_telefono, $this->str_sexo,$this->int_id_campus
             );
             $request = $this->update_sql($sql, $data);
+        } else {
+            $request = 'exist';
         }
-
         return $request;
     }
 
