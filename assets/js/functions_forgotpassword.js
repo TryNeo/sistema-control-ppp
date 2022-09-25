@@ -48,13 +48,10 @@ function sendingDataServerSideForgotpassword(idForm,validatorServerSide,fieldsTo
                 dataType: 'json'
             }).done(function (data) {
                 if(data.status){
-                    setTimeout(function(){
-                        $.LoadingOverlay("hide");
-                        mensaje('success','Exitoso',data.msg);
-                        $('#fntForgotpassword').trigger("reset");
-                        $('form').removeClass('was-validated');
-                        $("input").removeClass("is-valid");
-                    },900);
+                    mensaje('success','Exitoso',data.msg);
+                    $('#fntForgotpassword').trigger("reset");
+                    $('form').removeClass('was-validated');
+                    $("input").removeClass("is-valid");
                 }else{
                     if (!jQuery.isEmptyObject(data.formErrors)){
                         $.LoadingOverlay("hide");
@@ -68,6 +65,7 @@ function sendingDataServerSideForgotpassword(idForm,validatorServerSide,fieldsTo
                         mensaje("error","Error",data.msg);
                     }
                 }
+                $.LoadingOverlay("hide");
             }).fail(function (error) {
                 $.LoadingOverlay("hide");
                 mensaje("error","Error",'Hubo problemas con el servidor, intentelo nuevamente')
