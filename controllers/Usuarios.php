@@ -50,9 +50,9 @@ class Usuarios extends Controllers
                 }
 
                 if ($data[$i]['email_activo'] == 1) {
-                    $data[$i]['email_activo'] = '<span  class="text-center"><i class="icon fas fa-check-circle "></i></span>';
+                    $data[$i]['email_activo'] = '<span  class="text-center"><i class="fas fa-user-check"></i></span>';
                 } else {
-                    $data[$i]['email_activo'] = '<span class="text-center"><i class="text-center"><i class="icon fas fa-ban "></i></span>';
+                    $data[$i]['email_activo'] = '<span class="text-center"><i class="fas fa-user-times"></i></span>';
                 }
 
                 if ($_SESSION['permisos_modulo']['d']) {
