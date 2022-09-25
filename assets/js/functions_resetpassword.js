@@ -1,6 +1,4 @@
 $(function(){
-    document.body.style.zoom = "84%"; 
-
     const fieldsToValidate = ['password','password_confirm']
 
 
@@ -68,11 +66,19 @@ function sendingDataServerSideResetpasword(idForm,validatorServerSide,fieldsToVa
         let url = $(idForm).attr("action");
         $(idForm).on('submit',function (e) {
             e.preventDefault();
+
             let password = document.querySelector('#password').value;
             let password_confirm = document.querySelector('#password_confirm').value;
             if(password === password_confirm){
                 if(validatorServerSide.checkAll('.needs-validation') === 0){
                     let formData = $(this).serializeArray();
+                    $.LoadingOverlaySetup({
+                        image           : "https://i.ibb.co/DQstGsn/favicon1.png",
+                        imageColor      : "#ffcc00",
+                        imageAnimation  : "pulse 2.5s",
+                        imageAutoResize         : true,
+                    });
+                    $.LoadingOverlay("show");
                     $.ajax({
                         url: url,
                         type: $(idForm).attr("method"),
@@ -82,12 +88,9 @@ function sendingDataServerSideResetpasword(idForm,validatorServerSide,fieldsToVa
                         if(data.status){
                             mensaje('success','Exitoso',data.msg);
                             setTimeout(function(){
-                                $.LoadingOverlay("show");
-                            },1000);
-                            setTimeout(function(){
                                 window.location = data.url;
                                 document.getElementById("fntResetpassword").reset();
-                            },5000);
+                            },2000);
                         }else{
                             if (!jQuery.isEmptyObject(data.formErrors)){
                                 console.log(data.formErrors)
@@ -98,10 +101,13 @@ function sendingDataServerSideResetpasword(idForm,validatorServerSide,fieldsToVa
                                 });
                             }else{
                                 $("*", "#fntForgotpassword").prop('disabled',true);
+                                $.LoadingOverlay("hide");
                                 mensaje("error","Error",data.msg);
                             }
                         }
+                        $.LoadingOverlay("hide");
                     }).fail(function (error) {
+                        $.LoadingOverlay("hide");
                         mensaje("error","Error",'Hubo problemas con el servidor, intentelo nuevamente')
                     })
                 }else{
