@@ -126,6 +126,7 @@ class Usuarios extends Controllers
                 } else if ($response_usuario == 'exist') {
                     $data = array('status' => false, 'formErrors' => array(
                         'usuario' => "El usuario " . $usuario_name . " ya existe, ingrese uno nuevo",
+                        'email_institucional' => "El email institucional " . $email_institucional . " ya existe, ingrese uno nuevo",
                     ));
                 } else {
                     $data = array('status' => false, 'msg' => 'Hubo un error no se pudieron guardar los datos');
