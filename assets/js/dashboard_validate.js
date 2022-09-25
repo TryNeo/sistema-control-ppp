@@ -79,6 +79,15 @@ function validaTelefono(value) {
   return true;
 }
 
+
+function validateSelect(value){
+  if(value ===  null){
+    return false;
+  }
+  return true;
+}
+
+
 /**
  * Funcion validateCedula - valida que la cedula ingresa sea valida.
  * @param  {string} cedula -recibe  un string con una cantidad de numeros de 10 digitos
@@ -86,7 +95,7 @@ function validaTelefono(value) {
  */
 function validateCedula(cedula) {
   const validRegEx = /[0-9]{0,10}/;
-  if (cedula.match(validRegEx) === null) {
+  if (cedula.match(validRegEx) === null && cedula.length >= 10) {
     return false;
   } else {
     let validado = [...cedula].map((x) => (x == 0 ? 0 : parseInt(x) || x));
