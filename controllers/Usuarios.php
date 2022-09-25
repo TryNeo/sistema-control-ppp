@@ -137,6 +137,7 @@ class Usuarios extends Controllers
         } else {
             $data = array("status" => false, "msg" => "Error Hubo problemas");
         }
+        sleep(3);
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
     }
@@ -173,6 +174,7 @@ class Usuarios extends Controllers
 
             }
         }
+        sleep(3);
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
     }

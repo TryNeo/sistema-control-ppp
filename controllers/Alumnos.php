@@ -160,6 +160,7 @@
             }else{
                 header('location:'.server_url.'Errors');
             }
+            sleep(3);
             echo json_encode($data,JSON_UNESCAPED_UNICODE);
             die();
         }
@@ -246,6 +247,7 @@
                     $data = array("status" => false, "msg" => "Error al eliminar alumno");
                 }
             }
+            sleep(3);
             echo json_encode($data,JSON_UNESCAPED_UNICODE);
             die();
         }

@@ -97,6 +97,7 @@
                     $data = array('status' => false, 'msg' => 'Hubo un error al hacer respaldo');
                 }
             }
+            sleep(5);
             echo json_encode($data,JSON_UNESCAPED_UNICODE);                
             die();
         }
@@ -118,6 +119,7 @@
                     $data = array('status' => false, 'msg' => 'Hubo un error al insertar la base de datos');
                 }
             }
+            sleep(5);
             echo json_encode($data,JSON_UNESCAPED_UNICODE);                
             die();
         }
@@ -185,6 +187,7 @@
                     $data = array('status' => false, 'msg' => 'Hubo un error al eliminar la copia');
                 }
             }
+            sleep(5);
             echo json_encode($data,JSON_UNESCAPED_UNICODE);                
             die();
         }
