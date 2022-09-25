@@ -38,7 +38,7 @@
 </details>
 
 ## Acerca del proyecto
-
+[![ppp](https://i.ibb.co/N168wxY/Screenshot-7.jpg)](https://i.ibb.co/N168wxY/Screenshot-7.jpg)
 
 ### Construido con 
 
@@ -53,6 +53,7 @@ En esta sección se mostrará una lista de tecnologías que se usaron para la cr
 * [Select2](https://select2.org/)
 * [jQuery LoadingOverlay](https://gasparesganga.com/labs/jquery-loading-overlay/)
 * [Jbvalidator](https://emretulek.github.io/jbvalidator/)
+* [reCAPTCHA](https://www.google.com/recaptcha/about/)
 
 ## Licencia
 
