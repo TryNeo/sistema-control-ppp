@@ -117,6 +117,7 @@ class Login extends Controllers
                     'password' => 'El campo contraseña es obligatorio',
                 ));
             }
+            sleep(5);
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
         }
         die();

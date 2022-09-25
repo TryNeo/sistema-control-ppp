@@ -64,11 +64,8 @@ function sendingDataServerSideLogin(idForm,validatorServerSide,fieldsToValidate)
                 dataType: 'json'
             }).done(function (data) {
                 if(data.status){
-                    setTimeout(function(){
-                        $.LoadingOverlay("hide");
-                        mensaje('success','Exitoso',data.msg);
-                        window.location = data.url;
-                    }, 4000);
+                    mensaje('success','Exitoso',data.msg);
+                    window.location = data.url;
                 }else{
                     if (!jQuery.isEmptyObject(data.formErrors)){
                         $.LoadingOverlay("hide");
@@ -81,8 +78,8 @@ function sendingDataServerSideLogin(idForm,validatorServerSide,fieldsToValidate)
                         $.LoadingOverlay("hide");
                         mensaje("error","Error",data.msg);
                     }
-    
                 }
+                $.LoadingOverlay("hide");
             }).fail(function (error) {
                 console.log(error)
                 $.LoadingOverlay("hide");
