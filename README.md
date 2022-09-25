@@ -38,7 +38,16 @@
 </details>
 
 ## Acerca del proyecto
+
+Creador a partir de la necesidad del Instituto Superior Tecnológico Tres de Marzo de no poder tener un buen control para las practicas pre profesionales de sus alumnos donde esta nueva plataforma facilitaria a sus alumnos y docentes de poder llevar un registro de control de las pasantias que haga el estudiante en el instituto
+en cada empresa
+
 [![ppp](https://i.ibb.co/N168wxY/Screenshot-7.jpg)](https://i.ibb.co/N168wxY/Screenshot-7.jpg)
+
+<hr>
+
+[![ppp](https://i.ibb.co/31VFGSR/Screenshot-8.jpg)](https://i.ibb.co/31VFGSR/Screenshot-8.jpg)
+
 
 ### Construido con 
 
