@@ -1,7 +1,29 @@
 $(function(){
+    const columnData = [
+        {"data":"id_practica"},
+        {"data":"ced_nom_ape_al"},
+        {"data":"ruc_nom_ape_pr_em"},
+        {"data":"fecha_inicio"},
+        {"data":"fecha_fin"},
+        {"data":"tipo_practica"},
+    ]
+
+    const columnDefs = [
+        {
+            targets:[5],
+            orderable:false,
+            render:function(data,type,row){
+                console.log(row.tipo_practica)
+            }
+        }
+    ]
+
+    const tableAlumno = configDataTables('.tablePracticas',base_url+"practicas-pre-profesionales/getPracticaspreprofesionales",columnData,columnDefs);
+
     searchAlumno();
     searchProfesor();
     searchEmpresas();
+    const configValid = configToValidate();
 })
 
 function configToValidate(){
@@ -12,84 +34,94 @@ function configToValidate(){
         language: base_url_assets+"js/jbvalidatorLangEs.json",
     });
     validatorServerSide.validator.custom = function(el, event){
-
-        if($(el).is('[name=cedula]')){
+        if($(el).is('[name=id_alumno]')){
             let value= $(el).val()
-            if (!validateEmptyField(value)){
+            if (!validateSelect(value)){
                 return 'Este campo es obligatorio';
             }
-
-            if(!validateStringLength(value,10)){
-                return 'El campo cedula debe tener 10 caracteres';
-            }
-
-            if (!validateCedula(value)){
-                return 'La cedula '+value+' es incorrecta';
-            }
-            
         }
         
-        if($(el).is('[name=email_personal]')){
+        if($(el).is('[name=id_profesor]')){
             let value= $(el).val()
-
-            if (!validateEmptyField(value)){
+            if (!validateSelect(value)){
                 return 'Este campo es obligatorio';
             }
-
-            if (!validaEmail(value)){
-                return 'El email '+value+' es invalido';
-            }
-            
         }
 
-        if($(el).is('[name=nombre]')){
-            let value= $(el).val()
-
-            if (!validateEmptyField(value)){
-                return 'Este campo es obligatorio';
-            }
-
-
-            if (!validString(value)){
-                return 'El nombre '+value+' contiene numeros o caracteres especiales';
-            }
-            
-        }
         
-        if($(el).is('[name=apellido]')){
+        if($(el).is('[name=id_empresa]')){
             let value= $(el).val()
+            if (!validateSelect(value)){
+                return 'Este campo es obligatorio';
+            }
+        }
 
+        if($(el).is('[name=id_alcance_proyecto]')){
+            let value= $(el).val()
+            if (!validateSelect(value)){
+                return 'Este campo es obligatorio';
+            }
+        }
+
+        if($(el).is('[name=id_tipo_practica]')){
+            let value= $(el).val()
+            if (!validateSelect(value)){
+                return 'Este campo es obligatorio';
+            }
+        }
+
+        if($(el).is('[name=id_nivel_pasantias]')){
+            let value= $(el).val()
+            if (!validateSelect(value)){
+                return 'Este campo es obligatorio';
+            }
+        }
+
+        if($(el).is('[name=departamento_ep]')){
+            let value= $(el).val()
             if (!validateEmptyField(value)){
                 return 'Este campo es obligatorio';
             }
+        }
 
-            if (!validString(value)){
-                return 'El apellido '+value+' contiene numeros o caracteres especiales';
+        if($(el).is('[name=fecha_ini]')){
+            let value= $(el).val()
+            if (!validateEmptyField(value)){
+                return 'Este campo es obligatorio';
             }
+        }
+
+
+        if($(el).is('[name=fecha_fin]')){
+            let value= $(el).val()
+            if (!validateEmptyField(value)){
+                return 'Este campo es obligatorio';
+            }
+        }
+
+        if($(el).is('[name=total_horas]')){
+            let value= $(el).val()
             
-        }
-
-        if($(el).is('[name=id_carrera]')){
-            let value= $(el).val()
             if (!validateEmptyField(value)){
                 return 'Este campo es obligatorio';
             }
-            
-        }
 
-        if($(el).is('[name=sexo]')){
-            let value= $(el).val()
-            if (!validateEmptyField(value)){
-                return 'Este campo es obligatorio';
+            if (value == 0){
+                return 'Este campo no puede quedar en cero';
+            }
+
+            if (value < 0 ){
+                return 'Este campo no puede ser negativo';
+            }
+
+            if (value >= 400 ){
+                return 'Las horas no deben de pasar de 400';
             }
         }
-
     }
 
     return validatorServerSide
 }
-
-
 
 function formatRepo (repo) {
     if (repo.loading) {
@@ -112,7 +144,6 @@ function formatRepo (repo) {
 
     return option;
 }
-
 
 function formatRepoPr (repo) {
     if (repo.loading) {
@@ -160,7 +191,7 @@ function formatRepoEp (repo) {
 
 function searchAlumno(){
     $('#id_alumno').select2({
-        theme: "bootstrap-5",
+        theme: "bootstrap4",
         language:'es',
         allowClear:true,
         ajax: {
@@ -181,7 +212,7 @@ function searchAlumno(){
             },
             cache: true
         },
-        placeholder:"Buscar alumno",
+        placeholder:"Buscar alumno por cedula / nombre / apellido",
         templateResult: formatRepo,
     }).on('select2:select',function(e){
         e.preventDefault();
@@ -189,14 +220,12 @@ function searchAlumno(){
         $('#cedula_temp_al').val(data.cedula);
         $('#nombre_apellido_al').val(data.text);
         $('#carrera').val(data.carrera);
-        $('#id_alumno').val('');
-        $('#id_alumno').trigger('change.select2');
     });
 }
 
 function searchProfesor(){
     $('#id_profesor').select2({
-        theme: "bootstrap-5",
+        theme: "bootstrap4",
         language:'es',
         allowClear:true,
         ajax: {
@@ -217,23 +246,21 @@ function searchProfesor(){
             },
             cache: true
         },
-        placeholder:"Buscar tutor docente",
+        placeholder:"Buscar tutor docente por cedula / nombre / apellido",
         templateResult: formatRepoPr,
     }).on('select2:select',function(e){
         e.preventDefault();
         let data = e.params.data;
         $('#cedula_temp_pr').val(data.cedula);
         $('#nombre_apellido_pr').val(data.text);
+        $('#id_alumnos_re').val(data.id);
         $('#campus').val(data.campus);
-        $('#id_profesor').val('');
-        $('#id_profesor').trigger('change.select2');
     });
 }
 
-
 function searchEmpresas(){
     $('#id_empresa').select2({
-        theme: "bootstrap-5",
+        theme: "bootstrap4",
         language:'es',
         allowClear:true,
         ajax: {
@@ -254,7 +281,7 @@ function searchEmpresas(){
             },
             cache: true
         },
-        placeholder:"Buscar empresa",
+        placeholder:"Buscar empresa por ruc / nombre empresa",
         templateResult: formatRepoEp,
     }).on('select2:select',function(e){
         e.preventDefault();
@@ -262,9 +289,6 @@ function searchEmpresas(){
         $('#nombre_empresa_ep').val(data.text);
         $('#nombre_representante_ep').val(data.nombre);
         $('#telefono_ep').val(data.telefono);
-
-        $('#id_empresa').val('');
-        $('#id_empresa').trigger('change.select2');
     });
 }
 
