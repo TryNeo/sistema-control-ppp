@@ -147,6 +147,13 @@ function sendingDataServerSide(idForm,validatorServerSide,fieldsToValidate,listC
         e.preventDefault();
         if(validatorServerSide.checkAll('.needs-validation') === 0){
             let formData = $(this).serializeArray();
+            $.LoadingOverlaySetup({
+                image           : "https://i.ibb.co/DQstGsn/favicon1.png",
+                imageColor      : "#ffcc00",
+                imageAnimation  : "pulse 2.5s",
+                imageAutoResize         : true,
+            });
+            $.LoadingOverlay("show");
             $.ajax({
                 url: base_url+urlMethod,
                 type: $(idForm).attr("method"),
@@ -159,6 +166,7 @@ function sendingDataServerSide(idForm,validatorServerSide,fieldsToValidate,listC
                     configTable.ajax.reload();
                 }else{
                     if (!jQuery.isEmptyObject(data.formErrors)){
+                        $.LoadingOverlay("hide");
                         fieldsToValidate.forEach((value,index) => {
                             if (data.formErrors.hasOwnProperty(fieldsToValidate[index])){
                                 validatorServerSide.errorTrigger($('[name='+fieldsToValidate[index]+']'), data.formErrors[''+fieldsToValidate[index]+'']);
@@ -167,12 +175,15 @@ function sendingDataServerSide(idForm,validatorServerSide,fieldsToValidate,listC
                     }else{
                         if(data.msg == "error"){
                         }else{
+                            $.LoadingOverlay("hide");
                             mensaje("error","Error",data.msg);
                         }
                     }
     
                 }
+                $.LoadingOverlay("hide");
             }).fail(function (error) {
+                $.LoadingOverlay("hide");
                 mensaje("error","Error",'Hubo problemas con el servidor,intentelo nuevamente ,si el problema persiste comuniquese con el administrador del sistema');
             })
         }
@@ -194,6 +205,13 @@ function deleteServerSide(url,id,text,nameSelectortable){
         if (result.isConfirmed) {
             (async () => {
                 try {
+                    $.LoadingOverlaySetup({
+                        image           : "https://i.ibb.co/DQstGsn/favicon1.png",
+                        imageColor      : "#ffcc00",
+                        imageAnimation  : "pulse 2.5s",
+                        imageAutoResize         : true,
+                    });
+                    $.LoadingOverlay("show");
                     let data = new FormData();data.append("id",id);
                     let options = { method: "POST", body :data}
                     let response = await fetch(url,options);
@@ -203,12 +221,16 @@ function deleteServerSide(url,id,text,nameSelectortable){
                             mensaje("success","Exitoso",data.msg);
                             $(nameSelectortable).DataTable().ajax.reload();
                         }else{
+                            $.LoadingOverlay("hide");
                             mensaje("error","Error",data.msg);
                         }
                     }else {
+                        $.LoadingOverlay("hide");
                         mensaje("error","Error",'Hubo problemas con el servidor,intentelo nuevamente ,si el problema persiste comuniquese con el administrador del sistema');
                     }
+                    $.LoadingOverlay("hide");
                 } catch (err) {
+                    $.LoadingOverlay("hide");
                     mensaje("error","Error",'Hubo problemas con el servidor,intentelo nuevamente ,si el problema persiste comuniquese con el administrador del sistema');
                 }
             })();

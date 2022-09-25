@@ -93,7 +93,7 @@ function sendingDataServerSideResetpasword(idForm,validatorServerSide,fieldsToVa
                             },2000);
                         }else{
                             if (!jQuery.isEmptyObject(data.formErrors)){
-                                console.log(data.formErrors)
+                                $.LoadingOverlay("hide");
                                 fieldsToValidate.forEach((value,index) => {
                                     if (data.formErrors.hasOwnProperty(fieldsToValidate[index])){
                                         validatorServerSide.errorTrigger($('[name='+fieldsToValidate[index]+']'), data.formErrors[''+fieldsToValidate[index]+'']);

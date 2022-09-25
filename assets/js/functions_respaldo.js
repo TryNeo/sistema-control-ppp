@@ -26,6 +26,13 @@ function fntSetBackups(rbd){
             if (rbd === ""){
                 mensaje("error","Error","Opps! hubo un problema esta base de datos no existe");
             }else{
+                $.LoadingOverlaySetup({
+                    image           : "https://i.ibb.co/DQstGsn/favicon1.png",
+                    imageColor      : "#ffcc00",
+                    imageAnimation  : "pulse 2.5s",
+                    imageAutoResize         : true,
+                });
+                $.LoadingOverlay("show");
                 $.ajax({
                     type: 'GET',
                     url: base_url+"respaldo/setBackups?route="+rbd
@@ -37,8 +44,10 @@ function fntSetBackups(rbd){
                         mensaje("success","Exitoso",objdata.msg);
                         $('.tableRespaldo').DataTable().ajax.reload();
                     }else{
+                        $.LoadingOverlay("hide");
                         mensaje("error","Error",objdata.msg);
                     }
+                    $.LoadingOverlay("hide");
                 });
             }    
         }
@@ -61,6 +70,13 @@ function fntDeleteBackup(rbd){
             if (rbd === ""){
                 mensaje("error","Error","Opps! hubo un problema esta base de datos no existe");
             }else{
+                $.LoadingOverlaySetup({
+                    image           : "https://i.ibb.co/DQstGsn/favicon1.png",
+                    imageColor      : "#ffcc00",
+                    imageAnimation  : "pulse 2.5s",
+                    imageAutoResize         : true,
+                });
+                $.LoadingOverlay("show");
                 $.ajax({
                     type: 'GET',
                     url: base_url+"respaldo/delBackups?route="+rbd
@@ -70,8 +86,10 @@ function fntDeleteBackup(rbd){
                         mensaje("success","Exitoso",objdata.msg);
                         $('.tableRespaldo').DataTable().ajax.reload();
                     }else{
+                        $.LoadingOverlay("hide");
                         mensaje("error","Error",objdata.msg);
                     }
+                    $.LoadingOverlay("hide");
                 });
             }    
         }
@@ -92,6 +110,13 @@ function fntBackups(tableRespaldo){
             cancelButtonText : 'No, cancelar',
         }).then((result) => {
             if (result.isConfirmed) {
+                $.LoadingOverlaySetup({
+                    image           : "https://i.ibb.co/DQstGsn/favicon1.png",
+                    imageColor      : "#ffcc00",
+                    imageAnimation  : "pulse 2.5s",
+                    imageAutoResize         : true,
+                });
+                $.LoadingOverlay("show");
                 $.ajax({
                     type: 'GET',
                     url: base_url+"respaldo/backup"
@@ -101,8 +126,10 @@ function fntBackups(tableRespaldo){
                         mensaje("success","Exitoso",objdata.msg);
                         tableRespaldo.ajax.reload();
                     }else{
+                        $.LoadingOverlay("hide");
                         mensaje("error","Error",objdata.msg);
                     }
+                    $.LoadingOverlay("hide");
                 });
             }
         });
