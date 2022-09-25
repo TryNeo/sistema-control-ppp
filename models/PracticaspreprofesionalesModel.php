@@ -11,6 +11,19 @@ class PracticaspreprofesionalesModel extends Mysql
         parent::__construct();
     }
 
+    public function selectPracticasPreProfesionales(){
+        $sql = "SELECT ppp.id_practica,CONCAT(al.cedula,' ',al.nombre,' ',al.apellido) as ced_nom_ape_al,
+                    CONCAT(em.ruc_empresa,' ',em.nombre_empresa,' ','(',pr.nombre,' ',pr.apellido,')') as ruc_nom_ape_pr_em,
+                    ppp.fecha_inicio,ppp.fecha_fin,ppp.tipo_practica
+        FROM Practicas_pre_profesionales as ppp
+        INNER JOIN Alumnos as al ON al.id_alumno = ppp.id_alumno
+        INNER JOIN profesores as pr ON pr.id_profesor = ppp.id_profesor
+        INNER JOIN empresas as em ON em.id_empresa = ppp.id_empresa
+        where ppp.estado=1  ORDER BY ppp.id_practica DESC";
+        $request = $this->select_sql_all($sql);
+        return $request;
+    }
+
     public function selectAlumnosNoInactivos(string $str_search_alumno)
     {
         $this->str_search_alumno = $str_search_alumno;
