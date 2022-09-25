@@ -7,9 +7,6 @@
     <div class="section-body">
         <form class="needs-validation" id="fntPracticas" method="post" role="form" novalidate="">
             <input type="hidden" id="id_practicas" name="id_practicas" value="">
-            <input type="hidden" id="id_alumnos_re" name="id_alumnos_re" value=""  required>
-            <input type="hidden" id="id_profesores_re" name="id_profesores_re" value="" required>
-            <input type="hidden" id="id_empresas_re" name="id_empresas_re" value="" required>
             <div class="row">
                 <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
@@ -81,7 +78,7 @@
                                         <label><b>Tipo practica:</b></label>
 
                                         <div class="input-group">
-                                            <select name="id_tipo_practica" id="id_tipo_practica" class="form-control" required>
+                                            <select name="id_tipo_practica" id="id_tipo_practica" class="form-control">
                                                 <option value="" selected disabled>Seleccione el Tipo de Practica</option>
                                                 <option value="1">Empresarial</option>
                                                 <option value="2">Servicio a la comunidad</option>
@@ -92,9 +89,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label><b>Alcance proyecto:</b></label>
-
                                         <div class="input-group">
-                                            <select name="id_alcance_proyecto" id="id_alcance_proyecto" class="form-control" required>
+                                            <select name="id_alcance_proyecto" id="id_alcance_proyecto" class="form-control">
                                                 <option value="" selected disabled>Seleccione el Alcance Proyecto</option>
                                                 <option value="1">Nacional</option>
                                                 <option value="2">Provincial</option>
@@ -138,7 +134,7 @@
                                     <div class="form-group">
                                         <label><b>deparamento (maximo 80 caracteres):</b></label>
                                         <div class="input-group">
-                                            <input type="text" name="departamento_ep" class="form-control" id="departamento_ep" required>
+                                            <input type="text" name="departamento_ep" class="form-control" id="departamento_ep">
                                         </div>
                                     </div>
                                 </div>
@@ -146,7 +142,7 @@
                                     <div class="form-group">
                                         <label><b>Especifique el Nivel o Semestre en que se encontraba el alumno al momento de realizar estas pasantias:</b></label>
                                         <div class="input-group">
-                                            <select name="id_nivel_pasantias" id="id_nivel_pasantias" class="form-control" required>
+                                            <select name="id_nivel_pasantias" id="id_nivel_pasantias" class="form-control">
                                                 <option value="" selected disabled>Seleccione el nivel</option>
                                                 <option value="1">Primer nivel</option>
                                                 <option value="2">Segundo nivel</option>

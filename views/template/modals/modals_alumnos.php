@@ -19,7 +19,7 @@
                                             <i class="fas fa-address-card"></i>
                                         </span>
                                     </div>
-                                    <input type="text" name="cedula" class="form-control" id="cedula" placeholder="ingrese la cedula" required>
+                                    <input type="text" name="cedula" class="form-control" id="cedula" placeholder="ingrese la cedula">
                                 </div>
                             </div>
                         </div>
@@ -31,7 +31,7 @@
                                             <i class="fas fa-envelope"></i>
                                         </span>
                                     </div>
-                                    <input type="email" name="email_personal" class="form-control" id="email_personal" required placeholder="ingrese el email personal">
+                                    <input type="email" name="email_personal" class="form-control" id="email_personal"  placeholder="ingrese el email personal">
                                 </div>
                             </div>
                         </div>
@@ -43,7 +43,7 @@
                                             <i class="fas fa-address-book"></i>
                                         </span>
                                     </div>
-                                    <input type="text" name="nombre" class="form-control" id="nombre" placeholder="ingrese los nombres" required>
+                                    <input type="text" name="nombre" class="form-control" id="nombre" placeholder="ingrese los nombres" >
                                 </div>
                             </div>
                         </div>
@@ -55,7 +55,7 @@
                                             <i class="fas fa-address-book"></i>
                                         </span>
                                     </div>
-                                    <input type="text" name="apellido" class="form-control" id="apellido" placeholder="ingrese los apellidos" required>
+                                    <input type="text" name="apellido" class="form-control" id="apellido" placeholder="ingrese los apellidos" >
                                 </div>
                             </div>
                         </div>
@@ -68,7 +68,7 @@
                                             <i class="fas fa-mobile-alt"></i>
                                         </span>
                                     </div>
-                                    <input type="text" name="telefono" class="form-control" id="telefono" placeholder="ingrese el telefono personal" required>
+                                    <input type="text" name="telefono" class="form-control" id="telefono" placeholder="ingrese el telefono personal" >
                                 </div>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                                             <i class="fas fa-venus-mars"></i>
                                         </span>
                                     </div>
-                                    <select name="sexo" id="sexo" class="form-control" required>
+                                    <select name="sexo" id="sexo" class="form-control" >
                                         <option value="" selected disabled>Seleccione el sexo</option>
                                         <option value="M">Masculino</option>
                                         <option value="F">Femenino</option>
@@ -98,14 +98,14 @@
                                             <i class="fas fa-graduation-cap"></i>
                                         </span>
                                     </div>
-                                    <select name="id_carrera" id="id_carrera" class="form-control" required>
+                                    <select name="id_carrera" id="id_carrera" class="form-control">
                                     </select>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <select id="id_usuario" class="form-control select2" name="id_usuario" required>
+                                <select id="id_usuario" class="form-control select2" name="id_usuario">
                                 </select>
                             </div>
                         </div>

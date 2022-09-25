@@ -19,12 +19,12 @@
                                 <table  class="table tablePracticas table-striped table-bordered dt-responsive nowrap" cellspacing="0"  style="width:100%">
                                     <thead class="text-uppercase">
                                         <tr>
+                                            <th scope="col">No.</th>
                                             <th scope="col">ALUMNO</th>
                                             <th scope="col">EMPRESA / DOCENTE</th>
                                             <th scope="col">FECHA INICIAL</th>
                                             <th scope="col">FECHA FINAL</th>
                                             <th scope="col">TIPO</th>
-                                            <th scope="col">OPCIONES</th>
                                         </tr>
                                     </thead>
                                     <tbody>
