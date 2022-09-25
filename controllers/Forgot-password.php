@@ -87,6 +87,7 @@ class Forgotpassword extends Controllers
                     'emailuser' => 'el campo email se encuentra vacio',
                 ));
             }
+            sleep(5);
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
         }
         die();
@@ -186,6 +187,7 @@ class Forgotpassword extends Controllers
             } else {
                 $data = array('status' => false, 'msg' => 'Oops hubo un errors, intentelo de nuevo');
             }
+            sleep(5);
             echo json_encode($data, JSON_UNESCAPED_UNICODE);
         } else {
             header('location:' . server_url . 'login');
