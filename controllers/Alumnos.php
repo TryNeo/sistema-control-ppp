@@ -148,6 +148,7 @@
                 }else if ($response_alumno == 'exist'){
                     $data = array('status' => false,'formErrors'=> array(
                         'cedula' => "La cedula ".$cedula." ya existe, ingrese uno nuevo",
+                        'email_personal' => "El email ".$email_personal." ya existe, ingrese uno nuevo",
                     ));
                 }else if ($response_alumno == 'error_email') { 
                     $data = array('status' => false,'formErrors'=> array(
