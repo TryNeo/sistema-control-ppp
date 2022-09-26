@@ -32,18 +32,8 @@ $(function(){
     searchProfesor();
     searchEmpresas();
     const configValid = configToValidate();
-    /*
-    $('#total_horas').change(function(){
+    sendingDataServerSidePr('#fntPracticas',configValid,"practicas-pre-profesionales/setPracticaspreprofesionales");
 
-        let total_horas_ppp = $('#total_ppp').val();
-        console.log(total_horas_ppp)
-        let total_horas = $('#total_horas').val();
-        
-        total_horas = total_horas === "" ? 0 : +parseInt(total_horas);
-        
-        $('#total_ppp').val(parseInt(total_horas_ppp)+parseInt(total_horas))
-
-    });*/
 })
 
 function configToValidate(){
@@ -335,3 +325,35 @@ function searchEmpresas(){
 }
 
 
+function sendingDataServerSidePr(idForm,validatorServerSide,urlMethod){
+    $(idForm).on('submit',function (e) {
+        e.preventDefault();
+        if(validatorServerSide.checkAll('.needs-validation') === 0){
+            let formData = $(this).serializeArray();
+            $.LoadingOverlaySetup({
+                image           : "https://i.ibb.co/DQstGsn/favicon1.png",
+                imageColor      : "#ffcc00",
+                imageAnimation  : "pulse 2.5s",
+                imageAutoResize         : true,
+            });
+            $.LoadingOverlay("show");
+            $.ajax({
+                url: base_url+urlMethod,
+                type: $(idForm).attr("method"),
+                data: formData,
+                dataType: 'json'
+            }).done(function (data) {
+                if(data.status){
+                    mensaje('success','Exitoso',data.msg);
+                }else{
+                    $.LoadingOverlay("hide");
+                    mensaje('error','Error',data.msg);
+                }
+                $.LoadingOverlay("hide");
+            }).fail(function (error) {
+                $.LoadingOverlay("hide");
+                mensaje("error","Error",'Hubo problemas con el servidor,intentelo nuevamente ,si el problema persiste comuniquese con el administrador del sistema');
+            })
+        }
+    })
+}

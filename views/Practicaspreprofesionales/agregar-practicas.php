@@ -8,6 +8,11 @@
         <form class="needs-validation" id="fntPracticas" method="post" role="form" novalidate="">
             <input type="hidden" id="id_practicas" name="id_practicas" value="">
             <div class="row">
+                <div class="col-12 mb-4">
+                    <button type="submit" id="PracticaCr" class="btn btn-primary mt-4 pr-4 pl-4 is-valid"><span class="changeText">Crear </span><i class="fa fa-plus"></i></button>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
                         <div class="card-body">
@@ -155,7 +160,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" id="PracticaCr" class="btn btn-primary mt-4 pr-4 pl-4 is-valid"><span class="changeText">Crear </span><i class="fa fa-plus"></i></button>
                         </div>
                     </div>
                 </div>
@@ -178,7 +182,7 @@
                                 <div class="form-group">
                                     <label><b>Total horas ppp acumuladas:</b></label>
                                     <div class="input-group">
-                                        <input type="number" name="total_ppp" class="form-control" id="total_ppp" value="0" disabled>
+                                        <input type="number" name="total_ppp" class="form-control" id="total_ppp" value="0" readonly>
                                     </div>
                                 </div>
                             </div>

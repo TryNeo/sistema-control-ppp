@@ -52,6 +52,49 @@ class Practicaspreprofesionales extends Controllers
         die();
     }
 
+    public function setPracticaspreprofesionales(){
+        if($_POST){
+            $id_practicas = intval(strclean($_POST['id_practicas']));
+            $id_alumno = intval(strclean($_POST['id_alumno']));
+            $id_profesor = intval(strclean($_POST['id_profesor']));
+            $id_empresa = intval(strclean($_POST['id_empresa']));
+            $tipo_practica = intval(strclean($_POST['id_tipo_practica']));
+            $alcance_proyecto = intval(strclean($_POST['id_alcance_proyecto']));
+            $departamento = ucwords(strclean($_POST['departamento_ep']));
+            $nivel = intval(strclean($_POST['id_nivel_pasantias']));
+            $fecha_inicio = strclean($_POST['fecha_ini']);
+            $fecha_fin = strclean($_POST['fecha_fin']);
+            $total_ppp = intval(strclean($_POST['total_ppp']));
+            $total_horas = intval(strclean($_POST['total_horas']));
+
+            if ($id_practicas == 0){
+                if (empty($_SESSION['permisos_modulo']['w'])){
+                    header('location:'.server_url.'Errors');
+                    $data= array("status" => false, "msg" => "Error no tiene permisos");
+                    $response_practicas = 0;
+                }else{
+                    $response_practicas = $this->model->insertPracticaspreprofesionales($id_alumno, $id_profesor,$tipo_practica, $alcance_proyecto, $id_empresa,
+                        $departamento, $nivel, $fecha_inicio, $fecha_fin, $total_ppp, $total_horas);
+                    $option = 1;
+                }
+            }
+
+            if ($response_practicas > 0){ 
+                if ($option == 1){
+                    $data = array('status' => true, 'msg' => 'Datos guardados correctamente');
+                }
+            }else{
+                $data = array('status' => false,'msg' => 'Hubo un error no se pudieron guardar los datos');
+            }
+        }else{
+            header('location:'.server_url.'Errors');
+        }
+        sleep(3);
+        echo json_encode($data,JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+
     public function getSelectAlumnos()
     {
         if (empty($_SESSION['permisos_modulo']['r'])) {
