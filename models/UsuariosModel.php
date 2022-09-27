@@ -125,6 +125,7 @@
                 $sql = "UPDATE Usuarios SET email_activo= ?,estado = ?, fecha_modifica = now() WHERE id_usuario = $this->int_id_usuario";
                 $data = array(0,0);
                 $request_delete = $this->update_sql($sql,$data);
+                $request_delete = 'ok';
             }
             
             return $request_delete;

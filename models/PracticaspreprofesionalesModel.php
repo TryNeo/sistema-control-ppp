@@ -67,8 +67,9 @@ class PracticaspreprofesionalesModel extends Mysql
     {
         $this->str_search_empresa = $str_search_empresa;
         $sql = "SELECT ep.id_empresa,ep.nombre_empresa,ep.nombre_representante,ep.telefono_representante FROM Empresas as ep
-                    WHERE ep.estado = 1  and ep.nombre_empresa like '%" . $this->str_search_profesor . "%' 
-                        or ep.nombre_representante like '%" . $this->str_search_profesor . "%' or ep.ruc_empresa like '%" . $this->str_search_profesor . "%' LIMIT 5";
+                    WHERE (ep.estado = 1  and ep.nombre_empresa like '%" . $this->str_search_profesor . "%')
+                        or (ep.estado = 1 and ep.nombre_representante like '%" . $this->str_search_profesor . "%' ) or ( ep.estado = 1 and 
+                            ep.ruc_empresa like '%" . $this->str_search_profesor . "%') LIMIT 5";
         $request = $this->select_sql_all($sql);
         return $request;
     }
@@ -95,7 +96,6 @@ class PracticaspreprofesionalesModel extends Mysql
         int $id_nivel,
         string $fecha_inicio,
         string $fecha_fin,
-        int $total_ppp,
         int $total_horas
     ) {
 
@@ -108,7 +108,6 @@ class PracticaspreprofesionalesModel extends Mysql
         $this->int_id_nivel = $id_nivel;
         $this->str_fecha_inicio = $fecha_inicio;
         $this->str_fecha_fin = $fecha_fin;
-        $this->int_total_ppp = $total_ppp;
         $this->int_total_horas = $total_horas;
 
         $sql_insert = "INSERT INTO Practicas_pre_profesionales(
