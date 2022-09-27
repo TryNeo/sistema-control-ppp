@@ -230,6 +230,7 @@ function searchAlumno(){
         $('#cedula_temp_al').val(data.cedula);
         $('#nombre_apellido_al').val(data.text);
         $('#carrera').val(data.carrera);
+
         $.ajax({
             url: base_url+'practicas-pre-profesionales/getSelectTotalHorasppp/'+data.id,
             type: 'GET',
@@ -240,6 +241,9 @@ function searchAlumno(){
                     $('#total_ppp').addClass('is-invalid');
                     $('#total_ppp').val(0);
                     mensaje('warning',"Advertencia de horas",'El alumno ya ha completado las 400 horas de practicas pre profesionales');
+                    $('#fntPracticas').trigger("reset");
+                    $('#id_alumno').val('');
+                    $('#id_alumno').trigger('change.select2');
                 }else{
                     $('#total_ppp').val(0);
                     let total_horas = parseInt($('#total_ppp').val())+parseInt(data.msg.total_horas)
@@ -283,10 +287,7 @@ function searchProfesor(){
     }).on('select2:select',function(e){
         e.preventDefault();
         let data = e.params.data;
-        $('#cedula_temp_pr').val(data.cedula);
         $('#nombre_apellido_pr').val(data.text);
-        $('#id_alumnos_re').val(data.id);
-        $('#campus').val(data.campus);
     });
 }
 
@@ -345,6 +346,11 @@ function sendingDataServerSidePr(idForm,validatorServerSide,urlMethod){
             }).done(function (data) {
                 if(data.status){
                     mensaje('success','Exitoso',data.msg);
+                    setTimeout(function (
+                    ) {
+                        location.href = base_url+'practicas-pre-profesionales'
+                    }
+                    ,3000);
                 }else{
                     $.LoadingOverlay("hide");
                     mensaje('error','Error',data.msg);

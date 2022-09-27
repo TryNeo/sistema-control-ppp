@@ -258,6 +258,7 @@ async function fetchSelect(urlData,nameSelectorSelect,messageDefault){
 };
 
 
+
 function abrir_modal_restaurar(){
     let options = {
         "backdrop" : "static",
