@@ -6,6 +6,7 @@ $(function(){
         {"data":"fecha_inicio"},
         {"data":"fecha_fin"},
         {"data":"tipo_practica"},
+        {"data":"opciones"},
     ]
 
     const columnDefs = [
@@ -314,7 +315,7 @@ function searchEmpresas(){
             },
             cache: true
         },
-        placeholder:"Buscar empresa por ruc / nombre empresa",
+        placeholder:"Buscar empresa por ruc / nombre empresa / representante legal",
         templateResult: formatRepoEp,
     }).on('select2:select',function(e){
         e.preventDefault();
