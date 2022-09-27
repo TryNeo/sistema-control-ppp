@@ -187,11 +187,16 @@
           </li>
         </li>
       <?php } ?>
-      <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
+      <div class="p-3 hide-sidebar-mini">
             <a href="https://institutotresdemarzo.edu.ec/" class="btn btn-primary btn-lg btn-block btn-icon-split" target="_blank">
-                Ir a la pagina web
+                Ir a la pagina web <i class="fas fa-pager"></i>
             </a>
-          </div>
+      </div>
+      <div class="p-3 hide-sidebar-mini">
+            <a href="#" class="btn btn-success btn-lg btn-block btn-icon-split" target="_blank">
+                Ir al drive  <i class="fab fa-google-drive"></i>
+            </a>
+      </div>
     </ul>
   </aside>
 </div>
