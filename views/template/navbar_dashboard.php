@@ -193,7 +193,7 @@
             </a>
       </div>
       <div class="p-3 hide-sidebar-mini">
-            <a href="#" class="btn btn-success btn-lg btn-block btn-icon-split" target="_blank">
+            <a href="https://drive.google.com/drive/my-drive" class="btn btn-success btn-lg btn-block btn-icon-split" target="_blank">
                 Ir al drive  <i class="fab fa-google-drive"></i>
             </a>
       </div>

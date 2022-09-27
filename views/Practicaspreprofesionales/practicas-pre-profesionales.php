@@ -25,6 +25,7 @@
                                             <th scope="col">FECHA INICIAL</th>
                                             <th scope="col">FECHA FINAL</th>
                                             <th scope="col">TIPO</th>
+                                            <th scope="col">OPCIONES</th>
                                         </tr>
                                     </thead>
                                     <tbody>
