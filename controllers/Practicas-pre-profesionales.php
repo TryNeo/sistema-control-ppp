@@ -47,6 +47,23 @@ class Practicaspreprofesionales extends Controllers
             $data = array("status" => false, "msg" => "Error no tiene permisos");
         } else {
             $data = $this->model->selectPracticasPreProfesionales();
+            for ($i=0; $i < count($data); $i++) { 
+                $btnEliminarPractica = '';
+                $btnEditarPractica = '';
+
+                if ($_SESSION['permisos_modulo']['u']) {
+                    $btnEditarPractica = '<button class="btn btn-primary btnEditarPractica btn-circle " title="editar">
+                    <i class="fa fa-edit"></i></button>';
+                }
+
+
+                if ($_SESSION['permisos_modulo']['d']) {
+                    $btnEliminarPractica = '<button  class="btn btn-danger btn-circle btnEliminarPractica" 
+                        title="eliminar" ><i class="far fa-thumbs-down"></i></button>';
+                }
+
+                $data[$i]['opciones'] = $btnEditarPractica.' '.$btnEliminarPractica;
+            }
         }
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
