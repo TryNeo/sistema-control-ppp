@@ -115,17 +115,49 @@
             return $request;
         }
 
-        public function deleteUsuario(int $int_id_usuario){
+        public function deleteUsuario(int $int_id_usuario,int $int_id_rol){
             $this->int_id_usuario = $int_id_usuario;
+            $this->int_id_rol = $int_id_rol;
+            
+
             $sql_ultimo_online = "SELECT ultimo_online FROM Usuarios WHERE id_usuario = $this->int_id_usuario";
             $response_ultimo_online = $this->select_sql($sql_ultimo_online);
             if($response_ultimo_online['ultimo_online'] == 1){
                 $request_delete = 'error_online';
             }else{
-                $sql = "UPDATE Usuarios SET email_activo= ?,estado = ?, fecha_modifica = now() WHERE id_usuario = $this->int_id_usuario";
-                $data = array(0,0);
-                $request_delete = $this->update_sql($sql,$data);
-                $request_delete = 'ok';
+                
+                if ($this->int_id_rol == 2){
+                    $sql_validate_exist_al = "SELECT * FROM Usuarios as us 
+                            INNER JOIN Alumnos as al ON us.id_usuario = al.id_usuario 
+                            WHERE us.id_usuario = $this->int_id_usuario and al.estado = 1";
+                    $request_delete = $this->select_sql_all($sql_validate_exist_al);
+                    if(empty($request_delete)){
+                        $sql = "UPDATE Usuarios SET email_activo= ?,estado = ?, fecha_modifica = now() WHERE id_usuario = $this->int_id_usuario";
+                        $data = array(0,0);
+                        $request_delete = $this->update_sql($sql,$data);
+                        $request_delete = 'ok';
+                    }else{
+                        $request_delete = 'error_alumno';
+                    }
+                }else if ($this->int_id_rol == 3) {
+                    $sql_validate_exist_pr = "SELECT * FROM Usuarios as us 
+                            INNER JOIN Profesores as pr ON us.id_usuario = pr.id_usuario 
+                            WHERE us.id_usuario = $this->int_id_usuario and pr.estado = 1";
+                    $request_delete = $this->select_sql_all($sql_validate_exist_pr);
+                    if(empty($request_delete)){
+                        $sql = "UPDATE Usuarios SET email_activo= ?,estado = ?, fecha_modifica = now() WHERE id_usuario = $this->int_id_usuario";
+                        $data = array(0,0);
+                        $request_delete = $this->update_sql($sql,$data);
+                        $request_delete = 'ok';
+                    }else{
+                        $request_delete = 'error_profesor';
+                    }
+                }else{
+                    $sql = "UPDATE Usuarios SET email_activo= ?,estado = ?, fecha_modifica = now() WHERE id_usuario = $this->int_id_usuario";
+                    $data = array(0,0);
+                    $request_delete = $this->update_sql($sql,$data);
+                    $request_delete = 'ok';
+                }
             }
             
             return $request_delete;

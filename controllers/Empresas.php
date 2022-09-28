@@ -179,7 +179,10 @@
                 $response_del = $this->model->deleteEmpresa($id_empresa);
                 if($response_del == "ok"){
                     $data = array("status" => true, "msg" => "Se ha eliminado la empresa");
-                }else{
+                }else if ($response_del == "exist"){
+                    $data = array("status" => false, "msg" => "No se puede eliminar la empresa , porque tiene registros asociados en el modulo de practicas pre profesionales");
+                }
+                else{
                     $data = array("status" => false, "msg" => "Error al eliminar la empresa");
                 }
             }

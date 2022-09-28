@@ -233,16 +233,20 @@
                 $id_alumno = intval(strclean($_POST["id"]));
 
                 if(!validateEmptyFields([$id_alumno])){
-                    $data = array('status' => false,'msg' => 'El campo se encuentra vacio , verifique y vuelva a ingresarlo');
+                    $data = array('status' => false,'msg' => 'El campo se encuentra vacío, verifique y vuelva a ingresarlo');
                 }
 
                 if(!empty(preg_matchall([$id_alumno],regex_numbers))){
-                    $data = array('status' => false,'msg' => 'El campo estan mal escrito , verifique y vuelva a ingresarlo');
+                    $data = array('status' => false,'msg' => 'El campo esta mal escrito, verifique y vuelva a ingresarlo');
                 }
 
                 $response_del = $this->model->deleteAlumno($id_alumno);
                 if($response_del == "ok"){
                     $data = array("status" => true, "msg" => "Se ha eliminado el alumno");
+                }else if ($response_del == "error_online"){
+                    $data = array("status" => false, "msg" => "El alumno no se puede eliminar porque esta conectado");
+                }else if ($response_del == "exist"){
+                    $data = array("status" => false, "msg" => "porque tiene registros asociados en el modulo de practicas pre profesionales");
                 }else{
                     $data = array("status" => false, "msg" => "Error al eliminar alumno");
                 }

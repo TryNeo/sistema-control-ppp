@@ -170,7 +170,7 @@
                             if($response_del == "ok"){
                                 $data = array("status" => true, "msg" => "Se ha eliminado el rol");
                             }else if ($response_del == "exist"){
-                                $data = array("status" => false, "msg" => "No es posisible eliminar rol asociado a usuarios");
+                                $data = array("status" => false, "msg" => "No es posible eliminar rol, porque asociado a usuarios");
                             }else{
                                 $data = array("status" => false, "msg" => "Error al eliminar rol");
                             }

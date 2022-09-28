@@ -65,7 +65,7 @@ class Usuarios extends Controllers
                         ($_SESSION['user_data']['id_rol'] == 1 and $data[$i]['id_rol'] != 1) and 
                         ($_SESSION['user_data']['id_usuario'] != $data[$i]['id_usuario'])){
                             $btnEliminarUsuario = '<button  class="btn btn-danger btn-circle btnEliminarUsuario" 
-                            title="eliminar" onClick="return deleteServerSide('."'delUsuario/'".','.$data[$i]['id_usuario'].','."'¿Desea eliminar el usuario ".$data[$i]['usuario']."?'".','."'.tableUsuarios'".');"><i class="far fa-thumbs-down"></i></button>';
+                            title="eliminar" onClick="return deleteServerSide('."'delUsuario/'".','.$data[$i]['id_usuario'].','."'¿Desea eliminar el usuario ".$data[$i]['usuario']."?'".','."'.tableUsuarios'".','.$data[$i]['id_rol'].');"><i class="far fa-thumbs-down"></i></button>';
                         }else{
                             $btnEliminarUsuario = '<button  class="btn btn-danger btn-circle "  title="eliminar" disabled><i class="far fa-thumbs-down"></i></button>';
                         }
@@ -153,22 +153,27 @@ class Usuarios extends Controllers
             }
 
             $id_usuario = intval(strclean($_POST["id"]));
-            
-            if (!validateEmptyFields([$id_usuario])) {
+            $id_rol = intval(strclean($_POST["id_extra"]));
+
+            if (!validateEmptyFields([$id_usuario, $id_rol])) {
                 $data = array("status" => false, "msg" => "Oops!, no existe tal usuario o estas mandado datos erroneos");
             }
 
-            if (!empty(preg_matchall([$id_usuario], regex_numbers))) {
+            if (!empty(preg_matchall([$id_usuario, $id_rol], regex_numbers))) {
                 $data = array('status' => false, 'msg' => 'Oops!, El campo no es valido, verifiquelo y vuelva a intentarlo');
             }
 
-            $response_del = $this->model->deleteUsuario($id_usuario);
+            $response_del = $this->model->deleteUsuario($id_usuario,$id_rol);
             if ($response_del != "ok") {
                 $data = array("status" => false, "msg" => "Error al eliminar el usuario");
             }
 
             if ($response_del == "error_online"){
                 $data = array("status" => false, "msg" => "El usuario no se puede eliminar porque esta conectado");
+            }else if ($response_del == "error_alumno") {
+                $data = array("status" => false, "msg" => "No puede eliminar el usuario , porque esta asociado al alumno");
+            }else if($response_del == "error_profesor"){
+                $data = array("status" => false, "msg" => "No puede eliminar el usuario , porque esta asociado al docente");
             }else{
                 $data = array("status" => true, "msg" => "Se ha eliminado el usuario correctamente");
 

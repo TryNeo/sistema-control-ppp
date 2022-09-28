@@ -75,7 +75,7 @@
 
         public function deleteRol(int $intRol){
             $this->intRol = $intRol;
-            $sql = "SELECT * FROM Usuarios WHERE id_rol = $this->intRol";
+            $sql = "SELECT * FROM Usuarios WHERE id_rol = $this->intRol and estado = 1";
             $request_delete = $this->select_sql_all($sql);
             if(empty($request_delete)){
                 $sql = "UPDATE Roles set estado = ? , fecha_modifica = now() WHERE id_rol = $this->intRol";

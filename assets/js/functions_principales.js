@@ -192,7 +192,7 @@ function sendingDataServerSide(idForm,validatorServerSide,fieldsToValidate,listC
 }
 
 
-function deleteServerSide(url,id,text,nameSelectortable){
+function deleteServerSide(url,id,text,nameSelectortable,id_extra=''){
     Swal.fire({
             title: "Eliminar Registro",
             text: text,
@@ -214,6 +214,9 @@ function deleteServerSide(url,id,text,nameSelectortable){
                     });
                     $.LoadingOverlay("show");
                     let data = new FormData();data.append("id",id);
+                    if (id_extra != ''){
+                        data.append("id_extra",id_extra);
+                    }
                     let options = { method: "POST", body :data}
                     let response = await fetch(url,options);
                     if (response.ok) {

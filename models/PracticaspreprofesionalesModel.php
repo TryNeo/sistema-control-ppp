@@ -26,7 +26,7 @@ class PracticaspreprofesionalesModel extends Mysql
 
     public function selectPracticasPreProfesionales()
     {
-        $sql = "SELECT ppp.id_practica,CONCAT(al.cedula,'<br>',al.nombre,' ',al.apellido) as ced_nom_ape_al,
+        $sql = "SELECT ppp.id_practica,CONCAT(al.cedula,'<br>',al.nombre,' ',al.apellido) as ced_nom_ape_al,al.nombre,al.apellido,
                     CONCAT(em.ruc_empresa,'-',em.nombre_empresa,'<br>','(',pr.nombre,' ',pr.apellido,')') as ruc_nom_ape_pr_em,
                     ppp.fecha_inicio,ppp.fecha_fin,ppp.tipo_practica
         FROM Practicas_pre_profesionales as ppp
@@ -44,8 +44,9 @@ class PracticaspreprofesionalesModel extends Mysql
         $sql = "SELECT al.id_alumno,al.cedula,al.nombre,al.apellido,cr.nombre_carrera FROM Alumnos as al 
                     INNER JOIN Usuarios as us ON al.id_usuario = us.id_usuario
                     INNER JOIN Carreras as cr ON al.id_carrera = cr.id_carrera
-                    WHERE al.estado = 1 and us.email_activo = 1 and cr.estado = 1 and us.id_rol = 2 and al.cedula like '%" . $this->str_search_alumno . "%' 
-                        or al.apellido like '%" . $this->str_search_alumno . "%' or al.nombre like '%" . $this->str_search_alumno . "%' LIMIT 5";
+                    WHERE (al.estado = 1 and us.email_activo = 1 and cr.estado = 1 and us.id_rol = 2 and al.cedula like '%" . $this->str_search_alumno . "%' )
+                        or ( al.estado = 1 and us.email_activo = 1 and cr.estado = 1 and us.id_rol = 2 and al.apellido like '%" . $this->str_search_alumno . "%')
+                        or (al.estado = 1 and us.email_activo = 1 and cr.estado = 1 and us.id_rol = 2 and al.nombre like '%" . $this->str_search_alumno . "%' ) LIMIT 5";
         $request = $this->select_sql_all($sql);
         return $request;
     }
@@ -120,5 +121,20 @@ class PracticaspreprofesionalesModel extends Mysql
 
         $request = $this->insert_sql($sql_insert, $arrData);
         return $request;
+    }
+
+    public function deletePracticapreprofesional(int $int_id_practicas)
+    {
+        $this->int_id_practicas = $int_id_practicas;
+        $sql = "UPDATE Practicas_pre_profesionales SET estado = ?, fecha_modifica = now() WHERE id_practica = $this->int_id_practicas";
+        $data = array(0);
+        $request_delete = $this->update_sql($sql, $data);
+        if ($request_delete) {
+            $request_delete = 'ok';
+        } else {
+            $request_delete = 'error';
+
+        }
+        return $request_delete;
     }
 }

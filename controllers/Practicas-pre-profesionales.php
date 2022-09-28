@@ -59,7 +59,7 @@ class Practicaspreprofesionales extends Controllers
 
                 if ($_SESSION['permisos_modulo']['d']) {
                     $btnEliminarPractica = '<button  class="btn btn-danger btn-circle btnEliminarPractica" 
-                        title="eliminar" ><i class="far fa-thumbs-down"></i></button>';
+                        title="eliminar" onClick="return deleteServerSide('."'delPracticaspreprofesionales/'".','.$data[$i]['id_practica'].','."'¿Desea eliminar la practica pre profesional del alumno ".$data[$i]['nombre']." ".$data[$i]['apellido']."?'".','."'.tablePracticas'".');"><i class="far fa-thumbs-down"></i></button>';
                 }
 
                 $data[$i]['opciones'] = $btnEditarPractica.' '.$btnEliminarPractica;
@@ -237,4 +237,39 @@ class Practicaspreprofesionales extends Controllers
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
     }
+
+
+    public function delPracticaspreprofesionales(){
+        if (empty($_SESSION['permisos_modulo']['d']) ) {
+            header('location:'.server_url.'Errors');
+            $data = array("status" => false, "msg" => "Error no tiene permisos");
+        }else{
+
+            if (!$_POST){
+                $data = array("status" => false, "msg" => "Error Hubo problemas");
+            }
+
+            $id_practica = intval(strclean($_POST["id"]));
+
+            if(!validateEmptyFields([$id_practica])){
+                $data = array('status' => false,'msg' => 'El campo se encuentra vacio , verifique y vuelva a ingresarlo');
+            }
+
+            if(!empty(preg_matchall([$id_practica],regex_numbers))){
+                $data = array('status' => false,'msg' => 'El campo estan mal escrito , verifique y vuelva a ingresarlo');
+            }
+
+            $response_del = $this->model->deletePracticapreprofesional($id_practica);
+            
+            if($response_del == "ok"){
+                $data = array("status" => true, "msg" => "Se ha eliminado la practica pre profesional correctamente");
+            }else{
+                $data = array("status" => false, "msg" => "Error al eliminar  la practica pre profesional ");
+            }
+        }
+        sleep(3);
+        echo json_encode($data,JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
 }

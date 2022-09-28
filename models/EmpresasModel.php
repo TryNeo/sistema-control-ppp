@@ -145,16 +145,22 @@ class EmpresasModel extends Mysql
     public function deleteEmpresa(int $int_id_empresa)
     {
         $this->int_id_empresa = $int_id_empresa;
-
-        $sql = "UPDATE Empresas SET estado = ?, fecha_modifica = now() WHERE id_empresa = $this->int_id_empresa";
-        $data = array(0);
-        $request_delete = $this->update_sql($sql, $data);
-        if ($request_delete) {
-            $request_delete = 'ok';
-        } else {
-            $request_delete = 'error';
-
+        
+        $sql_validate_exist = "SELECT * FROM Practicas_pre_profesionales WHERE id_empresa = $int_id_empresa and estado = 1";
+        $request_delete = $this->select_sql_all($sql_validate_exist);
+        if($request_delete){
+            $sql = "UPDATE Empresas SET estado = ?, fecha_modifica = now() WHERE id_empresa = $this->int_id_empresa";
+            $data = array(0);
+            $request_delete = $this->update_sql($sql, $data);
+            if ($request_delete) {
+                $request_delete = 'ok';
+            } else {
+                $request_delete = 'error';
+            }
+        }else{
+            $request_delete = 'exist';
         }
+
         return $request_delete;
     }
 }

@@ -134,6 +134,9 @@ function configToValidate(){
     return validatorServerSide
 }
 
+setInterval(function(){ $(".tablePracticas").DataTable().ajax.reload(); },10000);
+
+
 function formatRepo (repo) {
     if (repo.loading) {
         return repo.text;

@@ -142,18 +142,30 @@ class AlumnosModel extends Mysql
     public function deleteAlumno(int $int_id_alumno)
     {
         $this->int_id_alumno = $int_id_alumno;
-
-        $sql = "UPDATE Alumnos SET estado = ?, fecha_modifica = now() WHERE id_alumno = $this->int_id_alumno";
-        $data = array(0);
-        $request_delete = $this->update_sql($sql, $data);
-
-        if ($request_delete) {
-            $request_delete = 'ok';
-            $sql_alu_email = "UPDATE  Usuarios SET email_activo = ?, fecha_modifica = now() WHERE id_usuario = (SELECT id_usuario FROM alumnos WHERE id_alumno = $this->int_id_alumno)";
-            $data = array(0);
-            $request_update = $this->update_sql($sql_alu_email, $data);
-        } else {
-            $request_delete = 'error';
+        $sql_validate_online = "SELECT ultimo_online FROM Usuarios WHERE id_usuario = (SELECT id_usuario FROM alumnos WHERE id_alumno = $this->int_id_alumno)";
+        $response_ultimo_online = $this->select_sql($sql_validate_online);
+        if($response_ultimo_online['ultimo_online'] == 1){
+            $request_delete = 'error_online';
+        }else{
+            $sql_validate_exist = "SELECT * FROM Practicas_pre_profesionales WHERE id_alumno = $this->int_id_alumno and estado = 1";
+            $request_delete = $this->select_sql_all($sql_validate_exist);
+    
+            if(empty($request_delete)){
+                $sql = "UPDATE Alumnos SET estado = ?, fecha_modifica = now() WHERE id_alumno = $this->int_id_alumno";
+                $data = array(0);
+                $request_delete = $this->update_sql($sql, $data);
+        
+                if ($request_delete) {
+                    $request_delete = 'ok';
+                    $sql_alu_email = "UPDATE  Usuarios SET email_activo = ?, fecha_modifica = now() WHERE id_usuario = (SELECT id_usuario FROM alumnos WHERE id_alumno = $this->int_id_alumno)";
+                    $data = array(0);
+                    $request_update = $this->update_sql($sql_alu_email, $data);
+                } else {
+                    $request_delete = 'error';
+                }
+            }else{
+                $request_delete = 'exist';
+            }
         }
         return $request_delete;
     }
