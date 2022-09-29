@@ -159,6 +159,22 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
+                                    <label><b>Horas empresariales acumuladas:</b></label>
+                                    <div class="input-group">
+                                        <input type="number" name="total_emp" class="form-control" id="total_emp"  value="0" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label><b>Horas de servicio a la comunidad acumuladas:</b></label>
+                                    <div class="input-group">
+                                        <input type="number" name="total_serv" class="form-control" id="total_serv"  value="0" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
                                     <label><b>Total horas ppp acumuladas:</b></label>
                                     <div class="input-group">
                                         <input type="number" name="total_ppp" class="form-control" id="total_ppp" value="0" readonly>
