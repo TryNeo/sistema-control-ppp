@@ -127,7 +127,7 @@
                     }else{
                         $response_empresa = $this->model->updateEmpresa($id_empresa,$ruc_empresa,$nombre_empresa,
                                     $direccion_empresa,$correo_empresa,$telefono_empresa,$cedula_representante,
-                                    $nombre_empresa,$telefono_representante,$descripcion_empresa);
+                                    $nombre_representante,$telefono_representante,$descripcion_empresa);
                         $option = 2;
                     }
                 }
