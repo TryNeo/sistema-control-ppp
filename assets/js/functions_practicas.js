@@ -231,13 +231,22 @@ function searchAlumno(){
         $('#nombre_apellido_al').val(data.text);
         $('#carrera').val(data.carrera);
 
-        $.ajax({
-            url: base_url+'practicas-pre-profesionales/getSelectTotalHorasppp/'+data.id,
-            type: 'GET',
-            dataType: 'json'
-        }).done(function (data) {
-            if(data.status){
-                if (data.msg.total_horas >= 400){
+        $.get("getSelectEmpresarialServiciosAlacomunidad/"+data.id, function(data){
+            let data_gen = JSON.parse(data);
+            if(data_gen.status){
+                $('#total_emp').val(data_gen.total_horas_emp.total_horas);
+                $('#total_serv').val(data_gen.total_horas_ser.total_horas);
+            }else{
+                mensaje("error","Error",'Hubo problemas con el servidor,intentelo nuevamente ,si el problema persiste comuniquese con el administrador del sistema')
+            }
+        });
+
+
+
+        $.get("getSelectTotalHorasppp/"+data.id, function(data){
+            let data_horas_ppp = JSON.parse(data);
+            if(data_horas_ppp.status){
+                if (data_horas_ppp.msg.total_horas >= 400){
                     $('#total_ppp').addClass('is-invalid');
                     $('#total_ppp').val(0);
                     mensaje('warning',"Advertencia de horas",'El alumno ya ha completado las 400 horas de practicas pre profesionales');
@@ -246,16 +255,15 @@ function searchAlumno(){
                     $('#id_alumno').trigger('change.select2');
                 }else{
                     $('#total_ppp').val(0);
-                    let total_horas = parseInt($('#total_ppp').val())+parseInt(data.msg.total_horas)
+                    let total_horas = parseInt($('#total_ppp').val())+parseInt(data_horas_ppp.msg.total_horas)
                     $('#total_ppp').val(total_horas);
                     $('#total_ppp').removeClass('is-invalid');
                 }
             }else{
-                mensaje("error","Error",'Esta cedula no tiene horas registradas y no puede ser seleccionado');
+                mensaje("error","Error",'Hubo problemas con el servidor,intentelo nuevamente ,si el problema persiste comuniquese con el administrador del sistema')
             }
-        }).fail(function (error) {
-            mensaje("error","Error",'Hubo problemas con el servidor,intentelo nuevamente ,si el problema persiste comuniquese con el administrador del sistema');
-        })
+        });
+
     });
 }
 
