@@ -48,6 +48,17 @@ en cada empresa
 
 [![ppp](https://i.ibb.co/31VFGSR/Screenshot-8.jpg)](https://i.ibb.co/31VFGSR/Screenshot-8.jpg)
 
+<hr>
+
+[![ppp](https://i.ibb.co/F3mcBwn/Screenshot-11.jpg)](https://i.ibb.co/F3mcBwn/Screenshot-11.jpg)
+
+<hr>
+
+[![ppp](https://i.ibb.co/L1vx09w/Screenshot-12.jpg)](https://i.ibb.co/L1vx09w/Screenshot-12.jpg)
+
+<hr>
+
+
 
 ### Construido con 
 
