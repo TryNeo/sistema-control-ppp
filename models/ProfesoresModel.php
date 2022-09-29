@@ -149,18 +149,30 @@ class ProfesoresModel extends Mysql
     public function deleteProfesor(int $int_id_profesor)
     {
         $this->int_id_profesor = $int_id_profesor;
-
-        $sql = "UPDATE Profesores SET estado = ?, fecha_modifica = now() WHERE id_profesor = $this->int_id_profesor";
-        $data = array(0);
-        $request_delete = $this->update_sql($sql, $data);
-
-        if ($request_delete) {
-            $request_delete = 'ok';
-            $sql_alu_email = "UPDATE  Usuarios SET email_activo = ?, fecha_modifica = now() WHERE id_usuario = (SELECT id_usuario FROM profesores WHERE id_profesor = $this->int_id_profesor)";
-            $data = array(0);
-            $request_update = $this->update_sql($sql_alu_email, $data);
-        } else {
-            $request_delete = 'error';
+        $sql_validate_online = "SELECT ultimo_online FROM Usuarios WHERE id_usuario = (SELECT id_usuario FROM profesores WHERE id_profesor = $this->int_id_profesor)";
+        $response_ultimo_online = $this->select_sql($sql_validate_online);
+        if($response_ultimo_online['ultimo_online'] == 1){
+            $request_delete = 'error_online';
+        }else{
+            $sql_validate_exist="SELECT * FROM Practicas_pre_profesionales WHERE id_profesor =  $this->int_id_profesor and estado = 1";
+            $request_validate_exist = $this->select_sql_all($sql_validate_exist);
+    
+            if(empty($request_validate_exist)){
+                $sql = "UPDATE Profesores SET estado = ?, fecha_modifica = now() WHERE id_profesor = $this->int_id_profesor";
+                $data = array(0);
+                $request_delete = $this->update_sql($sql, $data);
+        
+                if ($request_delete) {
+                    $request_delete = 'ok';
+                    $sql_alu_email = "UPDATE  Usuarios SET email_activo = ?, fecha_modifica = now() WHERE id_usuario = (SELECT id_usuario FROM profesores WHERE id_profesor = $this->int_id_profesor)";
+                    $data = array(0);
+                    $request_update = $this->update_sql($sql_alu_email, $data);
+                } else {
+                    $request_delete = 'error';
+                }
+            }else{
+                $request_delete = 'exist';
+            }
         }
         return $request_delete;
     }

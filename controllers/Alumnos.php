@@ -246,7 +246,7 @@
                 }else if ($response_del == "error_online"){
                     $data = array("status" => false, "msg" => "El alumno no se puede eliminar porque esta conectado");
                 }else if ($response_del == "exist"){
-                    $data = array("status" => false, "msg" => "porque tiene registros asociados en el modulo de practicas pre profesionales");
+                    $data = array("status" => false, "msg" => "No se pudo eliminar el alumno,porque tiene registros asociados en el modulo de practicas pre profesionales");
                 }else{
                     $data = array("status" => false, "msg" => "Error al eliminar alumno");
                 }

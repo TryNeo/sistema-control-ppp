@@ -245,9 +245,13 @@
 
                 $response_del = $this->model->deleteProfesor($id_profesor);
                 if($response_del == "ok"){
-                    $data = array("status" => true, "msg" => "Se ha eliminado el profesor");
+                    $data = array("status" => true, "msg" => "Se ha eliminado el docente");
+                }else if ($response_del == "error_online"){
+                    $data = array("status" => false, "msg" => "El docente no se puede eliminar porque esta conectado");
+                }else if ($response_del == "exist"){
+                    $data = array("status" => false, "msg" => "No se pudo eliminar el docente ,porque tiene registros asociados en el modulo de practicas pre profesionales");
                 }else{
-                    $data = array("status" => false, "msg" => "Error al eliminar profesor");
+                    $data = array("status" => false, "msg" => "Error al eliminar docente");
                 }
             }
             sleep(3);

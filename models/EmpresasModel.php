@@ -148,7 +148,7 @@ class EmpresasModel extends Mysql
         
         $sql_validate_exist = "SELECT * FROM Practicas_pre_profesionales WHERE id_empresa = $int_id_empresa and estado = 1";
         $request_delete = $this->select_sql_all($sql_validate_exist);
-        if($request_delete){
+        if(empty($request_delete)){
             $sql = "UPDATE Empresas SET estado = ?, fecha_modifica = now() WHERE id_empresa = $this->int_id_empresa";
             $data = array(0);
             $request_delete = $this->update_sql($sql, $data);

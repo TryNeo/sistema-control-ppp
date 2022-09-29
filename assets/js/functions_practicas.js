@@ -116,10 +116,6 @@ function configToValidate(){
                 return 'Este campo es obligatorio';
             }
 
-            if (value == 0){            
-                return 'Este campo no puede quedar en cero';
-            }
-
             if (value < 0 ){
                 return 'Este campo no puede ser negativo';
             }

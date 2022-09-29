@@ -1,4 +1,7 @@
 <?php
+
+use JetBrains\PhpStorm\ArrayShape;
+
 require_once("./libraries/core/controllers.php");
 
 class Practicaspreprofesionales extends Controllers
@@ -83,6 +86,20 @@ class Practicaspreprofesionales extends Controllers
             $fecha_fin = strclean($_POST['fecha_fin']);
             $total_ppp = intval(strclean($_POST['total_ppp']));
             $total_horas = intval(strclean($_POST['total_horas']));
+            
+
+            $validate_data=array($id_practicas,$id_alumno,$id_profesor,$id_empresa,
+                                $tipo_practica,$alcance_proyecto,$departamento,$nivel,$fecha_inicio,$fecha_fin,$total_ppp,$total_horas);
+
+            if(!validateEmptyFields($validate_data)){
+                $data = array('status' => false,'msg' => "Verifique que algunos de los campos no se encuentre vacio");
+            }
+
+            if(!empty(preg_matchall(array($id_practicas,$id_alumno,$id_profesor,$id_empresa,
+                                $tipo_practica,$alcance_proyecto,$nivel,$total_ppp,$total_horas),regex_numbers))){
+                $data = array('status' => false,'msg'=> "Verifique que los campos numericos no contengan letras");
+            }
+
             $suma_total_horas = $total_ppp+$total_horas;
             if ($suma_total_horas > 400) {
                 $data = array("status" => false, "msg" => "La suma de las horas sobre pasa las 400 horas, verifique las horas ingresadas");
