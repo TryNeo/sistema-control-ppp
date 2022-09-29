@@ -84,6 +84,8 @@ class Practicaspreprofesionales extends Controllers
             $nivel = intval(strclean($_POST['id_nivel_pasantias']));
             $fecha_inicio = strclean($_POST['fecha_ini']);
             $fecha_fin = strclean($_POST['fecha_fin']);
+            $total_ppp_emp = intval(strclean($_POST['total_emp']));
+            $total_ppp_serv = intval(strclean($_POST['total_serv']));
             $total_ppp = intval(strclean($_POST['total_ppp']));
             $total_horas = intval(strclean($_POST['total_horas']));
             
@@ -100,9 +102,16 @@ class Practicaspreprofesionales extends Controllers
                 $data = array('status' => false,'msg'=> "Verifique que los campos numericos no contengan letras");
             }
 
+            $total_ppp_emp = $total_ppp_emp+$total_horas;
+            $total_ppp_serv = $total_ppp_serv+$total_horas;
             $suma_total_horas = $total_ppp+$total_horas;
+
             if ($suma_total_horas > 400) {
                 $data = array("status" => false, "msg" => "La suma de las horas sobre pasa las 400 horas, verifique las horas ingresadas");
+            }else if($total_ppp_emp > 240 and $tipo_practica == 1){
+                $data = array('status' => false,'msg'=> "El total de horas empresariales sobre pasa las 240 horas");
+            }else if($total_ppp_serv > 160 and $tipo_practica == 2){
+                $data = array('status' => false,'msg'=> "El total de horas de servicio a la comunida sobre pasa las 160 horas");
             }else{
                 if ($id_practicas == 0){
                     if (empty($_SESSION['permisos_modulo']['w'])){
@@ -111,11 +120,10 @@ class Practicaspreprofesionales extends Controllers
                         $response_practicas = 0;
                     }else{
                         $response_practicas = $this->model->insertPracticaspreprofesionales($id_alumno, $id_profesor,$tipo_practica, $alcance_proyecto, $id_empresa,
-                            $departamento, $nivel, $fecha_inicio, $fecha_fin,$suma_total_horas);
+                            $departamento, $nivel, $fecha_inicio, $fecha_fin,$total_horas);
                         $option = 1;
                     }
                 }
-    
                 if ($response_practicas > 0){ 
                     if ($option == 1){
                         $data = array('status' => true, 'msg' => 'Datos guardados correctamente');
@@ -164,6 +172,31 @@ class Practicaspreprofesionales extends Controllers
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
     }
+
+    public function getSelectEmpresarialServiciosAlacomunidad($int_id_alumno){
+        if (empty($_SESSION['permisos_modulo']['r'])) {
+            header('location:' . server_url . 'Errors');
+            $data_response = array("status" => false, "msg" => "Error no tiene permisos");
+        } else {
+            $intAlumno  = Intval(strclean($int_id_alumno));
+            if ($intAlumno > 0) {
+                $data_emp = $this->model->selectHorasEmpresariales($intAlumno);
+                $data_ser = $this->model->selectHorasServicioComunitario($intAlumno);
+                if (empty($data_emp['total_horas']) and empty($data_ser['total_horas'])) {
+                    $data_emp['total_horas'] = 0;
+                    $data_ser['total_horas'] = 0;
+                    $data_response = array('status' => true, 'total_horas_emp' => $data_emp,'total_horas_ser' => $data_ser);
+                } else {
+                    $data_response = array('status' => true, 'total_horas_emp' => $data_emp,'total_horas_ser' => $data_ser);
+                }
+            } else {
+                $data_response = array('status' => false, 'msg' => 'No existe correctamente el id del alumno');
+            }
+        }
+        echo json_encode($data_response, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
 
 
     public function getSelectTotalHorasppp($int_id_alumno)
