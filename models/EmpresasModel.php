@@ -115,8 +115,8 @@ class EmpresasModel extends Mysql
         $this->str_descripcion_empresa = $descripcion_empresa;
 
         $sql = "SELECT id_empresa,ruc_empresa,cedula_representante FROM Empresas 
-            WHERE (ruc_empresa = '{$this->str_ruc_empresa}' and id_empresa != '{$this->int_id_empresa}' ) 
-                    or (cedula_representante = '{$this->str_cedula_representante}' and id_empresa != '{$this->int_id_empresa}')";
+            WHERE (ruc_empresa = '{$this->str_ruc_empresa}' and id_empresa != {$this->int_id_empresa} ) 
+                    or (cedula_representante = '{$this->str_cedula_representante}' and id_empresa != {$this->int_id_empresa})";
         $request = $this->select_sql_all($sql);
         
         if (empty($request)) {
