@@ -50,7 +50,7 @@ en cada empresa
 
 <hr>
 
-[![ppp](https://i.ibb.co/F3mcBwn/Screenshot-11.jpg)](https://i.ibb.co/F3mcBwn/Screenshot-11.jpg)
+[![ppp](https://i.ibb.co/wSR4yVx/Screenshot-5.jpg)](https://i.ibb.co/wSR4yVx/Screenshot-5.jpg)
 
 <hr>
 
