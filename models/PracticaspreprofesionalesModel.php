@@ -75,6 +75,21 @@ class PracticaspreprofesionalesModel extends Mysql
         return $request;
     }
 
+    public function selectHorasEmpresariales(int $str_search_alumno){
+        $this->str_search_alumno = $str_search_alumno;
+        $sql = "SELECT SUM(ppp.total_horas_ppp) as total_horas FROM Practicas_pre_profesionales as ppp
+                    WHERE ppp.id_alumno = $this->str_search_alumno and ppp.tipo_practica = 1 and ppp.estado = 1";
+        $request = $this->select_sql($sql);
+        return $request;
+    }
+
+    public function selectHorasServicioComunitario(int $str_search_alumno){
+        $this->str_search_alumno = $str_search_alumno;
+        $sql = "SELECT SUM(ppp.total_horas_ppp) as total_horas FROM Practicas_pre_profesionales as ppp
+                    WHERE ppp.id_alumno = $this->str_search_alumno and ppp.tipo_practica = 2 and ppp.estado = 1";
+        $request = $this->select_sql($sql);
+        return $request;
+    }
 
 
     public function selectAlumnoTotalHorasppp(int $str_search_alumno)
