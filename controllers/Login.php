@@ -104,7 +104,7 @@ class Login extends Controllers
                                     }
                                 }
                             } else {
-                                $data = array('status' => false, 'msg' => 'El  reCAPTCHA ha sido invalido, recargue la pagiina e  intentelo nuevamente');
+                                $data = array('status' => false, 'msg' => 'El  reCAPTCHA ha sido invalido, recargue la pagina e  intentelo nuevamente');
                             }
                         } else {
                             $data = array('status' => false, 'msg' => 'Oops hubo un error, intentelo de nuevo');
