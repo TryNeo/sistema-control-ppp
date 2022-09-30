@@ -32,12 +32,39 @@ class Practicaspreprofesionales extends Controllers
 
     public function agregar()
     {
+        if (empty($_SESSION['permisos_modulo']['w'])) {
+            header('location:' . server_url . 'Errors');
+        }
         $data = [];
         $data["page_id"] = 9;
         $data["tag_pag"] = "";
         $data["page_title"] = "Agregar practicas";
         $data["page_name"] = "practicas";
         $data["page"] = "practicas";
+        $data["create"] = 0;
+        $this->views->getView($this, "agregar-practicas", $data);
+        die();
+    }
+
+
+    public function editar($id_practica)
+    {
+        if (empty($_SESSION['permisos_modulo']['u'])) {
+            header('location:' . server_url . 'Errors');
+        }
+
+        if(empty($id_practica)){
+            header('location:' . server_url . 'practicas-pre-profesionales');
+        }
+
+        $data = [];
+        $data["page_id"] = 9;
+        $data["tag_pag"] = "";
+        $data["page_title"] = "Editar practicas";
+        $data["page_name"] = "practicas";
+        $data["page"] = "practicas";
+        $data["create"] = 1;
+        $data["id_practica"] = $id_practica;
         $this->views->getView($this, "agregar-practicas", $data);
         die();
     }
@@ -55,8 +82,8 @@ class Practicaspreprofesionales extends Controllers
                 $btnEditarPractica = '';
 
                 if ($_SESSION['permisos_modulo']['u']) {
-                    $btnEditarPractica = '<button class="btn btn-primary btnEditarPractica btn-circle " title="editar">
-                    <i class="fa fa-edit"></i></button>';
+                    $btnEditarPractica = '<a href="./editar/'.$data[$i]['id_practica'].'" class="btn btn-primary btnEditarPractica btn-circle " title="editar">
+                    <i class="fa fa-edit"></i></a>';
                 }
 
 
