@@ -29,9 +29,10 @@
     <li>
       <a href="#acerca-del-proyecto">Acerca del proyecto</a>
       <ul>
-        <li><a href="#built-with">Construido con</a></li>
+        <li><a href="#construido-con">Construido con</a></li>
       </ul>
     </li>
+    <li><a href="#instrucciones-para-instalar-el-sistema-control-ppp">Insrucciones</a></li>
     <li><a href="#license">Licencia</a></li>
     <li><a href="#contact">Contacto</a></li>
   </ol>
@@ -50,7 +51,7 @@ en cada empresa
 
 <hr>
 
-[![ppp](https://i.ibb.co/F3mcBwn/Screenshot-11.jpg)](https://i.ibb.co/F3mcBwn/Screenshot-11.jpg)
+[![ppp](https://i.ibb.co/wSR4yVx/Screenshot-5.jpg)](https://i.ibb.co/wSR4yVx/Screenshot-5.jpg)
 
 <hr>
 
@@ -74,6 +75,30 @@ En esta sección se mostrará una lista de tecnologías que se usaron para la cr
 * [jQuery LoadingOverlay](https://gasparesganga.com/labs/jquery-loading-overlay/)
 * [Jbvalidator](https://emretulek.github.io/jbvalidator/)
 * [reCAPTCHA](https://www.google.com/recaptcha/about/)
+
+
+## Instrucciones para instalar el sistema control ppp
+* Tener instalado xampp la version de php 7.9.29 [Xampp](https://downloadsapachefriends.global.ssl.fastly.net/7.4.29/xampp-windows-x64-7.4.29-1-VC15-installer.exe?from_af=true)
+* Descargar el proyecto en htdocs
+* Irse a la carpeta ./database y modificar el script controlppp_bd.sql, dirigirse al insert que crea el super usuario, cambiando el correo por defecto por uno que ustedes utilicen, es importante que el correo que se coloque ahí deba permitir que se envíen correos desde aplicaciones no seguras, eso se encuentra en Gmail y se tendrá configurar(la contraseña por defecto que se refleja ahi es : <b>12345</b>).
+[![ppp](https://i.ibb.co/cxW0mp6/Screenshot-6.jpg)](https://i.ibb.co/cxW0mp6/Screenshot-6.jpg) 
+* Luego de haber modificado el Insert , se tendra que ejecutar el script en el administrador de base de datos , de preferencia phpmyadmin
+* Se debera crear un nuevo archivo con el nombre <b>secretinfo.php</b> en la siguiente ruta ./config.
+[![ppp](https://i.ibb.co/LRJDrQd/Screenshot-7.jpg)](https://i.ibb.co/LRJDrQd/Screenshot-7.jpg)
+* En el contenido de este archivo se va encontrar datos sencibles , tales como el correo,contraseña y GOOGLE_KEY para el reCAPTCHA y envio de 
+correo electronico , el cual esto es importante para la correcta ejecucion del programa.
+[![ppp](https://i.ibb.co/0YPJKVK/Screenshot-8.jpg)](https://i.ibb.co/0YPJKVK/Screenshot-8.jpg)
+* Se va a necesitar que se genere KEYS para el reCAPTCHAV3 de google, aqui se encontrara mas informacion sobre eso 
+[reCAPTCHA](https://www.google.com/recaptcha/about/).
+* Una vez generado las GOOGLE_KEY_PUBLIC Y GOOGLE_KEY_SECRET, la cual la GOOGLE_KEY_PUBLIC se va ir a configurar 
+a los siguiente archivos 
+
+[![ppp](https://i.ibb.co/JnZFnW5/Screenshot-9.jpg)](https://i.ibb.co/JnZFnW5/Screenshot-9.jpg)
+
+Y LA GOOGLE_KEY_SECRET se va ir a configurar en el archivo secretinfo.php
+
+* Y Finalmente una vez echo todo estos pasos, el proyecto estaria funcionando de manera correcta.
+
 
 ## Licencia
 
