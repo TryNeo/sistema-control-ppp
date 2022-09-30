@@ -1,3 +1,4 @@
+
 $(function(){
     const columnData = [
         {"data":"id_practica"},
@@ -33,6 +34,10 @@ $(function(){
     searchProfesor();
     searchEmpresas();
     const configValid = configToValidate();
+    
+
+
+
     sendingDataServerSidePr('#fntPracticas',configValid,"practicas-pre-profesionales/setPracticaspreprofesionales");
 
 })
@@ -335,39 +340,40 @@ function searchEmpresas(){
 
 
 function sendingDataServerSidePr(idForm,validatorServerSide,urlMethod){
+
     $(idForm).on('submit',function (e) {
         e.preventDefault();
-        if(validatorServerSide.checkAll('.needs-validation') === 0){
-            let formData = $(this).serializeArray();
-            $.LoadingOverlaySetup({
-                image           : "https://i.ibb.co/DQstGsn/favicon1.png",
-                imageColor      : "#ffcc00",
-                imageAnimation  : "pulse 2.5s",
-                imageAutoResize         : true,
-            });
-            $.LoadingOverlay("show");
-            $.ajax({
-                url: base_url+urlMethod,
-                type: $(idForm).attr("method"),
-                data: formData,
-                dataType: 'json'
-            }).done(function (data) {
-                if(data.status){
-                    mensaje('success','Exitoso',data.msg);
-                    setTimeout(function (
-                    ) {
+        if(window.location.href != base_url+"practicas-pre-profesionales/agregar"){
+            mensaje('warning','Advertencia','La url no es valida, verifique que este escrita correctamente y vuelva a intentarlo');
+        }else{
+            if(validatorServerSide.checkAll('.needs-validation') === 0){
+                let formData = $(this).serializeArray();
+                $.LoadingOverlaySetup({
+                    image           : "https://i.ibb.co/DQstGsn/favicon1.png",
+                    imageColor      : "#ffcc00",
+                    imageAnimation  : "pulse 2.5s",
+                    imageAutoResize         : true,
+                });
+                $.LoadingOverlay("show");
+                $.ajax({
+                    url: base_url+urlMethod,
+                    type: $(idForm).attr("method"),
+                    data: formData,
+                    dataType: 'json'
+                }).done(function (data) {
+                    if(data.status){
+                        mensaje('success','Exitoso',data.msg);
                         location.href = base_url+'practicas-pre-profesionales'
+                    }else{
+                        $.LoadingOverlay("hide");
+                        mensaje('error','Error',data.msg);
                     }
-                    ,3000);
-                }else{
                     $.LoadingOverlay("hide");
-                    mensaje('error','Error',data.msg);
-                }
-                $.LoadingOverlay("hide");
-            }).fail(function (error) {
-                $.LoadingOverlay("hide");
-                mensaje("error","Error",'Hubo problemas con el servidor,intentelo nuevamente ,si el problema persiste comuniquese con el administrador del sistema');
-            })
+                }).fail(function (error) {
+                    $.LoadingOverlay("hide");
+                    mensaje("error","Error",'Hubo problemas con el servidor,intentelo nuevamente ,si el problema persiste comuniquese con el administrador del sistema');
+                })
+            }
         }
     })
 }
