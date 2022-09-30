@@ -29,12 +29,12 @@
     <li>
       <a href="#acerca-del-proyecto">Acerca del proyecto</a>
       <ul>
-        <li><a href="#built-with">Construido con</a></li>
+        <li><a href="#construido-con">Construido con</a></li>
       </ul>
     </li>
-    <li><a href="Instrucciones">Insrucciones</a></li>
-    <li><a href="license">Licencia</a></li>
-    <li><a href="contact">Contacto</a></li>
+    <li><a href="#Instrucciones">Insrucciones</a></li>
+    <li><a href="#license">Licencia</a></li>
+    <li><a href="#contact">Contacto</a></li>
   </ol>
 </details>
 
