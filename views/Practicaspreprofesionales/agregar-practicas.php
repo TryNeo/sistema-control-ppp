@@ -2,11 +2,21 @@
 ?>
 <section class="section">
     <div class="section-header">
-        <h1>Agregando pasantia</h1>
+        <h1>
+        <?php if($data['create']){ ?>
+            Editar pasantia
+        <?php }else{ ?>
+            Agregando pasantia 
+        <?php } ?>
+        </h1>
     </div>
     <div class="section-body">
         <form class="needs-validation" id="fntPracticas" method="post" role="form" novalidate="">
-            <input type="hidden" id="id_practicas" name="id_practicas" value="">
+            <?php if($data['create']){ ?>
+                <input type="hidden" id="id_practicas" name="id_practicas" value="<?php echo $data['id_practica']?>">
+            <?php }else{ ?>
+                <input type="hidden" id="id_practicas" name="id_practicas" value="">
+            <?php } ?>
             <div class="row">
                 <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
                     <div class="card">
@@ -14,7 +24,7 @@
                             <div class="card-body-lg row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <select id="id_alumno" class="form-control select2" name="id_alumno">
+                                        <select id="id_alumno" class="form-control select2" name="id_alumno" >
                                         </select>
                                     </div>
                                 </div>

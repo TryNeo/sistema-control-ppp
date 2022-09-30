@@ -214,5 +214,6 @@ INSERT INTO Campus (nombre_campus,descripcion,estado,fecha_crea) values ("Campus
 
 
 
-INSERT INTO Usuarios (usuario,password,email_institucional,email_activo,id_rol,estado,fecha_crea) VALUES ("superadmin","$2y$10$nLtnKbUrAQnMMfWi9bqsEuQ53U5k1pKCRsKYWEw0x/R5hgKNcHiYK","jjhuacon@est.itsgg.edu.ec",1,1,1,now());
+INSERT INTO Usuarios (usuario,password,email_institucional,email_activo,id_rol,estado,fecha_crea) 
+    VALUES ("superadmin","$2y$10$nLtnKbUrAQnMMfWi9bqsEuQ53U5k1pKCRsKYWEw0x/R5hgKNcHiYK","jjhuacon@est.itsgg.edu.ec",1,1,1,now());
 
