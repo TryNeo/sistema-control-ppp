@@ -78,7 +78,7 @@ En esta sección se mostrará una lista de tecnologías que se usaron para la cr
 
 
 ## Instrucciones para instalar el sistema control ppp
-* 1.Tener instalado xampp la version 7.9.29 [Xampp](https://downloadsapachefriends.global.ssl.fastly.net/7.4.29/xampp-windows-x64-7.4.29-1-VC15-installer.exe?from_af=true)
+* 1.Tener instalado xampp la version de php 7.9.29 [Xampp](https://downloadsapachefriends.global.ssl.fastly.net/7.4.29/xampp-windows-x64-7.4.29-1-VC15-installer.exe?from_af=true)
 * 2.Descargar el proyecto en htdocs
 * 3.Irse a la carpeta ./database y modificar el script controlppp_bd.sql, dirigirse al insert que crea el super usuario, cambiando el correo por defecto por uno que ustedes utilicen, es importante que el correo que se coloque ahí deba permitir que se envíen correos desde aplicaciones no seguras, eso se encuentra en Gmail y se tendrá configurar(la contraseña por defecto que se refleja ahi es : <b>12345</b>).
 [![ppp](https://i.ibb.co/cxW0mp6/Screenshot-6.jpg)](https://i.ibb.co/cxW0mp6/Screenshot-6.jpg) 
