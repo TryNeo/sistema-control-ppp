@@ -58,8 +58,9 @@ class PracticaspreprofesionalesModel extends Mysql
         $sql = "SELECT pr.id_profesor,pr.cedula,pr.nombre,pr.apellido,cp.nombre_campus FROM Profesores as pr 
                     INNER JOIN Usuarios as us ON pr.id_usuario = us.id_usuario
                     INNER JOIN Campus as cp ON pr.id_campus = cp.id_campus
-                    WHERE pr.estado = 1 and us.email_activo = 1 and cp.estado = 1 and us.id_rol = 3 and pr.cedula like '%" . $this->str_search_profesor . "%' 
-                        or pr.apellido like '%" . $this->str_search_profesor . "%' or pr.nombre like '%" . $this->str_search_profesor . "%' LIMIT 5";
+                    WHERE (pr.estado = 1 and us.email_activo = 1 and cp.estado = 1 and us.id_rol = 3 and pr.cedula like '%" . $this->str_search_profesor . "%' )
+                        or ( pr.estado = 1 and us.email_activo = 1 and cp.estado = 1 and us.id_rol = 3 and pr.apellido like '%" . $this->str_search_profesor . "%')
+                        or ( pr.estado = 1 and us.email_activo = 1 and cp.estado = 1 and us.id_rol = 3 and pr.nombre like '%" . $this->str_search_profesor . "%') LIMIT 5";
         $request = $this->select_sql_all($sql);
         return $request;
     }
