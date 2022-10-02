@@ -31,8 +31,8 @@ class PracticaspreprofesionalesModel extends Mysql
                     ppp.fecha_inicio,ppp.fecha_fin,ppp.tipo_practica
         FROM Practicas_pre_profesionales as ppp
         INNER JOIN Alumnos as al ON al.id_alumno = ppp.id_alumno
-        INNER JOIN profesores as pr ON pr.id_profesor = ppp.id_profesor
-        INNER JOIN empresas as em ON em.id_empresa = ppp.id_empresa
+        INNER JOIN Profesores as pr ON pr.id_profesor = ppp.id_profesor
+        INNER JOIN Empresas as em ON em.id_empresa = ppp.id_empresa
         where ppp.estado=1  ORDER BY ppp.id_practica DESC";
         $request = $this->select_sql_all($sql);
         return $request;
