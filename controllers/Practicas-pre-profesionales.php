@@ -41,7 +41,6 @@ class Practicaspreprofesionales extends Controllers
         $data["page_title"] = "Agregar practicas";
         $data["page_name"] = "practicas";
         $data["page"] = "practicas";
-        $data["create"] = 0;
         $this->views->getView($this, "agregar-practicas", $data);
         die();
     }
@@ -62,10 +61,10 @@ class Practicaspreprofesionales extends Controllers
         $data["tag_pag"] = "";
         $data["page_title"] = "Editar practicas";
         $data["page_name"] = "practicas";
-        $data["page"] = "practicas";
-        $data["create"] = 1;
-        $data["id_practica"] = $id_practica;
-        $this->views->getView($this, "agregar-practicas", $data);
+        $data["page"] = "practicas_edit";
+        $id_practica = intval(strclean($id_practica));
+        $data["practicas_data"] = $this->model->selectPracticasPreProfesionalesEdit($id_practica);
+        $this->views->getView($this, "editar-practicas", $data);
         die();
     }
 
@@ -82,7 +81,7 @@ class Practicaspreprofesionales extends Controllers
                 $btnEditarPractica = '';
 
                 if ($_SESSION['permisos_modulo']['u']) {
-                    $btnEditarPractica = '<a href="./editar/'.$data[$i]['id_practica'].'" class="btn btn-primary btnEditarPractica btn-circle " title="editar">
+                    $btnEditarPractica = '<a href="'.server_url.'practicas-pre-profesionales/editar/'.$data[$i]['id_practica'].'" class="btn btn-primary btnEditarPractica btn-circle " title="editar">
                     <i class="fa fa-edit"></i></a>';
                 }
 
@@ -102,36 +101,51 @@ class Practicaspreprofesionales extends Controllers
     public function setPracticaspreprofesionales(){
         if($_POST){
             $id_practicas = intval(strclean($_POST['id_practicas']));
-            $id_alumno = intval(strclean($_POST['id_alumno']));
-            $id_profesor = intval(strclean($_POST['id_profesor']));
-            $id_empresa = intval(strclean($_POST['id_empresa']));
+            $id_alumno = intval(strclean($_POST['id_alumno_ppp']));
+            $id_profesor = intval(strclean($_POST['id_profesor_ppp']));
+            $id_empresa = intval(strclean($_POST['id_empresa_ppp']));
             $tipo_practica = intval(strclean($_POST['id_tipo_practica']));
             $alcance_proyecto = intval(strclean($_POST['id_alcance_proyecto']));
             $departamento = ucwords(strclean($_POST['departamento_ep']));
             $nivel = intval(strclean($_POST['id_nivel_pasantias']));
             $fecha_inicio = strclean($_POST['fecha_ini']);
             $fecha_fin = strclean($_POST['fecha_fin']);
-            $total_ppp_emp = intval(strclean($_POST['total_emp']));
-            $total_ppp_serv = intval(strclean($_POST['total_serv']));
-            $total_ppp = intval(strclean($_POST['total_ppp']));
+
             $total_horas = intval(strclean($_POST['total_horas']));
             
-
             $validate_data=array($id_practicas,$id_alumno,$id_profesor,$id_empresa,
-                                $tipo_practica,$alcance_proyecto,$departamento,$nivel,$fecha_inicio,$fecha_fin,$total_ppp,$total_horas);
+                                $tipo_practica,$alcance_proyecto,$departamento,$nivel,$fecha_inicio,$fecha_fin,$total_horas);
 
             if(!validateEmptyFields($validate_data)){
                 $data = array('status' => false,'msg' => "Verifique que algunos de los campos no se encuentre vacio");
             }
 
             if(!empty(preg_matchall(array($id_practicas,$id_alumno,$id_profesor,$id_empresa,
-                                $tipo_practica,$alcance_proyecto,$nivel,$total_ppp,$total_horas),regex_numbers))){
+                                $tipo_practica,$alcance_proyecto,$nivel,$total_horas),regex_numbers))){
                 $data = array('status' => false,'msg'=> "Verifique que los campos numericos no contengan letras");
             }
 
-            $total_ppp_emp = $total_ppp_emp+$total_horas;
-            $total_ppp_serv = $total_ppp_serv+$total_horas;
-            $suma_total_horas = $total_ppp+$total_horas;
+
+            if($id_practicas == 0){
+                $total_ppp_emp = intval(strclean($_POST['total_emp']));
+                $total_ppp_serv = intval(strclean($_POST['total_serv']));
+                $total_ppp = intval(strclean($_POST['total_ppp']));
+
+                $total_ppp_emp = $total_ppp_emp+$total_horas;
+                $total_ppp_serv = $total_ppp_serv+$total_horas;
+                $suma_total_horas = $total_ppp+$total_horas;
+            }else{
+                $total_horas_temp = $this->model->selectHorasAlumno($id_alumno,$id_practicas,$tipo_practica);
+                if($total_horas_temp['tipo_practica'] == 1){
+                    $total_ppp_serv = 0;
+                    $suma_total_horas = 0;
+                    $total_ppp_emp = $total_horas_temp['total_horas_temp']+$total_horas;
+                }else{
+                    $total_ppp_emp = 0;
+                    $suma_total_horas = 0;
+                    $total_ppp_serv = $total_horas_temp['total_horas_temp']+$total_horas;
+                }
+            }
 
             if ($suma_total_horas > 400) {
                 $data = array("status" => false, "msg" => "La suma de las horas sobre pasa las 400 horas, verifique las horas ingresadas");
@@ -150,11 +164,28 @@ class Practicaspreprofesionales extends Controllers
                             $departamento, $nivel, $fecha_inicio, $fecha_fin,$total_horas);
                         $option = 1;
                     }
+                }else{
+                    if (empty($_SESSION['permisos_modulo']['u'])){
+                        header('location:'.server_url.'Errors');
+                        $data= array("status" => false, "msg" => "Error no tiene permisos");
+                        $response_practicas = 0;
+                    }else{
+                        $response_practicas = $this->model->updatePracticaspreprofesionales($id_practicas, $id_alumno, $id_profesor,$tipo_practica, $alcance_proyecto, $id_empresa,
+                            $departamento, $nivel, $fecha_inicio, $fecha_fin,$total_horas);
+                        $option = 2;
+                    }
                 }
+
+
                 if ($response_practicas > 0){ 
                     if ($option == 1){
                         $data = array('status' => true, 'msg' => 'Datos guardados correctamente');
                     }
+
+                    if ($option == 2){
+                        $data = array('status' => true, 'msg' => 'Datos actualizados correctamente');
+                    }
+
                 }else{
                     $data = array('status' => false,'msg' => 'Hubo un error no se pudieron guardar los datos');
                 }
@@ -214,6 +245,12 @@ class Practicaspreprofesionales extends Controllers
                     $data_ser['total_horas'] = 0;
                     $data_response = array('status' => true, 'total_horas_emp' => $data_emp,'total_horas_ser' => $data_ser);
                 } else {
+                    if(empty($data_emp['total_horas'])){
+                        $data_emp['total_horas'] = 0;
+                    }
+                    if(empty($data_ser['total_horas'])){
+                        $data_ser['total_horas'] = 0;
+                    }
                     $data_response = array('status' => true, 'total_horas_emp' => $data_emp,'total_horas_ser' => $data_ser);
                 }
             } else {

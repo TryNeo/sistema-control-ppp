@@ -34,7 +34,8 @@ function clickModal(nameSelector,modalName,formSelector='',selectId='',formSelec
 
         if(formSelect2 != ''){
             $(formSelect2).val('').trigger('change')
-            $(formSelect2).removeAttr('disabled');   
+            $(formSelect2).removeAttr('disabled');
+            $(formSelect2).next(".select2-container").show();
 
         }
 

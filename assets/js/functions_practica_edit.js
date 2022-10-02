@@ -1,43 +1,14 @@
-
 $(function(){
-    const columnData = [
-        {"data":"id_practica"},
-        {"data":"ced_nom_ape_al"},
-        {"data":"ruc_nom_ape_pr_em"},
-        {"data":"fecha_inicio"},
-        {"data":"fecha_fin"},
-        {"data":"tipo_practica"},
-        {"data":"opciones"},
-    ]
-
-    const columnDefs = [
-        {
-            targets:[5],
-            orderable:false,
-            render:function(data,type,row){
-                if (row.tipo_practica === "1"){
-                    return '<button type="button" class="btn btn-primary btn-icon icon-left">'+
-                            '<i class="fas fa-business-time"></i> EMPRESARIAL'+
-                            '</button>'
-                }else{
-                    return '<button type="button" class="btn btn-info btn-icon icon-left">'+
-                            '<i class="fas fa-poll-h"></i> SERVICIO A LA COMUNIDAD'+
-                            '</button>'
-                }
-            }
-        }
-    ]
-
-    const tablePracticas = configDataTables('.tablePracticas',base_url+"practicas-pre-profesionales/getPracticaspreprofesionales",columnData,columnDefs);
-
+    
     searchAlumno();
     searchProfesor();
     searchEmpresas();
-    const configValid = configToValidate();
-    
 
-    sendingDataServerSidePr('#fntPracticas',configValid,"practicas-pre-profesionales/setPracticaspreprofesionales");
-})
+    const configValid = configToValidate();
+
+    sendingDataServerSidePrEdit('#fntPracticas',configValid,"practicas-pre-profesionales/setPracticaspreprofesionales");
+});
+
 
 function configToValidate(){
 
@@ -115,8 +86,6 @@ function configToValidate(){
 
     return validatorServerSide
 }
-
-setInterval(function(){ $(".tablePracticas").DataTable().ajax.reload(); },10000);
 
 
 function formatRepo (repo) {
@@ -213,47 +182,18 @@ function searchAlumno(){
     }).on('select2:select',function(e){
         e.preventDefault();
         let data = e.params.data;
+
         $('#id_alumno_ppp').val(data.id);
         $('#cedula_temp_al').val(data.cedula);
         $('#nombre_apellido_al').val(data.text);
         $('#carrera').val(data.carrera);
+        
         $('#id_alumno').val('');
         $('#id_alumno').trigger('change.select2');
 
-        $.get(base_url+"practicas-pre-profesionales/getSelectEmpresarialServiciosAlacomunidad/"+data.id, function(data){
-            let data_gen = JSON.parse(data);
-            if(data_gen.status){
-                $('#total_emp').val(data_gen.total_horas_emp.total_horas);
-                $('#total_serv').val(data_gen.total_horas_ser.total_horas);
-            }else{
-                mensaje("error","Error",'Hubo problemas con el servidor,intentelo nuevamente ,si el problema persiste comuniquese con el administrador del sistema')
-            }
-        });
-
-
-        $.get(base_url+"practicas-pre-profesionales/getSelectTotalHorasppp/"+data.id, function(data){
-            let data_horas_ppp = JSON.parse(data);
-            if(data_horas_ppp.status){
-                if (data_horas_ppp.msg.total_horas >= 400){
-                    $('#total_ppp').addClass('is-invalid');
-                    $('#total_ppp').val(0);
-                    mensaje('warning',"Advertencia de horas",'El alumno ya ha completado las 400 horas de practicas pre profesionales');
-                    $('#fntPracticas').trigger("reset");
-                    $('#id_alumno').val('');
-                    $('#id_alumno').trigger('change.select2');
-                }else{
-                    $('#total_ppp').val(0);
-                    let total_horas = parseInt($('#total_ppp').val())+parseInt(data_horas_ppp.msg.total_horas)
-                    $('#total_ppp').val(total_horas);
-                    $('#total_ppp').removeClass('is-invalid');
-                }
-            }else{
-                mensaje("error","Error",'Hubo problemas con el servidor,intentelo nuevamente ,si el problema persiste comuniquese con el administrador del sistema')
-            }
-        });
-
     });
 }
+
 
 function searchProfesor(){
     $('#id_profesor').select2({
@@ -327,8 +267,7 @@ function searchEmpresas(){
     });
 }
 
-
-function sendingDataServerSidePr(idForm,validatorServerSide,urlMethod){
+function sendingDataServerSidePrEdit(idForm,validatorServerSide,urlMethod){
     $(idForm).on('submit',function (e) {
         e.preventDefault();
 
@@ -359,11 +298,6 @@ function sendingDataServerSidePr(idForm,validatorServerSide,urlMethod){
                 });
             }
 
-            return false;
-        }
-
-        if(window.location.href != base_url+"practicas-pre-profesionales/agregar"){
-            mensaje('warning','Advertencia','La url no es valida, verifique que este escrita correctamente y vuelva a intentarlo');
             return false;
         }
 
@@ -400,7 +334,6 @@ function sendingDataServerSidePr(idForm,validatorServerSide,urlMethod){
     })
 }
 
-
 function hiddenValidate(){
     $('.select2-container--bootstrap4 .select2-selection').css("border-color","#d8d8d8");
     $('#cedula_temp_al').removeClass('is-valid');
@@ -410,8 +343,5 @@ function hiddenValidate(){
     $('#nombre_empresa_ep').removeClass('is-valid');
     $('#nombre_representante_ep').removeClass('is-valid');
     $('#telefono_ep').removeClass('is-valid');
-    $('#total_ppp').removeClass('is-valid');
-    $('#total_emp').removeClass('is-valid');
-    $('#total_serv').removeClass('is-valid');
 }
 

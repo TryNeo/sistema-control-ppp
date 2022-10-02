@@ -76,7 +76,8 @@ class PracticaspreprofesionalesModel extends Mysql
         return $request;
     }
 
-    public function selectHorasEmpresariales(int $str_search_alumno){
+    public function selectHorasEmpresariales(int $str_search_alumno)
+    {
         $this->str_search_alumno = $str_search_alumno;
         $sql = "SELECT SUM(ppp.total_horas_ppp) as total_horas FROM Practicas_pre_profesionales as ppp
                     WHERE ppp.id_alumno = $this->str_search_alumno and ppp.tipo_practica = 1 and ppp.estado = 1";
@@ -84,10 +85,23 @@ class PracticaspreprofesionalesModel extends Mysql
         return $request;
     }
 
-    public function selectHorasServicioComunitario(int $str_search_alumno){
+    public function selectHorasServicioComunitario(int $str_search_alumno)
+    {
         $this->str_search_alumno = $str_search_alumno;
         $sql = "SELECT SUM(ppp.total_horas_ppp) as total_horas FROM Practicas_pre_profesionales as ppp
                     WHERE ppp.id_alumno = $this->str_search_alumno and ppp.tipo_practica = 2 and ppp.estado = 1";
+        $request = $this->select_sql($sql);
+        return $request;
+    }
+
+    public function selectHorasAlumno(int $int_id_alumno, int $int_id_practica, int $int_id_tipo_practica)
+    {
+        $this->int_id_alumno = $int_id_alumno;
+        $this->int_id_practicas = $int_id_practica;
+        $this->int_id_tipo_practica = $int_id_tipo_practica;
+
+        $sql = "SELECT ppp.tipo_practica,SUM(ppp.total_horas_ppp) as total_horas_temp FROM Practicas_pre_profesionales as ppp
+                    WHERE ppp.id_alumno = $this->int_id_alumno and ppp.id_practica != $this->int_id_practicas and ppp.estado = 1 and ppp.tipo_practica = $this->int_id_tipo_practica";
         $request = $this->select_sql($sql);
         return $request;
     }
@@ -104,9 +118,10 @@ class PracticaspreprofesionalesModel extends Mysql
     }
 
 
-    public function selectPracticasPreProfesionalesEdit(int $int_id_practica){
+    public function selectPracticasPreProfesionalesEdit(int $int_id_practica)
+    {
         $this->int_id_practicas = $int_id_practica;
-        
+
         $sql = "SELECT ppp.id_practica,al.id_alumno,pr.id_profesor,al.cedula,CONCAT(al.nombre,' ',al.apellido) as nombre_apellido_al,
         CONCAT(pr.nombre,' ',pr.apellido) as nombre_apellido_pr,ppp.alcance_proyecto,cr.nombre_carrera,ppp.tipo_practica,ppp.id_empresa,
         emp.nombre_empresa,emp.nombre_representante,emp.telefono_empresa,ppp.departamento,ppp.nivel,ppp.fecha_inicio,ppp.fecha_fin,ppp.total_horas_ppp
@@ -118,7 +133,6 @@ class PracticaspreprofesionalesModel extends Mysql
         WHERE ppp.id_practica = $this->int_id_practicas and ppp.estado = 1";
         $request = $this->select_sql($sql);
         return $request;
-
     }
 
     public function insertPracticaspreprofesionales(
@@ -149,11 +163,49 @@ class PracticaspreprofesionalesModel extends Mysql
                 id_alumno,id_profesor,tipo_practica,alcance_proyecto,id_empresa,departamento,nivel,fecha_inicio,fecha_fin,total_horas_ppp,estado,fecha_crea)
                 VALUES(?,?,?,?,?,?,?,?,?,?,1,now())";
 
-        $arrData = array($this->int_id_alumno, $this->int_id_profesor,$this->int_id_tipo_practica,
-                    $this->int_id_alcance_proyecto,$this->int_id_empresa,$this->str_departamento,
-                    $this->int_id_nivel,$this->str_fecha_inicio,$this->str_fecha_fin,$this->int_total_horas);
+        $arrData = array(
+            $this->int_id_alumno, $this->int_id_profesor, $this->int_id_tipo_practica,
+            $this->int_id_alcance_proyecto, $this->int_id_empresa, $this->str_departamento,
+            $this->int_id_nivel, $this->str_fecha_inicio, $this->str_fecha_fin, $this->int_total_horas
+        );
 
         $request = $this->insert_sql($sql_insert, $arrData);
+        return $request;
+    }
+
+    public function updatePracticaspreprofesionales(
+        int $id_practica,
+        int $id_alumno,
+        int $id_profesor,
+        int $id_tipo_practica,
+        int $id_alcance_proyecto,
+        int $id_empresa,
+        string $departamento,
+        int $id_nivel,
+        string $fecha_inicio,
+        string $fecha_fin,
+        int $total_horas
+    ) {
+        $this->int_id_practicas = $id_practica;
+        $this->int_id_alumno = $id_alumno;
+        $this->int_id_profesor = $id_profesor;
+        $this->int_id_tipo_practica = $id_tipo_practica;
+        $this->int_id_alcance_proyecto = $id_alcance_proyecto;
+        $this->int_id_empresa = $id_empresa;
+        $this->str_departamento = $departamento;
+        $this->int_id_nivel = $id_nivel;
+        $this->str_fecha_inicio = $fecha_inicio;
+        $this->str_fecha_fin = $fecha_fin;
+        $this->int_total_horas = $total_horas;
+
+        $sql_update = "UPDATE Practicas_pre_profesionales SET id_alumno = ?,id_profesor = ?,tipo_practica = ?,alcance_proyecto = ?,
+            id_empresa = ?,departamento = ?,nivel = ?,fecha_inicio = ?,fecha_fin = ?,total_horas_ppp = ?,fecha_modifica = now() WHERE id_practica = $this->int_id_practicas";
+        $arrData = array(
+            $this->int_id_alumno, $this->int_id_profesor, $this->int_id_tipo_practica,
+            $this->int_id_alcance_proyecto, $this->int_id_empresa, $this->str_departamento,
+            $this->int_id_nivel, $this->str_fecha_inicio, $this->str_fecha_fin, $this->int_total_horas
+        );
+        $request = $this->update_sql($sql_update, $arrData);
         return $request;
     }
 
@@ -167,7 +219,6 @@ class PracticaspreprofesionalesModel extends Mysql
             $request_delete = 'ok';
         } else {
             $request_delete = 'error';
-
         }
         return $request_delete;
     }
