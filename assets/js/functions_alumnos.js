@@ -16,6 +16,8 @@ $(function(){
     const fieldsToValidate = ["cedula","email_personal","nombre","apellido","telefono","sexo","id_carrera","id_usuario"];
     const configValid = configToValidate();
 
+    $("#id_usuario").next(".select2-container").show();
+    
     clickModal("#modalAlumno","Crear | Alumno","#fntAlumno","#id_alumno","#id_usuario",['#id_carrera','#sexo']);
     fetchSelect(base_url+"alumnos/getSelectCarreras","#id_carrera","Selecciona una carrera")
     sendingDataServerSide('#fntAlumno',configValid,fieldsToValidate,listCamps,tableAlumno,"alumnos/setAlumno","#modalAlumno");
@@ -202,6 +204,7 @@ $("textarea").removeClass("is-invalid");
 $("select").removeClass("is-valid");
 $("select").removeClass("is-invalid");
 
+
 document.querySelector('#modalTitle').innerHTML = modalName;
 document.querySelector('.changeText').innerHTML = " Actualizar registro ";
 (async () => {
@@ -227,10 +230,10 @@ document.querySelector('.changeText').innerHTML = " Actualizar registro ";
             }
 
             if(isSelect2){
+                $(nameSelect2).next(".select2-container").hide();
                 $(nameSelect2).attr('disabled','disabled');
                 $(nameSelect2).addClass('hidden-data');
                 $(nameSelect2).removeClass('is-invalid');
-                $('select').toggleSelect2(false);
             }
 
         }else {
