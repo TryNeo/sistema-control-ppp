@@ -44,9 +44,9 @@ class Usuarios extends Controllers
                 }
 
                 if ($data[$i]['ultimo_online'] == 1) {
-                    $data[$i]['ultimo_online'] = '<span  class="btn btn-success btn-icon-split btn-custom-sm"><i class="icon fas fa-signal"></i><span class="label text-padding text-white-1">&nbsp;&nbsp;Online</span></span>';
+                    $data[$i]['ultimo_online'] = '<span  class="btn btn-success btn-icon-split btn-custom-sm"><i class="icon fas fa-signal"></i><span class="label text-padding text-white-1">&nbsp;&nbsp;En línea</span></span>';
                 } else {
-                    $data[$i]['ultimo_online'] = '<span  class="btn btn-danger btn-icon-split btn-custom-sm"><i class="icon fas fa-ban"></i><span class="label text-padding text-white-1">0ffline</span></span>';
+                    $data[$i]['ultimo_online'] = '<span  class="btn btn-danger btn-icon-split btn-custom-sm"><i class="icon fas fa-ban"></i><span class="label text-padding text-white-1">Desconectado</span></span>';
                 }
 
                 if ($data[$i]['email_activo'] == 1) {
