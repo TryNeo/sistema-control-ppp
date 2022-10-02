@@ -39,6 +39,7 @@
 <script src="<?php echo server_url; ?>assets/js/dashboard_validate.js"></script>
 <script src="<?php echo server_url; ?>assets/js/functions_principales.js"></script>
 <script src="<?php echo server_url; ?>assets/js/dashboard_reloj.js"></script>
+<script src="<?php echo server_url; ?>assets/libs/izitoast/dist/js/iziToast.min.js"></script>
 
 <?php if (isset($data['page'])) { ?>
     <?php if ($data['page'] == 'roles') { ?>
@@ -74,6 +75,10 @@
 
     <?php if ($data['page'] == 'empresas') { ?>
         <script type="text/javascript" src="<?php echo server_url; ?>assets/js/functions_empresas.js"></script>
+    <?php } ?>
+    
+    <?php if ($data['page'] == 'practicas_edit') { ?>
+        <script type="text/javascript" src="<?php echo server_url; ?>assets/js/functions_practica_edit.js"></script>
     <?php } ?>
 
 <?php } else { ?>
