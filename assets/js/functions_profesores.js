@@ -227,10 +227,10 @@ document.querySelector('.changeText').innerHTML = " Actualizar registro ";
             }
 
             if(isSelect2){
+                $(nameSelect2).next(".select2-container").hide();
                 $(nameSelect2).attr('disabled','disabled');
                 $(nameSelect2).addClass('hidden-data');
                 $(nameSelect2).removeClass('is-invalid');
-                $('select').toggleSelect2(false);
             }
 
         }else {
