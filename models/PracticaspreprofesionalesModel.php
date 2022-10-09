@@ -125,11 +125,11 @@ class PracticaspreprofesionalesModel extends Mysql
         $sql = "SELECT ppp.id_practica,al.id_alumno,pr.id_profesor,al.cedula,CONCAT(al.nombre,' ',al.apellido) as nombre_apellido_al,
         CONCAT(pr.nombre,' ',pr.apellido) as nombre_apellido_pr,ppp.alcance_proyecto,cr.nombre_carrera,ppp.tipo_practica,ppp.id_empresa,
         emp.nombre_empresa,emp.nombre_representante,emp.telefono_empresa,ppp.departamento,ppp.nivel,ppp.fecha_inicio,ppp.fecha_fin,ppp.total_horas_ppp
-        FROM practicas_pre_profesionales as ppp
-        INNER JOIN alumnos as al ON ppp.id_alumno = al.id_alumno
-        INNER JOIN carreras as cr ON al.id_carrera = cr.id_carrera
-        INNER JOIN profesores as pr ON ppp.id_profesor = pr.id_profesor
-        INNER JOIN empresas as emp ON ppp.id_empresa = emp.id_empresa
+        FROM Practicas_pre_profesionales as ppp
+        INNER JOIN Alumnos as al ON ppp.id_alumno = al.id_alumno
+        INNER JOIN Carreras as cr ON al.id_carrera = cr.id_carrera
+        INNER JOIN Profesores as pr ON ppp.id_profesor = pr.id_profesor
+        INNER JOIN Empresas as emp ON ppp.id_empresa = emp.id_empresa
         WHERE ppp.id_practica = $this->int_id_practicas and ppp.estado = 1";
         $request = $this->select_sql($sql);
         return $request;
