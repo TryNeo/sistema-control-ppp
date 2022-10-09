@@ -169,14 +169,15 @@ INSERT INTO Modulos (nombre,descripcion,estado,fecha_crea) values('Usuarios','mo
 INSERT INTO Modulos (nombre,descripcion,estado,fecha_crea) values('Roles','modulo de roles',1,now());
 INSERT INTO Modulos (nombre,descripcion,estado,fecha_crea) values('Respaldo','modulo de respaldo',1,now());
 INSERT INTO Modulos (nombre,descripcion,estado,fecha_crea) values('Permisos','modulo de permisos',1,now());
-INSERT INTO Modulos (nombre,descripcion,estado,fecha_crea) values('Alumnos','modulo de alumnos',1,now());
-INSERT INTO Modulos (nombre,descripcion,estado,fecha_crea) values('Profesores','modulo de profesores',1,now());
+INSERT INTO Modulos (nombre,descripcion,estado,fecha_crea) values('Estudiantes','modulo de alumnos',1,now());
+INSERT INTO Modulos (nombre,descripcion,estado,fecha_crea) values('Docentes','modulo de profesores',1,now());
 INSERT INTO Modulos (nombre,descripcion,estado,fecha_crea) values('Empresas','modulo de convenios',1,now());
 INSERT INTO Modulos (nombre,descripcion,estado,fecha_crea) values('Practicas profesionales','modulo de practicas profesionales',1,now());
+INSERT INTO Modulos (nombre,descripcion,estado,fecha_crea) values('Historial estudiante','modulo de historial estudiante',1,now());
 
 INSERT INTO Roles (nombre_rol,descripcion,estado,fecha_crea) values ("Administrador","permisos de acceso a todo el sistema",1,now());
 INSERT INTO Roles (nombre_rol,descripcion,estado,fecha_crea) values ("Estudiante","permisos de acceso para el estudiante",1,now());
-INSERT INTO Roles (nombre_rol,descripcion,estado,fecha_crea) values ("Profesor","permisos de acceso para el profesor",1,now());
+INSERT INTO Roles (nombre_rol,descripcion,estado,fecha_crea) values ("Docente","permisos de acceso para el Docente",1,now());
 
 INSERT INTO Permisos (id_modulo,id_rol,r,w,u,d) VALUES (1,1,1,1,1,1);
 INSERT INTO Permisos (id_modulo,id_rol,r,w,u,d) VALUES (2,1,1,1,1,1);
@@ -187,8 +188,11 @@ INSERT INTO Permisos (id_modulo,id_rol,r,w,u,d) VALUES (6,1,1,1,1,1);
 INSERT INTO Permisos (id_modulo,id_rol,r,w,u,d) VALUES (7,1,1,1,1,1);
 INSERT INTO Permisos (id_modulo,id_rol,r,w,u,d) VALUES (8,1,1,1,1,1);
 INSERT INTO Permisos (id_modulo,id_rol,r,w,u,d) VALUES (9,1,1,1,1,1);
+INSERT INTO Permisos (id_modulo,id_rol,r,w,u,d) VALUES (10,1,1,1,1,1);
 
 INSERT INTO Permisos (id_modulo,id_rol,r,w,u,d) VALUES (1,2,1,1,1,1);
+INSERT INTO Permisos (id_modulo,id_rol,r,w,u,d) VALUES (10,2,1,0,0,0);
+
 INSERT INTO Permisos (id_modulo,id_rol,r,w,u,d) VALUES (1,3,1,1,1,1);
 
 
