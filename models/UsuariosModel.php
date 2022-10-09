@@ -43,10 +43,24 @@
             $request_usuario = $this->select_sql_all($sql_usuario);
 
             if (empty($request_email_inst) && empty($request_usuario)){
-                $sql_insert = "INSERT INTO Usuarios (usuario,password,email_institucional,id_rol,estado,fecha_crea) values (?,?,?,?,1,now())";
-                $data = array($this->str_usuario,$this->str_password,$this->str_email_institucional,$this->int_id_rol);
-                $request_insert = $this->insert_sql($sql_insert,$data);
-                $return = $request_insert;
+                if ($this->int_id_rol != 2){
+                    if($this->int_id_rol != 3){
+                        $sql_insert = "INSERT INTO Usuarios (usuario,password,email_institucional,email_activo,id_rol,estado,fecha_crea) values (?,?,?,1,?,1,now())";
+                        $data = array($this->str_usuario,$this->str_password,$this->str_email_institucional,$this->int_id_rol);
+                        $request_insert = $this->insert_sql($sql_insert,$data);
+                        $return = $request_insert;
+                    }else{
+                        $sql_insert = "INSERT INTO Usuarios (usuario,password,email_institucional,id_rol,estado,fecha_crea) values (?,?,?,?,1,now())";
+                        $data = array($this->str_usuario,$this->str_password,$this->str_email_institucional,$this->int_id_rol);
+                        $request_insert = $this->insert_sql($sql_insert,$data);
+                        $return = $request_insert;   
+                    }
+                }else{
+                    $sql_insert = "INSERT INTO Usuarios (usuario,password,email_institucional,id_rol,estado,fecha_crea) values (?,?,?,?,1,now())";
+                    $data = array($this->str_usuario,$this->str_password,$this->str_email_institucional,$this->int_id_rol);
+                    $request_insert = $this->insert_sql($sql_insert,$data);
+                    $return = $request_insert;   
+                }
             }else{
                 $return = "exist";
             }
