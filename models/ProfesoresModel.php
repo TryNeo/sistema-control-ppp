@@ -149,7 +149,7 @@ class ProfesoresModel extends Mysql
     public function deleteProfesor(int $int_id_profesor)
     {
         $this->int_id_profesor = $int_id_profesor;
-        $sql_validate_online = "SELECT ultimo_online FROM Usuarios WHERE id_usuario = (SELECT id_usuario FROM profesores WHERE id_profesor = $this->int_id_profesor)";
+        $sql_validate_online = "SELECT ultimo_online FROM Usuarios WHERE id_usuario = (SELECT id_usuario FROM Profesores WHERE id_profesor = $this->int_id_profesor)";
         $response_ultimo_online = $this->select_sql($sql_validate_online);
         if($response_ultimo_online['ultimo_online'] == 1){
             $request_delete = 'error_online';
@@ -164,7 +164,7 @@ class ProfesoresModel extends Mysql
         
                 if ($request_delete) {
                     $request_delete = 'ok';
-                    $sql_alu_email = "UPDATE  Usuarios SET email_activo = ?, fecha_modifica = now() WHERE id_usuario = (SELECT id_usuario FROM profesores WHERE id_profesor = $this->int_id_profesor)";
+                    $sql_alu_email = "UPDATE  Usuarios SET email_activo = ?, fecha_modifica = now() WHERE id_usuario = (SELECT id_usuario FROM Profesores WHERE id_profesor = $this->int_id_profesor)";
                     $data = array(0);
                     $request_update = $this->update_sql($sql_alu_email, $data);
                 } else {
