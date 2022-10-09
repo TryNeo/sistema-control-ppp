@@ -142,7 +142,7 @@ class AlumnosModel extends Mysql
     public function deleteAlumno(int $int_id_alumno)
     {
         $this->int_id_alumno = $int_id_alumno;
-        $sql_validate_online = "SELECT ultimo_online FROM Usuarios WHERE id_usuario = (SELECT id_usuario FROM alumnos WHERE id_alumno = $this->int_id_alumno)";
+        $sql_validate_online = "SELECT ultimo_online FROM Usuarios WHERE id_usuario = (SELECT id_usuario FROM Alumnos WHERE id_alumno = $this->int_id_alumno)";
         $response_ultimo_online = $this->select_sql($sql_validate_online);
         if($response_ultimo_online['ultimo_online'] == 1){
             $request_delete = 'error_online';
@@ -157,7 +157,7 @@ class AlumnosModel extends Mysql
         
                 if ($request_delete) {
                     $request_delete = 'ok';
-                    $sql_alu_email = "UPDATE  Usuarios SET email_activo = ?, fecha_modifica = now() WHERE id_usuario = (SELECT id_usuario FROM alumnos WHERE id_alumno = $this->int_id_alumno)";
+                    $sql_alu_email = "UPDATE  Usuarios SET email_activo = ?, fecha_modifica = now() WHERE id_usuario = (SELECT id_usuario FROM Alumnos WHERE id_alumno = $this->int_id_alumno)";
                     $data = array(0);
                     $request_update = $this->update_sql($sql_alu_email, $data);
                 } else {
