@@ -1,7 +1,5 @@
 <?php
 
-use JetBrains\PhpStorm\ArrayShape;
-
 require_once("./libraries/core/controllers.php");
 
 class Practicaspreprofesionales extends Controllers
