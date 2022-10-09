@@ -83,6 +83,8 @@
                 $request_delete = $this->update_sql($sql,$data);
                 if ($request_delete){
                     $request_delete = 'ok';
+                    $sql_delete = "DELETE FROM Permisos WHERE id_rol = $this->intRol";
+                    $request_delete_perm = $this->delete_sql($sql_delete);
                 }else{
                     $request_delete = 'error';
                 }
