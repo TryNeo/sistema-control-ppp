@@ -6,19 +6,6 @@
     </ul>
   </form>
   <ul class="navbar-nav navbar-right">
-    <!---
-    <li class="dropdown dropdown-list-toggle" style="margin-right:20px;margin-top:6px;color:white;font-size:17px;">
-      </a>
-      <div>
-        <input type="checkbox" class="checkbox-mode" id="chk" />
-        <label class="label-mode" for="chk">
-          <i class="fas fa-moon"></i>
-          <i class="fas fa-sun"></i>
-          <div class="ball-mode"></div>
-        </label>
-      </div>
-    </li>
-    --->
     <li class="dropdown dropdown-list-toggle reloj" style="margin-right:20px;margin-top:6px;color:white;font-size:17px;">
       <a class="nav-link reloj" href="#">
       </a>
@@ -36,23 +23,40 @@
               <?php } ?>
           </figure>
         <?php }else{ ?>
-          <figure class="avatar mr-2 avatar-sm bg-primary" 
-              data-initial="<?php echo $_SESSION['user_data']['nombre'][0]; ?><?php echo $_SESSION['user_data']['apellido'][0]; ?>">
-              <?php if ($_SESSION['user_data']['ultimo_online'] == 1) { ?>
-                  <i class="avatar-presence online"></i>
-              <?php } ?>
+          <?php if ($_SESSION['user_data']['id_rol'] != 2 and ($_SESSION['user_data']['id_rol'] != 3) ) { ?>
+            <figure class="avatar mr-2 avatar-sm bg-primary" 
+                data-initial="<?php echo strtoupper($_SESSION['user_data']['usuario'][0]); ?><?php echo strtoupper($_SESSION['user_data']['usuario'][1]); ?>">
+                <?php if ($_SESSION['user_data']['ultimo_online'] == 1) { ?>
+                    <i class="avatar-presence online"></i>
+                <?php } ?>
 
-              <?php if ($_SESSION['user_data']['ultimo_online'] == 0) { ?>
-                  <i class="avatar-presence offline"></i>
-              <?php } ?>
-          </figure>
+                <?php if ($_SESSION['user_data']['ultimo_online'] == 0) { ?>
+                    <i class="avatar-presence offline"></i>
+                <?php } ?>
+            </figure>
+          <?php }else { ?>
+            <figure class="avatar mr-2 avatar-sm bg-primary" 
+                data-initial="<?php echo $_SESSION['user_data']['nombre'][0]; ?><?php echo $_SESSION['user_data']['apellido'][0]; ?>">
+                <?php if ($_SESSION['user_data']['ultimo_online'] == 1) { ?>
+                    <i class="avatar-presence online"></i>
+                <?php } ?>
+
+                <?php if ($_SESSION['user_data']['ultimo_online'] == 0) { ?>
+                    <i class="avatar-presence offline"></i>
+                <?php } ?>
+            </figure>
+          <?php } ?>
         <?php } ?>
 
         <div class="d-sm-none d-lg-inline-block">HOLA , 
           <?php if ($_SESSION['user_data']['id_usuario'] == 1) { ?>
             ADMINISTRADOR
           <?php }else { ?>
-            <?php echo strtoupper($_SESSION['user_data']['nombre']); ?> <?php echo strtoupper($_SESSION['user_data']['apellido']); ?>
+            <?php if ($_SESSION['user_data']['id_rol'] != 2 and ($_SESSION['user_data']['id_rol'] != 3) ) { ?>
+              <?php echo strtoupper($_SESSION['user_data']['usuario']); ?>
+            <?php }else { ?>
+              <?php echo strtoupper($_SESSION['user_data']['nombre']); ?> <?php echo strtoupper($_SESSION['user_data']['apellido']); ?>
+            <?php } ?>
           <?php } ?>
         </div>
 
@@ -97,25 +101,15 @@
         <?php if (!empty($_SESSION['permisos'][6]['r'])) { ?>
           <?php if ($data['page_id'] == 6) { ?>
             <li class="active">
-              <a href="<?php echo server_url; ?>alumnos/" class="nav-link"><i class="fas fa-user-friends"></i><span>Alumnos</span></a>
+              <a href="<?php echo server_url; ?>alumnos/" class="nav-link"><i class="fas fa-user-friends"></i><span>Estudiantes</span></a>
             </li>
           <?php } else { ?>
             <li>
-              <a href="<?php echo server_url; ?>alumnos/" class="nav-link"><i class="fas fa-user-friends"></i><span>Alumnos</span></a>
+              <a href="<?php echo server_url; ?>alumnos/" class="nav-link"><i class="fas fa-user-friends"></i><span>Estudiantes</span></a>
             </li>
           <?php } ?>
         <?php } ?>
-        <?php if (!empty($_SESSION['permisos'][6]['r'])) { ?>
-          <?php if ($data['page_id'] == 222) { ?>
-            <li class="active">
-              <a href="<?php echo server_url; ?>historial-alumno/" class="nav-link"><i class="fas fa-history"></i><span>Historial Alumno</span></a>
-            </li>
-          <?php } else { ?>
-            <li>
-              <a href="<?php echo server_url; ?>historial-alumno/" class="nav-link"><i class="fas fa-history"></i><span>Historial Alumno</span></a>
-            </li>
-          <?php } ?>
-        <?php } ?>
+
         <?php if (!empty($_SESSION['permisos'][7]['r'])) { ?>
           <?php if ($data['page_id'] == 7) { ?>
             <li class="active">
@@ -149,7 +143,17 @@
             </li>
           <?php } ?>
         <?php } ?>
-        
+        <?php if (!empty($_SESSION['permisos'][10]['r'])) { ?>
+          <?php if ($data['page_id'] == 10) { ?>
+            <li class="active">
+              <a href="<?php echo server_url; ?>historial-estudiante/" class="nav-link"><i class="fas fa-history"></i><span>Historial Estudiante</span></a>
+            </li>
+          <?php } else { ?>
+            <li>
+              <a href="<?php echo server_url; ?>historial-estudiante/" class="nav-link"><i class="fas fa-history"></i><span>Historial Estudiante</span></a>
+            </li>
+          <?php } ?>
+        <?php } ?>
       </li>
       <?php if ($_SESSION['user_data']['id_rol'] != 2) {?>
       <li class="menu-header">Seguridad</li>
@@ -189,14 +193,16 @@
       <?php } ?>
       <div class="p-3 hide-sidebar-mini">
             <a href="https://institutotresdemarzo.edu.ec/" class="btn btn-primary btn-lg btn-block btn-icon-split" target="_blank">
-                Ir a la pagina web <i class="fas fa-pager"></i>
+                Pagina web <i class="fas fa-pager"></i>
             </a>
       </div>
-      <div class="p-3 hide-sidebar-mini">
+      <?php if ($_SESSION['user_data']['id_rol'] != 2) {?>
+          <div class="p-3 hide-sidebar-mini">
             <a href="https://drive.google.com/drive/my-drive" class="btn btn-success btn-lg btn-block btn-icon-split" target="_blank">
-                Ir al drive  <i class="fab fa-google-drive"></i>
+                Google Drive  <i class="fab fa-google-drive"></i>
             </a>
-      </div>
+          </div>
+      <?php } ?>
     </ul>
   </aside>
 </div>
