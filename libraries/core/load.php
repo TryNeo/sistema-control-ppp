@@ -6,7 +6,7 @@
 		require_once($controllerFile);
 		$controller = str_replace("-", "", $controller);
 		$controller = new $controller();
-		$method = str_replace("-", "", $method);;
+		$method = str_replace("-", "", $method);
 		if(method_exists($controller, $method))
 		{
 			$controller->{$method}($params);
