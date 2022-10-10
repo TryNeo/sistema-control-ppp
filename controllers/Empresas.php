@@ -40,7 +40,7 @@
                     }
 
                     if ($_SESSION['permisos_modulo']['u']) {
-                        $btnEditarEmpresa = '<button class="btn btn-primary btnEditarEmpresa btn-circle " title="editar" 
+                        $btnEditarEmpresa = '<button class="btn btn-outline-primary btnEditarEmpresa btn-circle " title="editar" 
                         onClick="return clickModalEditing('."'getEmpresa/".$data[$i]['id_empresa']."'".','."'Actualizacion | Empresa'".','."'id_empresa'".','."['ruc_empresa','nombre_empresa','direccion_empresa','correo_empresa',
                         'telefono_empresa','cedula_representante','nombre_representante','telefono_representante','descripcion_empresa']".','."'#modalEmpresa'".');">
                         <i class="fa fa-edit"></i></button>';
@@ -48,7 +48,7 @@
 
 
                     if ($_SESSION['permisos_modulo']['d']) {
-                        $btnEliminarEmpresa = '<button  class="btn btn-danger btn-circle btnEliminarAlumno" 
+                        $btnEliminarEmpresa = '<button  class="btn btn-outline-danger btn-circle btnEliminarAlumno" 
                             title="eliminar" onClick="return deleteServerSide('."'delEmpresa/'".','.$data[$i]['id_empresa'].','."'¿Desea eliminar la empresa ".$data[$i]['nombre_empresa']."?'".','."'.tableEmpresa'".');"><i class="far fa-thumbs-down"></i></button>';
                     }
 
