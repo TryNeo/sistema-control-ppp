@@ -192,13 +192,13 @@
         </li>
       <?php } ?>
       <div class="p-3 hide-sidebar-mini">
-            <a href="https://institutotresdemarzo.edu.ec/" class="btn btn-primary btn-lg btn-block btn-icon-split" target="_blank">
+            <a href="https://institutotresdemarzo.edu.ec/" class="btn btn-outline-primary btn-lg btn-block btn-icon-split" target="_blank">
                 Pagina web <i class="fas fa-pager"></i>
             </a>
       </div>
       <?php if ($_SESSION['user_data']['id_rol'] != 2) {?>
           <div class="p-3 hide-sidebar-mini">
-            <a href="https://drive.google.com/drive/my-drive" class="btn btn-success btn-lg btn-block btn-icon-split" target="_blank">
+            <a href="https://drive.google.com/drive/my-drive" class="btn btn-outline-success btn-lg btn-block btn-icon-split" target="_blank">
                 Google Drive  <i class="fab fa-google-drive"></i>
             </a>
           </div>

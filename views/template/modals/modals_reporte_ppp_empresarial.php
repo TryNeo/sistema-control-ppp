@@ -8,11 +8,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <iframe id="pdfcertificadoppEmpresarial"src="<?php echo server_url; ?>historial-estudiante/certificadopppEmpresarial#toolbar=0" width="100%" height="500px">
+        <iframe id="pdfcertificadoppEmpresarial"src="<?php echo server_url; ?>historial-estudiante/certificado-ppp-empresarial#toolbar=0" width="100%" height="500px">
         </iframe>
         <hr>
         <div>
-            <a href="<?php echo server_url; ?>historial-estudiante/certificadopppEmpresarial" download class="btn btn-danger">
+            <a href="<?php echo server_url; ?>historial-estudiante/certificado-ppp-empresarial" download class="btn btn-danger">
             Descargar <i class="fa fa-download" aria-hidden="true"></i></a>
             <button onclick="return printPdf('pdfcertificadoppEmpresarial');" 
                 class="btn btn-primary">Imprimir <i class="fas fa-print" aria-hidden="true"></i></button>

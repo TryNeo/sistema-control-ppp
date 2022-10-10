@@ -1,5 +1,5 @@
 <?php getHeaderDashboard($data);
-    getModal('modals_reporte_ppp_empresarial',$data);
+getModal('modals_reporte_ppp_empresarial', $data);
 ?>
 
 <section class="section">
@@ -7,6 +7,21 @@
         <h1 class="mx-auto">Historial estudiante</h1>
     </div>
     <div class="section-body">
+    <?php if ($_SESSION['permisos_modulo']['u']) { ?>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                            <div class="form-group row form-control-sm">
+                                <div class="col-sm-12">
+                                    <select class="form-control select2" id="SearchAlumno"></select>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php } ?>
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -37,10 +52,10 @@
         <div class="row  mb-4">
             <?php if ($_SESSION['permisos_modulo']['r']) { ?>
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                    <button onclick="return abrir_modal_reporte('modalReporteEmpresarial');" class="btn btn-info "><i class="fas fa-print" aria-hidden="true"></i>
-                        Imprimir certificado de practicas pre-profesionales (Empresariales)</button>  
-                        <button onclick="return abrir_modal_reporte('modalReporteNomina');" class="btn btn-warning"><i class="fas fa-print" aria-hidden="true"></i>
-                    Imprimir certificado de practicas pre-profesionales (Vinculacion con la Sociedad)</button>
+                    <button class="btn btn-outline-info" id="pppEmpresarial"><i class="fas fa-print" aria-hidden="true"></i>
+                        Imprimir certificado de practicas pre-profesionales (Empresariales)</button>
+                    <button onclick="return abrir_modal_reporte('modalReporteNomina');" class="btn btn-outline-warning"><i class="fas fa-print" aria-hidden="true"></i>
+                        Imprimir certificado de practicas pre-profesionales (Vinculacion con la Sociedad)</button>
                 </div>
             <?php } ?>
         </div>
