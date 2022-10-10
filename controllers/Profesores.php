@@ -41,7 +41,7 @@
 
 
                     if ($_SESSION['permisos_modulo']['u']) {
-                        $btnEditarProfesor = '<button class="btn btn-primary btn-circle " title="editar" 
+                        $btnEditarProfesor = '<button class="btn btn-outline-primary btn-circle " title="editar" 
                         onClick="return clickModalEditingPr('."'getProfesor/".$data[$i]['id_profesor']."'".
                         ','."'Actualizacion | Profesor'".','."'id_profesor'".','."['cedula','email_personal','nombre','apellido','telefono']".
                         ','."'#modalProfesor'".','.'true'.','."['sexo','id_campus']".','.'true'.','."'#id_usuario'".');">
@@ -50,7 +50,7 @@
 
 
                     if ($_SESSION['permisos_modulo']['d']) {
-                        $btnEliminarProfesor = '<button  class="btn btn-danger btn-circle btnEliminarProfesor" 
+                        $btnEliminarProfesor = '<button  class="btn btn-outline-danger btn-circle btnEliminarProfesor" 
                             title="eliminar" onClick="return deleteServerSide('."'delProfesor/'".','.$data[$i]['id_profesor'].','."'¿Desea eliminar el docente ".$data[$i]['nombre']." ".$data[$i]['apellido']."?'".','."'.tableProfesores'".');"><i class="far fa-thumbs-down"></i></button>';
                     }
 
