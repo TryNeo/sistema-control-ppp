@@ -10,7 +10,7 @@
                     <div class="card">
                         <div class="card-body">
                             <?php  if ($_SESSION['permisos_modulo']['w']) {?>
-                                <button id="backupbd" type="button" class="btn btn-primary mb-3 btn-lg mb-3">Realizar copia de seguridad <i class="fa fa-plus"></i></button>
+                                <button id="backupbd" type="button" class="btn btn-outline-primary mb-3 btn-lg mb-3">Realizar copia de seguridad <i class="fa fa-plus"></i></button>
                             <?php } ?>
                         </div>
                     </div>
