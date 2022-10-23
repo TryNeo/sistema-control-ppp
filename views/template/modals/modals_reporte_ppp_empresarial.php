@@ -12,7 +12,7 @@
         </iframe>
         <hr>
         <div>
-            <a href="<?php echo server_url; ?>historial-estudiante/certificado-ppp-empresarial" download class="btn btn-danger">
+            <a id="modalEmpresarialppp" href="<?php echo server_url; ?>historial-estudiante/certificado-ppp-empresarial" download class="btn btn-danger">
             Descargar <i class="fa fa-download" aria-hidden="true"></i></a>
             <button onclick="return printPdf('pdfcertificadoppEmpresarial');" 
                 class="btn btn-primary">Imprimir <i class="fas fa-print" aria-hidden="true"></i></button>

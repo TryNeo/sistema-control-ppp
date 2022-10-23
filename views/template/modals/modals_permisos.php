@@ -17,7 +17,7 @@
                             <i class="fas fa-users"></i>
                         </span>
                     </div>
-                    <select name="id_rol" id="id_rol" class="form-control" required>
+                    <select name="id_rol" id="id_rol" class="form-control">
                     </select>
                 </div>
             </div>
