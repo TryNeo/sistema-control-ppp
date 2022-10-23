@@ -22,8 +22,15 @@ function fntSetBackups(rbd){
         cancelButtonText : 'No, restaurar',
     }).then((result) => {
         if (result.isConfirmed) {
+            $.LoadingOverlaySetup({
+                image           : "https://i.ibb.co/DQstGsn/favicon1.png",
+                imageColor      : "#ffcc00",
+                imageAnimation  : "pulse 2.5s",
+                imageAutoResize         : true,
+            });
             $.LoadingOverlay("show");
             if (rbd === ""){
+                $.LoadingOverlay("hide");
                 mensaje("error","Error","Opps! hubo un problema esta base de datos no existe");
             }else{
                 $.LoadingOverlaySetup({
@@ -67,7 +74,15 @@ function fntDeleteBackup(rbd){
         cancelButtonText : 'No, cancelar',
     }).then((result) => {
         if (result.isConfirmed) {
+            $.LoadingOverlaySetup({
+                image           : "https://i.ibb.co/DQstGsn/favicon1.png",
+                imageColor      : "#ffcc00",
+                imageAnimation  : "pulse 2.5s",
+                imageAutoResize         : true,
+            });
+            $.LoadingOverlay("show");
             if (rbd === ""){
+                $.LoadingOverlay("hide");
                 mensaje("error","Error","Opps! hubo un problema esta base de datos no existe");
             }else{
                 $.LoadingOverlaySetup({
