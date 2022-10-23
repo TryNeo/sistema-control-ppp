@@ -98,6 +98,7 @@ function fntDeleteBackup(rbd){
                 }).then(function (data) {
                     let objdata = JSON.parse(data); 
                     if (objdata.status){
+                        $.LoadingOverlay("hide");
                         mensaje("success","Exitoso",objdata.msg);
                         $('.tableRespaldo').DataTable().ajax.reload();
                     }else{
@@ -138,6 +139,7 @@ function fntBackups(tableRespaldo){
                 }).then(function (data) {
                     let objdata = JSON.parse(data); 
                     if (objdata.status){
+                        $.LoadingOverlay("hide");
                         mensaje("success","Exitoso",objdata.msg);
                         tableRespaldo.ajax.reload();
                     }else{
