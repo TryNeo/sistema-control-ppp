@@ -124,7 +124,7 @@ function configToValidate(){
 
         if($(el).is('[name=id_rol]')){
             let value= $(el).val()
-            if (!validateEmptyField(value)){
+            if (!validateSelect(value)){
                 return 'Este campo es obligatorio';
             }
         }
@@ -150,10 +150,15 @@ function clickModalPermiso(nameSelector,modalName,listCamps){
         
         document.querySelector('#modalTitle').innerHTML = modalName;
         document.querySelector('.changeText').innerHTML = "Crear ";
+        $('#fntPermiso').trigger("reset");
+        $('#fntPermiso').removeClass('was-validated');
+        $('#id_rol').removeClass('is-invalid');
+        $('#id_rol').removeClass('is-valid');
+
         listCamps.forEach(element => {
             document.querySelector(element).value = '';
-            $(element).addClass('is-invalid');
         });
+        
         $(nameSelector).modal(options);
     });
 }

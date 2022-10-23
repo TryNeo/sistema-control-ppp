@@ -16,11 +16,11 @@ $(function(){
             orderable:false,
             render:function(data,type,row){
                 if (row.tipo_practica === "1"){
-                    return '<button type="button" class="btn btn-primary btn-icon icon-left">'+
+                    return '<button type="button" class="btn btn-outline-primary btn-icon icon-left">'+
                             '<i class="fas fa-business-time"></i> EMPRESARIAL'+
                             '</button>'
                 }else{
-                    return '<button type="button" class="btn btn-info btn-icon icon-left">'+
+                    return '<button type="button" class="btn btn-outline-info btn-icon icon-left">'+
                             '<i class="fas fa-poll-h"></i> SERVICIO A LA COMUNIDAD'+
                             '</button>'
                 }

@@ -14,11 +14,11 @@ $(function(){
             let value= $(el).val()
             
             if (!validateEmptyField(value)){
-                return 'El campo email es obligatorio';
+                return 'El email es obligatorio, por favor ingrese un email';
             }
 
             if (!validaEmail(value)){
-                return 'El email '+value +' ingresado es incorrecto';
+                return 'El email '+value +' ingresado es no es valido';
             }
         }
 

@@ -30,6 +30,7 @@ $(function(){
     const tableHistorialAlumno = configDataTables('.tableHistorialAlumno',base_url+"historial-estudiante/getHistorialEstudiante",columnData,columnDefs);
     searchAlumno(tableHistorialAlumno);
     pppEmpresarialReporte();
+    pppComunitarioReporte();
 });
 
 function formatRepo (repo) {
@@ -80,12 +81,22 @@ function searchAlumno(tableHistorialAlumno){
         $('#SearchAlumno').val('');
         $('#SearchAlumno').trigger('change.select2');
         tableHistorialAlumno.ajax.url(base_url+"historial-estudiante/getHistorialEstudiante/"+data.id).load();
+        $('#modalComunitarioppp').attr('href',base_url+"historial-estudiante/certificado-ppp-comunitario/"+data.id);
+        $('#modalEmpresarialppp').attr('href',base_url+"historial-estudiante/certificado-ppp-empresarial/"+data.id);
+        $('#pdfcertificadoppComunitario').attr('src',base_url+"historial-estudiante/certificado-ppp-comunitario/"+data.id+"#toolbar=0");
+        $('#pdfcertificadoppEmpresarial').attr('src',base_url+"historial-estudiante/certificado-ppp-empresarial/"+data.id+"#toolbar=0");
     });
+
 }
 
 
 function pppEmpresarialReporte(){
     $("#pppEmpresarial").click(function(){
         abrir_modal_reporte('modalReporteEmpresarial');
+    })
+}
+function pppComunitarioReporte(){
+    $("#pppComunitario").click(function(){
+        abrir_modal_reporte('modalReporteComunitario');
     })
 }
