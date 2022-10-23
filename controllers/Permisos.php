@@ -37,16 +37,16 @@
                     
                     if ($_SESSION['permisos_modulo']['u']) {
                         if ($_SESSION['user_data']['id_rol'] != 1 and $request_data[$i]['id_rol'] != 1 ){
-                            $btnEditarRol = '<button class="btn btn-primary btnEditarRol btn-circle " title="editar" 
+                            $btnEditarRol = '<button class="btn btn-outline-primary btnEditarRol btn-circle " title="editar" 
                                 onClick="return clickModalEditingPermisos('.$request_data[$i]['id_rol'].');">
                                 <i class="fa fa-edit"></i></button>';
                         }else{
                             if($_SESSION['user_data']['id_rol'] == 1){
-                                $btnEditarRol = '<button class="btn btn-primary btnEditarRol btn-circle " title="editar" 
+                                $btnEditarRol = '<button class="btn btn-outline-primary btnEditarRol btn-circle " title="editar" 
                                 onClick="return clickModalEditingPermisos('.$request_data[$i]['id_rol'].');">
                                 <i class="fa fa-edit"></i></button>';
                             }else{
-                                $btnEditarRol = '<button class="btn btn-primary  btn-circle " title="editar" disabled>
+                                $btnEditarRol = '<button class="btn btn-outline-primary  btn-circle " title="editar" disabled>
                                 <i class="fa fa-edit"></i></button>';  
                             }
 

@@ -33,11 +33,12 @@
                     $btnEliminarAlumno = '';
                     $btnEditarAlumno = '';
 
-                    if ($data[$i]['estado'] == 1){
-                        $data[$i]['estado']= '<span  class="btn btn-success btn-icon-split btn-custom-sm"><i class="icon fas fa-check-circle "></i><span class="label text-padding text-white-50">&nbsp;&nbsp;Activo</span></span>';
-                    }else{
-                        $data[$i]['estado']='<span  class="btn btn-danger btn-icon-split btn-custom-sm"><i class="icon fas fa-ban "></i><span class="label text-padding text-white-50">Inactivo</span></span>';
+                    if ($data[$i]['estado'] == 1) {
+                        $data[$i]['estado'] = '<span  class="btn btn-outline-success btn-icon-split btn-custom-sm"><i class="icon fas fa-check-circle "></i><span class="label text-padding text-white-1">&nbsp;&nbsp;Activo</span></span>';
+                    } else {
+                        $data[$i]['estado'] = '<span  class="btn btn-outline-danger btn-icon-split btn-custom-sm"><i class="icon fas fa-ban "></i><span class="label text-padding text-white-1">Inactivo</span></span>';
                     }
+    
 
 
                     if ($_SESSION['permisos_modulo']['u']) {

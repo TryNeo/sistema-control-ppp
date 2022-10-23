@@ -79,13 +79,13 @@ class Practicaspreprofesionales extends Controllers
                 $btnEditarPractica = '';
 
                 if ($_SESSION['permisos_modulo']['u']) {
-                    $btnEditarPractica = '<a href="'.server_url.'practicas-pre-profesionales/editar/'.$data[$i]['id_practica'].'" class="btn btn-primary btnEditarPractica btn-circle " title="editar">
+                    $btnEditarPractica = '<a href="'.server_url.'practicas-pre-profesionales/editar/'.$data[$i]['id_practica'].'" class="btn btn-outline-primary btnEditarPractica btn-circle " title="editar">
                     <i class="fa fa-edit"></i></a>';
                 }
 
 
                 if ($_SESSION['permisos_modulo']['d']) {
-                    $btnEliminarPractica = '<button  class="btn btn-danger btn-circle btnEliminarPractica" 
+                    $btnEliminarPractica = '<button  class="btn btn-outline-danger btn-circle btnEliminarPractica" 
                         title="eliminar" onClick="return deleteServerSide('."'delPracticaspreprofesionales/'".','.$data[$i]['id_practica'].','."'¿Desea eliminar la practica pre profesional del alumno ".$data[$i]['nombre']." ".$data[$i]['apellido']."?'".','."'.tablePracticas'".');"><i class="far fa-thumbs-down"></i></button>';
                 }
 

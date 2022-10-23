@@ -67,7 +67,7 @@ class Login extends Controllers
                             $response = curl_exec($cu);
                             curl_close($cu);
                             $datos = json_decode($response, true);
-                            if ($datos['success'] == 1 && $datos['score'] >= 0.5) {
+                            if ($datos['success'] == 1 && $datos['score'] >= 0.9) {
                                 $str_email = strtolower(strclean($_POST['email']));
                                 $str_password = strclean($_POST['password']);
                                 $request_user = $this->model->login_user($str_email);

@@ -38,15 +38,15 @@ class Usuarios extends Controllers
                 $btnEliminarUsuario = '';
 
                 if ($data[$i]['estado'] == 1) {
-                    $data[$i]['estado'] = '<span  class="btn btn-success btn-icon-split btn-custom-sm"><i class="icon fas fa-check-circle "></i><span class="label text-padding text-white-1">&nbsp;&nbsp;Activo</span></span>';
+                    $data[$i]['estado'] = '<span  class="btn btn-outline-success btn-icon-split btn-custom-sm"><i class="icon fas fa-check-circle "></i><span class="label text-padding text-white-1">&nbsp;&nbsp;Activo</span></span>';
                 } else {
-                    $data[$i]['estado'] = '<span  class="btn btn-danger btn-icon-split btn-custom-sm"><i class="icon fas fa-ban "></i><span class="label text-padding text-white-1">Inactivo</span></span>';
+                    $data[$i]['estado'] = '<span  class="btn btn-outline-danger btn-icon-split btn-custom-sm"><i class="icon fas fa-ban "></i><span class="label text-padding text-white-1">Inactivo</span></span>';
                 }
 
                 if ($data[$i]['ultimo_online'] == 1) {
-                    $data[$i]['ultimo_online'] = '<span  class="btn btn-success btn-icon-split btn-custom-sm"><i class="icon fas fa-signal"></i><span class="label text-padding text-white-1">&nbsp;&nbsp;En línea</span></span>';
+                    $data[$i]['ultimo_online'] = '<span  class="btn btn-outline-success btn-icon-split btn-custom-sm"><i class="icon fas fa-signal"></i><span class="label text-padding text-white-1">&nbsp;&nbsp;En línea</span></span>';
                 } else {
-                    $data[$i]['ultimo_online'] = '<span  class="btn btn-danger btn-icon-split btn-custom-sm"><i class="icon fas fa-ban"></i><span class="label text-padding text-white-1">Desconectado</span></span>';
+                    $data[$i]['ultimo_online'] = '<span  class="btn btn-outline-danger btn-icon-split btn-custom-sm"><i class="icon fas fa-ban"></i><span class="label text-padding text-white-1">Desconectado</span></span>';
                 }
 
                 if ($data[$i]['email_activo'] == 1) {
@@ -58,16 +58,16 @@ class Usuarios extends Controllers
                 if ($_SESSION['permisos_modulo']['d']) {
                     if ($_SESSION['id_usuario'] != 1 and $_SESSION['user_data']['id_rol'] != 1 
                     and $data[$i]['id_usuario'] != 1) {
-                        $btnEliminarUsuario = '<button  class="btn btn-danger btn-circle btnEliminarUsuario" 
+                        $btnEliminarUsuario = '<button  class="btn btn-outline-danger btn-circle btnEliminarUsuario" 
                         title="eliminar" onClick="return deleteServerSide('."'delUsuario/'".','.$data[$i]['id_usuario'].','."'¿Desea eliminar el usuario ".$data[$i]['usuario']."?'".','."'.tableUsuarios'".');"><i class="far fa-thumbs-down"></i></button>';
                     }else{
                         if(($_SESSION['id_usuario'] == 1 and $_SESSION['user_data']['id_rol'] == 1) ||
                         ($_SESSION['user_data']['id_rol'] == 1 and $data[$i]['id_rol'] != 1) and 
                         ($_SESSION['user_data']['id_usuario'] != $data[$i]['id_usuario'])){
-                            $btnEliminarUsuario = '<button  class="btn btn-danger btn-circle btnEliminarUsuario" 
+                            $btnEliminarUsuario = '<button  class="btn btn-outline-danger btn-circle btnEliminarUsuario" 
                             title="eliminar" onClick="return deleteServerSide('."'delUsuario/'".','.$data[$i]['id_usuario'].','."'¿Desea eliminar el usuario ".$data[$i]['usuario']."?'".','."'.tableUsuarios'".','.$data[$i]['id_rol'].');"><i class="far fa-thumbs-down"></i></button>';
                         }else{
-                            $btnEliminarUsuario = '<button  class="btn btn-danger btn-circle "  title="eliminar" disabled><i class="far fa-thumbs-down"></i></button>';
+                            $btnEliminarUsuario = '<button  class="btn btn-outline-danger btn-circle "  title="eliminar" disabled><i class="far fa-thumbs-down"></i></button>';
                         }
                     }
                 }

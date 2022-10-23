@@ -133,8 +133,7 @@
                 $id = 0;
                 $btnRestore = '';
                 $btnRestoreEliminar = '';
-                $data = array(array('id' => 0, 'nombre' =>'database-ignore','opciones' => '<div class="text-center"><button type="button" class="btn btn-outline-info btn-circle btnRestore" title="restaurar" rbd=""><i class="fa fa-upload"></i></button>
-                <button type="button" class="btn btn-outline-danger btn-circle btnRestoreEliminar" title="eliminar" rbd=""><i class="fa fa-trash"></i></button></div>'));
+                $data = [];
                 if (is_dir($ruta)){
                     if($aux = opendir($ruta)){
                         while (($archivo = readdir($aux)) !== false ){
@@ -146,8 +145,7 @@
                                 if(is_dir($ruta_completa)){
                                 }else{
                                     $id++;
-                                    $data[$id]['id'] = $id;
-                                    $data[$id]['nombre'] = $nombre_archivo;
+                                    
                                     if ($_SESSION['permisos_modulo']['u']) {
                                         $btnRestore = '<button type="button" class="btn btn-outline-info btn-circle btnRestore" title="restaurar"  onClick="return fntSetBackups('."'".$ruta_completa."'".')"><i class="fa fa-upload"></i></button>';
                                     }
@@ -156,13 +154,18 @@
                                         $btnRestoreEliminar = '<button type="button" class="btn btn-outline-danger btn-circle btnRestoreEliminar" title="eliminar" onClick="return fntDeleteBackup('."'".$ruta_completa."'".')"><i class="fa fa-trash"></i></button>';
                                     }
 
-                                    $data[$id]['opciones'] = '<div class="text-center">'.$btnRestore.' '.$btnRestoreEliminar.'</div>';
+                                    $data[] = array(
+                                        "id" => $id,
+                                        "nombre" => $nombre_archivo,
+                                        "opciones" => '<div class="text-center">'.$btnRestore.' '.$btnRestoreEliminar.'</div>'
+                                    );
+
                                 }
                             }
                         }
                         closedir($aux);
                     }
-                }                
+                }
                 echo json_encode($data,JSON_UNESCAPED_UNICODE);
             }
         }
