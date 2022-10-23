@@ -45,7 +45,7 @@
                                         <i class="fas fa-envelope"></i>
                                     </span>
                                 </div>
-                                <input type="email" name="emailuser" class="form-control" id="emailuser" required placeholder="ingrese su email">
+                                <input type="email" name="emailuser" class="form-control" id="emailuser" placeholder="ingrese su email">
                             </div>
                         </div>
                         <div class="form-group">
@@ -58,7 +58,7 @@
                 </div>
                 </div>
                 <div class="mt-5 text-center" style="color:white;font-weight:700;">
-                    ¿Ya tienes una cuenta?, Ingresa aqui <a href="<?php echo server_url; ?>login" style="color:black;font-weight:600;">Login</a>
+                    ¿Ya tienes una cuenta?, Ingresa aqui <a href="<?php echo server_url; ?>login" style="color:white;font-weight:800;">Login</a>
                 </div>
                 <div class="simple-footer" style="color:white;font-weight:700;">
                     Copyright &copy; Instituto Tecnológico Superior Tres De Marzo - <?php echo date("Y");?>

@@ -1,5 +1,6 @@
 <?php getHeaderDashboard($data);
 getModal('modals_reporte_ppp_empresarial', $data);
+getModal('modals_reporte_ppp_comunitario', $data);
 ?>
 
 <section class="section">
@@ -54,7 +55,7 @@ getModal('modals_reporte_ppp_empresarial', $data);
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <button class="btn btn-outline-info" id="pppEmpresarial"><i class="fas fa-print" aria-hidden="true"></i>
                         Imprimir certificado de practicas pre-profesionales (Empresariales)</button>
-                    <button onclick="return abrir_modal_reporte('modalReporteNomina');" class="btn btn-outline-warning"><i class="fas fa-print" aria-hidden="true"></i>
+                    <button class="btn btn-outline-warning"  id="pppComunitario"><i class="fas fa-print" aria-hidden="true"></i>
                         Imprimir certificado de practicas pre-profesionales (Vinculacion con la Sociedad)</button>
                 </div>
             <?php } ?>
