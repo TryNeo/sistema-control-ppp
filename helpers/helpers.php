@@ -173,6 +173,14 @@
         $_SESSION["permisos_modulo"] = $permisosModulo;
     }
 
+    function getFile(string $url,$data){
+        ob_start();
+        require_once("Views/{$url}.php");
+        $file = ob_get_clean();
+        return $file;
+    }
+
+
     function fechaCastellano($fecha) {
         $fecha = substr($fecha, 0, 10);
         $numeroDia = date('d', strtotime($fecha));
