@@ -36,7 +36,7 @@ RewriteRule ^(helpers/*) - [F,L,NC]
 
 </Files>
 
-<FilesMatch "((\.(lock|cache|database|config|backups|helpers|models|views|font|fpdf))|CHANGELOG.md |README.md|.gitignore |.htaccess |^(.*\.config|.*\.example|.*\.sql)(.*?))$">
+<FilesMatch "((\.(lock|cache|database|config|backups|helpers|models|views|font))|CHANGELOG.md |README.md|.gitignore |.htaccess |^(.*\.config|.*\.example|.*\.sql)(.*?))$">
 	<IfModule !mod_authz_core.c>
 		Order allow,deny
 		Deny from all
