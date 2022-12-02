@@ -36,6 +36,7 @@ class Usuarios extends Controllers
             $data = $this->model->selectUsuarios();
             for ($i = 0; $i < count($data); $i++) {
                 $btnEliminarUsuario = '';
+                $btnEditarUsuario='';
 
                 if ($data[$i]['estado'] == 1) {
                     $data[$i]['estado'] = '<span  class="btn btn-outline-success btn-icon-split btn-custom-sm"><i class="icon fas fa-check-circle "></i><span class="label text-padding text-white-1">&nbsp;&nbsp;Activo</span></span>';
@@ -55,6 +56,25 @@ class Usuarios extends Controllers
                     $data[$i]['email_activo'] = '<span class="text-center"><i class="fas fa-user-times"></i></span>';
                 }
 
+
+                if ($_SESSION['permisos_modulo']['u']) {
+                    if ($_SESSION['id_usuario'] != 1 and $_SESSION['user_data']['id_rol'] != 1 
+                    and $data[$i]['id_usuario'] != 1){
+                        $btnEditarUsuario = '<button  class="btn btn-outline-primary btn-circle btnEditarUsuario" 
+                        title="editar" onClick="return clickModalEditing('."'getUsuario/".$data[$i]['id_usuario']."'".','."'Actualizacion | Usuario'".','."'id_usuario'".','."['usuario','email_institucional','id_rol']".','."'#modalUsuario'".');"><i class="fa fa-edit"></i></button>';
+                    }else{
+                        if(($_SESSION['id_usuario'] == 1 and $_SESSION['user_data']['id_rol'] == 1) ||
+                        ($_SESSION['user_data']['id_rol'] == 1 and $data[$i]['id_rol'] != 1) and 
+                        ($_SESSION['user_data']['id_usuario'] != $data[$i]['id_usuario'])){
+                            $btnEditarUsuario = '<button  class="btn btn-outline-primary btn-circle btnEditarUsuario" 
+                            title="editar" onClick="return clickModalEditing('."'getUsuario/".$data[$i]['id_usuario']."'".','."'Actualizacion | Usuario'".','."'id_usuario'".','."['usuario','email_institucional','id_rol']".','."'#modalUsuario'".');"><i class="fa fa-edit"></i></button>';
+                        }else{
+                            $btnEditarUsuario = '<button  class="btn btn-outline-primary btn-circle "  title="editar" disabled><i class="fa fa-edit"></i></button>';
+                        }
+                    }
+                }
+
+
                 if ($_SESSION['permisos_modulo']['d']) {
                     if ($_SESSION['id_usuario'] != 1 and $_SESSION['user_data']['id_rol'] != 1 
                     and $data[$i]['id_usuario'] != 1) {
@@ -72,7 +92,7 @@ class Usuarios extends Controllers
                     }
                 }
 
-                $data[$i]['opciones'] = $btnEliminarUsuario;
+                $data[$i]['opciones'] = $btnEditarUsuario.' '.$btnEliminarUsuario;
             }
         }
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
@@ -113,6 +133,21 @@ class Usuarios extends Controllers
                         $option = 1;
                     }
                 } else {
+                    if (empty($_SESSION['permisos_modulo']['u'])) {
+                        header('location:' . server_url . 'Errors');
+                        $data = array("status" => false, "msg" => "Error no tiene permisos");
+                        $response_usuario = 0;
+                    } else {
+                        $str_password = password_hash(strclean($_POST['password']), PASSWORD_DEFAULT, ['cost' => 10]);
+                        $response_usuario = $this->model->updateUsuario(
+                            $id_usuario,
+                            $usuario_name,
+                            $email_institucional,
+                            $str_password,
+                            $id_rol_usuario
+                        );
+                        $option = 2;
+                    }
                 }
 
                 if ($response_usuario > 0) {
@@ -139,6 +174,28 @@ class Usuarios extends Controllers
         }
         sleep(3);
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    
+    public function getUsuario(int $id_usuario){
+        if (empty($_SESSION['permisos_modulo']['r']) ) {
+            header('location:'.server_url.'Errors');
+            $data_response = array("status" => false, "msg" => "Error no tiene permisos");
+        }else{
+            $id_usuario  = (Intval(strclean($id_usuario)) > 0 ) ? Intval(strclean($id_usuario)) : '' ;
+            if(empty(preg_matchall([$id_usuario],regex_numbers))){
+                $data = $this->model->selectUsuario($id_usuario);
+                if (empty($data)){
+                    $data_response = array('status' => false,'msg'=> 'Datos no encontrados');
+                }else{
+                    $data_response = array('status' => true,'msg'=> $data);
+                }
+            }else{
+                $data_response = array('status' => false,'msg' => 'Oops!, El campo no es valido, verifiquelo y vuelva a intentarlo');
+            }
+        }
+        echo json_encode($data_response,JSON_UNESCAPED_UNICODE);
         die();
     }
 

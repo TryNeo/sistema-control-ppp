@@ -84,7 +84,7 @@
 
                         <div class="form-group">
                             <button class="g-recaptcha btn btn-primary btn-lg btn-block" 
-                                    data-sitekey="6LesooYhAAAAALYkmxdjcz-9ec3gIz5sMPnRILQu" 
+                                    data-sitekey="6LdBdushAAAAACDLXq_sGAIEU4BVY59r4aLHKeZM" 
                                     data-callback='onSubmit' 
                                     data-action='submit' id="loginEc">Iniciar Sesión <i class="fas fa-sign-in"></i></button>
                         </div>
@@ -111,11 +111,11 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.16/dist/sweetalert2.all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emretulek/jbvalidator"></script>
     <script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
-    <script src="https://www.google.com/recaptcha/api.js?render=6LesooYhAAAAALYkmxdjcz-9ec3gIz5sMPnRILQu"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LdBdushAAAAACDLXq_sGAIEU4BVY59r4aLHKeZM"></script>
     <script>
             $('#loginEc').click(function(){
                 grecaptcha.ready(function() {
-                    grecaptcha.execute('6LesooYhAAAAALYkmxdjcz-9ec3gIz5sMPnRILQu', {action: 'submit'}).then(function(token) {
+                    grecaptcha.execute('6LdBdushAAAAACDLXq_sGAIEU4BVY59r4aLHKeZM', {action: 'submit'}).then(function(token) {
                         $('#fntLogin').submit();
                     });
                 });

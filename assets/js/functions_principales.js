@@ -301,3 +301,12 @@ function abrir_modal_reporte(idModal){
     $('#'+idModal).modal(options);
 }
 
+function showLoader(){
+    $.LoadingOverlaySetup({
+        image           : "https://i.ibb.co/DQstGsn/favicon1.png",
+        imageColor      : "#ffcc00",
+        imageAnimation  : "pulse 2.5s",
+        imageAutoResize         : true,
+    });
+    $.LoadingOverlay("show");
+}

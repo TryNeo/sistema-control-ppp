@@ -48,21 +48,6 @@ function configToValidate(){
             
         }
 
-        if($(el).is('[name=password]')){
-            let value= $(el).val()
-
-            if (!validateEmptyField(value)){
-                return 'Este campo es obligatorio';
-            }
-
-            
-            if (!validateUser(value)){
-                return 'La contraseña '+value+' no es valida';
-            }
-            
-            
-        }
-
 
         if($(el).is('[name=email_institucional]')){
             let value= $(el).val()
